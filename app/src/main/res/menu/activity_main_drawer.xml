@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single" android:id="@+id/top">
+
+        <item
+            android:id="@+id/nav_categories"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/nav_categories_title"/>
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/nav_search_title"/>
+        <item
+            android:id="@+id/nav_trending"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="@string/nav_trending_title"/>
+    </group>
+
+    <group android:checkableBehavior="single" android:id="@+id/mid">
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/nav_favorites_title"/>
+        <item
+            android:id="@+id/nav_recently_viewed"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/nav_recently_viewed_title"/>
+        <item
+            android:id="@+id/nav_checkins"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="@string/nav_check_ins_title"/>
+        <item
+            android:id="@+id/nav_reviews"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="@string/nav_reviews_title"/>
+    </group>
+
+    <group android:checkableBehavior="single" android:id="@+id/business">
+        <item
+            android:id="@+id/nav_add_business"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/nav_add_business_title"/>
+        <item
+            android:id="@+id/nav_my_business"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/nav_my_business_title"/>
+    </group>
+
+    <group android:checkableBehavior="single" android:id="@+id/settings">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/nav_settings_title"/>
+        <item
+            android:id="@+id/nav_report_bug"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/nav_report_bug_title"/>
+    </group>
+
+
+</menu>
