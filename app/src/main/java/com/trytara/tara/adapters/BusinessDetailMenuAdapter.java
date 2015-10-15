@@ -3,6 +3,7 @@ package com.trytara.tara.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -54,11 +55,11 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
                 public void onClick(View v) {
                     /*Intent i = new Intent(mContext, BusinessDetailActivity.class);
                     mContext.startActivity(i);*/
+                  menuImage.clearColorFilter();
                 }
             });
 
             menuImage = (ImageView) v.findViewById(R.id.menu_image);
-
         }
 
         public ImageView getMenuImage() {
@@ -81,6 +82,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         //Log.d(TAG, "Element " + position + " set.");
+        viewHolder.getMenuImage().setColorFilter(Color.argb(100, 255, 255, 255));
         viewHolder.getMenuImage().setImageResource(imgList[position]);
     }
 
