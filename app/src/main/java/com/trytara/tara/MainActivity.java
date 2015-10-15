@@ -9,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -17,10 +16,9 @@ import android.widget.TextView;
 import com.facebook.login.widget.ProfilePictureView;
 
 import com.parse.ParseUser;
-import com.trytara.tara.fragments.CategoriesFragment;
+import com.trytara.tara.fragments.CategoryListFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        CategoriesFragment.OnCategoryFragmentItemClickListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "Debug";
 
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAddress = (TextView) findViewById(R.id.address);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new CategoriesFragment())
+                .replace(R.id.fragment_container, new CategoryListFragment())
                 .commit();
 
 
@@ -113,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = new Fragment();
         switch (id) {
             case R.id.nav_categories:
-                fragment = new CategoriesFragment();
+                fragment = new CategoryListFragment();
                 break;
             case R.id.nav_search:
                 break;
@@ -135,9 +133,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_report_bug:
                 break;
-            default:
-                fragment = new CategoriesFragment();
-
         }
 
         getSupportFragmentManager().beginTransaction()
@@ -148,13 +143,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTitle(item.getTitle());
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-
-    @Override
-    public void onCategoryFragmentItemClick() {
-
-
     }
 
     private void checkIfSignIn() {

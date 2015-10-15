@@ -22,7 +22,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.trytara.tara.fragments.ItemFragment;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener,
         ItemFragment.OnFragmentInteractionListener {

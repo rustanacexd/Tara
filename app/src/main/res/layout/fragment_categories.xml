@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
               android:orientation="vertical"
-             tools:context="com.trytara.tara.fragments.CategoriesFragment">
+             tools:context="com.trytara.tara.fragments.CategoriesListFragment">
 
     <SearchView
         android:background="@color/colorPrimaryDark"
