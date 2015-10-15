@@ -1,6 +1,5 @@
 package com.trytara.tara.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -70,6 +69,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
 
 
     }
+
 
 
 
