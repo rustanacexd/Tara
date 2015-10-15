@@ -1,24 +1,35 @@
 package com.trytara.tara.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.trytara.tara.BusinessDetailActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.models.Business;
 
 import java.util.List;
 
-public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.ViewHolder> {
+public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.ViewHolder>{
     private static final String TAG = "BusinessListAdapter";
 
     private List<Business> mDataSet;
+    private Context mContext;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public BusinessListAdapter(Context context, List<Business> dataSet) {
+        mContext = context;
+        mDataSet = dataSet;
+    }
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
         private final TextView businessName;
         private final TextView businessDescription;
         private final TextView businessDistance;
@@ -30,9 +41,11 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "Element " + getPosition() + " clicked.");
+                    Intent i = new Intent(mContext, BusinessDetailActivity.class);
+                    mContext.startActivity(i);
                 }
             });
+
             businessName = (TextView) v.findViewById(R.id.business_name);
             businessDescription = (TextView) v.findViewById(R.id.business_description);
             businessThumbnail = (ImageView) v.findViewById(R.id.business_thumbnail);
@@ -55,11 +68,11 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
         public ImageView getBusinessThumbnail() {
             return businessThumbnail;
         }
+
+
     }
 
-    public BusinessListAdapter(List<Business> dataSet) {
-        mDataSet = dataSet;
-    }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
