@@ -20,7 +20,7 @@
 
     <LinearLayout
         android:gravity="top"
-        android:paddingLeft="8dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
         android:layout_weight="50"
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
 
         <Button
             android:id="@+id/logout"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             style="@style/Base.Widget.AppCompat.Button.BlueButton"
             android:text="@string/com_facebook_loginview_log_out_action"
             android:layout_width="150dp"

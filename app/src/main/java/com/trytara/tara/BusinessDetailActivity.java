@@ -24,9 +24,9 @@ public class BusinessDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.business_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("BUSINESS");
-        //getSupportActionBar().setTitle("BUSINESS");
+        /*CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle("Business Name");*/
+        getSupportActionBar().setTitle("Business Name");
 
         mViewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(mViewPager);
