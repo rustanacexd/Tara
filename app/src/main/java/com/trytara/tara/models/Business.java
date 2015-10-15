@@ -2,6 +2,7 @@ package com.trytara.tara.models;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -13,14 +14,16 @@ public class Business {
     private String mContactNumber;
     private String mAddress;
     private Category mCategory;
+    private List<Review> mReviews;
+    private List<MenuItem> mMenus;
 
-    private static final RandomEnum<Category> r = new RandomEnum<>(Category.class);
-
-    public Business(String name, String description, String contactNumber, String address, RandomEnum<Category> category) {
+    public Business(String name, String description, String contactNumber, String address, BusinessDataSource.RandomEnum<Category> category) {
         mName = name;
         mDescription = description;
         mContactNumber = contactNumber;
         mAddress = address;
+        mReviews = new ArrayList<>();
+        mMenus = new ArrayList<>();
     }
 
     public String getName() {
@@ -55,28 +58,150 @@ public class Business {
         mAddress = address;
     }
 
-
-    public static List<Business> createBusinessList(int numBusiness) {
-        List<Business> businesses = new ArrayList<>();
-        for (int i = 1; i <= numBusiness; i++) {
-            businesses.add(new Business("Business " + i,"Lorem ipsum nonsense lol" ,"2142406",
-                    "Pagadian City", r));
-        }
-
-        return businesses;
+    public List<Review> getReviews() {
+        return mReviews;
     }
 
-    private static class RandomEnum<E extends Enum> {
+    public void addReview(Review review) {
+        mReviews.add(review);
+    }
 
-        private static final Random RND = new Random();
-        private final E[] values;
+    public List<MenuItem> getMenus() {
+        return mMenus;
+    }
 
-        public RandomEnum(Class<E> token) {
-            values = token.getEnumConstants();
+    public void addMenu(MenuItem menu) {
+        mMenus.add(menu);
+    }
+
+
+
+
+
+    public static class Review {
+        //TODO: Implement Class
+        private String mContent;
+        private Double mRating;
+        private Date mDate;
+        private String mReviewer;
+
+        public Review(String content, Double rating, String reviewer) {
+            mContent = content;
+            mRating = rating;
+            mDate = new Date();
+            mReviewer = reviewer;
         }
 
-        public E random() {
-            return values[RND.nextInt(values.length)];
+        public String getContent() {
+            return mContent;
         }
+
+        public Double getRating() {
+            return mRating;
+        }
+
+        public Date getDate() {
+            return mDate;
+        }
+
+        public String getReviewer() {
+            return mReviewer;
+        }
+
+        @Override
+        public String toString() {
+            return "Review{" +
+                    "mContent='" + mContent + '\'' +
+                    ", mRating=" + mRating +
+                    ", mDate=" + mDate +
+                    ", mReviewer='" + mReviewer + '\'' +
+                    '}';
+        }
+    }
+
+    public static class MenuItem {
+        //TODO: Implement Class
+        private String mTitle;
+        private String mPrice;
+        private String mDescription;
+        private List<MenuItemCategory> mMenuItemCategories;
+        private String mStatus;
+
+        public String getStatus() {
+            return mStatus;
+        }
+
+        public void setStatus(String status) {
+            mStatus = status;
+        }
+
+        public String getDescription() {
+            return mDescription;
+        }
+
+        public void setDescription(String description) {
+            mDescription = description;
+        }
+
+
+        public String getTitle() {
+            return mTitle;
+        }
+
+        public void setTitle(String title) {
+            mTitle = title;
+        }
+
+        public List<MenuItemCategory> getMenuItemCategories() {
+            return mMenuItemCategories;
+        }
+
+        public void addMenuItemCategory(MenuItemCategory menuItemCategory) {
+            mMenuItemCategories.add(menuItemCategory);
+        }
+
+        public String getPrice() {
+            return mPrice;
+        }
+
+        public void setPrice(String price) {
+            mPrice = price;
+        }
+
+        private class MenuItemCategory {
+            private String mName;
+
+            public String getName() {
+                return mName;
+            }
+
+            public void setName(String name) {
+                mName = name;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "MenuItem{" +
+                    "mTitle='" + mTitle + '\'' +
+                    ", mPrice='" + mPrice + '\'' +
+                    ", mDescription='" + mDescription + '\'' +
+                    ", mMenuItemCategories=" + mMenuItemCategories +
+                    ", mStatus='" + mStatus + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Business{" +
+                "mName='" + mName + '\'' +
+                ", mDescription='" + mDescription + '\'' +
+                ", mContactNumber='" + mContactNumber + '\'' +
+                ", mAddress='" + mAddress + '\'' +
+                ", mCategory=" + mCategory +
+                ", mReviews=" + mReviews +
+                ", mMenus=" + mMenus +
+                '}';
     }
 }

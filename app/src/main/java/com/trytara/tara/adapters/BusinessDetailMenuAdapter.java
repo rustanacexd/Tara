@@ -35,7 +35,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.coffee_shop, R.drawable.restaurant,
             R.drawable.pharmacy };
 
-    private Context mContext;
+    private static Context mContext;
 
     public BusinessDetailMenuAdapter(Context context) {
         mContext = context;
@@ -43,7 +43,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView menuImage;
 

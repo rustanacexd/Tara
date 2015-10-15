@@ -22,7 +22,7 @@ public class BusinessStaffAdapter extends RecyclerView.Adapter<BusinessStaffAdap
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.coffee_shop, R.drawable.restaurant,
             R.drawable.pharmacy };
 
-    private Context mContext;
+    private static Context mContext;
 
     public BusinessStaffAdapter(Context context) {
         mContext = context;
@@ -30,7 +30,7 @@ public class BusinessStaffAdapter extends RecyclerView.Adapter<BusinessStaffAdap
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView staffImage;
 

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import com.trytara.tara.adapters.ViewPagerAdapter;
 import com.trytara.tara.fragments.BusinessAboutFragment;
 import com.trytara.tara.fragments.BusinessMenuFragment;
+import com.trytara.tara.fragments.BusinessReviewFragment;
 
 public class BusinessDetailActivity extends AppCompatActivity {
 
@@ -61,7 +62,7 @@ public class BusinessDetailActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new BusinessMenuFragment(), "Menu");
         adapter.addFrag(new BusinessAboutFragment(), "About");
-        adapter.addFrag(new BusinessMenuFragment(), "Reviews");
+        adapter.addFrag(new BusinessReviewFragment(), "Reviews");
         adapter.addFrag(new BusinessMenuFragment(), "Contact");
         viewPager.setAdapter(adapter);
     }

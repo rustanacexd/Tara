@@ -15,23 +15,20 @@ import com.trytara.tara.models.Business;
 
 import java.util.List;
 
-public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.ViewHolder>{
-    private static final String TAG = "BusinessListAdapter";
+public class BusinessReviewsListAdapter extends RecyclerView.Adapter<BusinessReviewsListAdapter.ViewHolder> {
+    private static final String TAG = "BusinessReviewsListAdapter";
 
-    private List<Business> mDataSet;
+    private List<Business.Review> mDataSet;
     private static Context mContext;
 
-    public BusinessListAdapter(Context context, List<Business> dataSet) {
+    public BusinessReviewsListAdapter(Context context, List<Business.Review> dataSet) {
         mContext = context;
         mDataSet = dataSet;
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView businessName;
-        private final TextView businessDescription;
-        private final TextView businessDistance;
-        private final ImageView businessThumbnail;
 
         public ViewHolder(View v) {
             super(v);
@@ -45,39 +42,24 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
             });
 
             businessName = (TextView) v.findViewById(R.id.business_name);
-            businessDescription = (TextView) v.findViewById(R.id.business_description);
-            businessThumbnail = (ImageView) v.findViewById(R.id.business_thumbnail);
-            businessDistance = (TextView) v.findViewById(R.id.business_distance);
+
 
         }
 
-        public TextView getBusinessDistance() {
-            return businessDistance;
-        }
 
         public TextView getBusinessName() {
             return businessName;
-        }
-
-        public TextView getBusinessDescription() {
-            return businessDescription;
-        }
-
-        public ImageView getBusinessThumbnail() {
-            return businessThumbnail;
         }
 
 
     }
 
 
-
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.business_row_item, viewGroup, false);
+                .inflate(R.layout.review_row_item, viewGroup, false);
 
         return new ViewHolder(v);
     }
@@ -87,10 +69,9 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         //Log.d(TAG, "Element " + position + " set.");
 
-        Business business = mDataSet.get(position);
-        viewHolder.getBusinessName().setText(business.getName());
-        viewHolder.getBusinessDescription().setText(business.getDescription());
-        viewHolder.getBusinessDistance().setText("82km");
+        Business.Review review = mDataSet.get(position);
+        viewHolder.getBusinessName().setText(review.getContent());
+
     }
 
     @Override
