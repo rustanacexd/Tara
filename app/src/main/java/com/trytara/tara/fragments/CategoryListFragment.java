@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -73,7 +74,8 @@ public class CategoryListFragment extends Fragment{
             Categories.CategoryItem category = getItem(position);
             TextView categoryDescription = (TextView) convertView.findViewById(R.id.category_descripton);
             categoryDescription.setText(category.mDescription);
-            convertView.setBackgroundResource(mDrawables.get(position));
+            ImageView categoryImage = (ImageView) convertView.findViewById(R.id.category_image);
+            categoryImage.setImageResource(mDrawables.get(position));
             return convertView;
         }
 
