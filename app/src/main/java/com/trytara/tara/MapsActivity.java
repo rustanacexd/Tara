@@ -26,7 +26,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.trytara.tara.fragments.BusinessListFragment;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
+import java.util.Objects;
+
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener{
 
     private GoogleMap mMap;
 
@@ -93,9 +95,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("TAG", "ON RESUME RUNNING");
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+
+        if (fragment.getTag().equals("MapFragment")) {
+            mMapFragment.getMapAsync(this);
+        }
+
     }
 
     @Override
