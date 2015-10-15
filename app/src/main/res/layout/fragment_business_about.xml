@@ -1,13 +1,32 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             android:padding="@dimen/activity_vertical_margin"
              tools:context="com.trytara.tara.fragments.BusinessAboutFragment">
+
+    <TextView
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:id="@+id/about_title"
+        android:text="What we offer:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_below="@id/about_title"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur ad
+ipisicing elit, sed do eiusmod tempor incididunt
+ut labore et dolore magna aliqua. Ut enim ad
+minim veniam, quis nostrud exercitation ullam
+co laboris nisi ut aliquip ex ea.
 
-</FrameLayout>
+	Commodo consequat. Duis aute irure dolor
+in reprehenderit in voluptate velit esse cillum
+dolore eu fugiat nulla pariatur. sed do eiusmod
+tempor incididunt ut labore et dolore magna."/>
+
+</RelativeLayout>
