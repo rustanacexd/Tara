@@ -1,15 +1,18 @@
 package com.trytara.tara.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.trytara.tara.MapsActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.models.Categories;
 
@@ -35,11 +38,18 @@ public class CategoryListFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_categories, container, false);
+        View view = inflater.inflate(R.layout.fragment_categories_list, container, false);
 
         // Set the adapter
         mListView = (ListView) view.findViewById(R.id.listview);
         mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getActivity(), MapsActivity.class);
+                getActivity().startActivity(i);
+            }
+        });
         mListView.setDivider(null);
 
         return view;

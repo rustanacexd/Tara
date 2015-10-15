@@ -9,9 +9,11 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -22,9 +24,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.trytara.tara.fragments.BusinessListFragment;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener,
-        ItemFragment.OnFragmentInteractionListener {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
 
@@ -40,10 +42,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-
         GoogleMapOptions options = new GoogleMapOptions();
         options.mapType(GoogleMap.MAP_TYPE_NORMAL)
                 .compassEnabled(false)
@@ -51,11 +49,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .tiltGesturesEnabled(false);
 
         mMapFragment = SupportMapFragment.newInstance(options);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, mMapFragment)
-                .commit();
         mMapFragment.getMapAsync(this);
 
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, mMapFragment, "MapFragment")
+                .commit();
 
     }
 
@@ -92,6 +90,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         locationManager.requestLocationUpdates(bestProvider, 2000, 0, this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("TAG", "ON RESUME RUNNING");
     }
 
     @Override
@@ -138,9 +142,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.switch_view_settings) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new ItemFragment())
-                    .commit();
+
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag("MapFragment");
+
+            if (fragment != null && fragment.isVisible()) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new BusinessListFragment(), "ListFragment")
+                        .commit();
+            } else {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, mMapFragment, "MapFragment")
+                        .commit();
+            }
+
+
             return true;
         }
 
@@ -163,9 +178,4 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-
-    @Override
-    public void onFragmentInteraction(String id) {
-
-    }
 }
