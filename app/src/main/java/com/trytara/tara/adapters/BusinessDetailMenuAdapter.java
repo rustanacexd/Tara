@@ -1,6 +1,5 @@
 package com.trytara.tara.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -16,13 +15,14 @@ import com.trytara.tara.models.Business;
 
 import java.util.List;
 
-public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.ViewHolder>{
-    private static final String TAG = "BusinessListAdapter";
+public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDetailMenuAdapter.ViewHolder>{
+
+    private static final String TAG = "BusinessDetailMenuAdapter";
 
     private List<Business> mDataSet;
     private Context mContext;
 
-    public BusinessListAdapter(Context context, List<Business> dataSet) {
+    public BusinessDetailMenuAdapter(Context context, List<Business> dataSet) {
         mContext = context;
         mDataSet = dataSet;
     }
@@ -67,7 +67,6 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
         public ImageView getBusinessThumbnail() {
             return businessThumbnail;
         }
-
 
     }
 

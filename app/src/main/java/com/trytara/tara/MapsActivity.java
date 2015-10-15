@@ -27,12 +27,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.trytara.tara.fragments.BusinessListFragment;
-import com.trytara.tara.models.Categories;
 
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener{
 
     private static final String EXTRA_CATEGORY_NAME = "EXTRA_CATEGORY_NAME";
+
     private GoogleMap mMap;
 
     private static final int MY_LOCATION_REQUEST_CODE = 119;
@@ -44,16 +44,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        String currentCategorySelected = getIntent().getStringExtra(EXTRA_CATEGORY_NAME);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(currentCategorySelected);
 
         GoogleMapOptions options = new GoogleMapOptions();
         options.mapType(GoogleMap.MAP_TYPE_NORMAL)
                 .compassEnabled(false)
                 .rotateGesturesEnabled(false)
                 .tiltGesturesEnabled(false);
+
 
         mMapFragment = SupportMapFragment.newInstance(options);
         mMapFragment.getMapAsync(this);
@@ -62,7 +65,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .replace(R.id.fragment_container, mMapFragment, "MapFragment")
                 .commit();
 
-        setTitle(getIntent().getStringExtra(EXTRA_CATEGORY_NAME));
     }
 
     public static Intent newIntent(Context packageContext, String selectedCategory) {

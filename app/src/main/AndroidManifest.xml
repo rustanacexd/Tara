@@ -78,7 +78,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".BusinessDetailActivity" >
+        <activity android:name=".BusinessDetailActivity"
+            android:parentActivityName=".MapsActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MapsActivity" />
         </activity>
     </application>
 

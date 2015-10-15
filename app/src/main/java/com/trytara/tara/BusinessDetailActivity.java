@@ -1,5 +1,6 @@
 package com.trytara.tara;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ public class BusinessDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.business_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Map");
 
         mViewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(mViewPager);
@@ -60,4 +63,6 @@ public class BusinessDetailActivity extends AppCompatActivity {
         adapter.addFrag(new BusinessAboutFragment(), "Contact");
         viewPager.setAdapter(adapter);
     }
+
+
 }
