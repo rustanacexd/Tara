@@ -1,6 +1,8 @@
 package com.trytara.tara;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -25,11 +27,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.trytara.tara.fragments.BusinessListFragment;
+import com.trytara.tara.models.Categories;
 
-import java.util.Objects;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener{
 
+    private static final String EXTRA_CATEGORY_NAME = "EXTRA_CATEGORY_NAME";
     private GoogleMap mMap;
 
     private static final int MY_LOCATION_REQUEST_CODE = 119;
@@ -41,8 +44,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         GoogleMapOptions options = new GoogleMapOptions();
         options.mapType(GoogleMap.MAP_TYPE_NORMAL)
@@ -57,8 +62,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .replace(R.id.fragment_container, mMapFragment, "MapFragment")
                 .commit();
 
+        setTitle(getIntent().getStringExtra(EXTRA_CATEGORY_NAME));
     }
 
+    public static Intent newIntent(Context packageContext, String selectedCategory) {
+        Intent i = new Intent(packageContext, MapsActivity.class);
+        i.putExtra(EXTRA_CATEGORY_NAME, selectedCategory);
+        return i;
+    }
 
     /**
      * Manipulates the map once available.
@@ -130,6 +141,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

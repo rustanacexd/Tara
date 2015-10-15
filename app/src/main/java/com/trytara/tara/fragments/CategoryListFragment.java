@@ -46,7 +46,7 @@ public class CategoryListFragment extends Fragment{
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getActivity(), MapsActivity.class);
+                Intent i = MapsActivity.newIntent(getActivity(), Categories.sCategoryItemsList.get(position).mName);
                 getActivity().startActivity(i);
             }
         });
