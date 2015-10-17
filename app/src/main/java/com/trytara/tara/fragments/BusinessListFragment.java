@@ -76,7 +76,9 @@ public class BusinessListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_business_list, container, false);
 
         RecyclerView rvBusiness = (RecyclerView) view.findViewById(R.id.rvBusiness);
-        BusinessListAdapter adapter = new BusinessListAdapter(getActivity(), BusinessDataSource.get(getActivity()).getBusinesses());
+        BusinessListAdapter adapter = new BusinessListAdapter(getActivity(),
+                BusinessDataSource.get(getActivity()).getBusinesses());
+
         rvBusiness.setAdapter(adapter);
         rvBusiness.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvBusiness.setHasFixedSize(true);

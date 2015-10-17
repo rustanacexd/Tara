@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.trytara.tara.BusinessDetailActivity;
@@ -15,20 +16,26 @@ import com.trytara.tara.models.Business;
 
 import java.util.List;
 
+import static com.trytara.tara.models.Business.*;
+
 public class BusinessReviewsListAdapter extends RecyclerView.Adapter<BusinessReviewsListAdapter.ViewHolder> {
     private static final String TAG = "BusinessReviewsListAdapter";
 
-    private List<Business> mDataSet;
+    private List<Review> mDataSet;
     private static Context mContext;
 
-    public BusinessReviewsListAdapter(Context context, List<Business> dataSet) {
+    public BusinessReviewsListAdapter(Context context, List<Review> dataSet) {
         mContext = context;
         mDataSet = dataSet;
     }
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView businessName;
+        private final ImageView userThumbnail;
+        private final TextView userName;
+        private final TextView dateReview;
+        private final TextView reviewContent;
+        private final RatingBar userRating;
 
         public ViewHolder(View v) {
             super(v);
@@ -41,17 +48,34 @@ public class BusinessReviewsListAdapter extends RecyclerView.Adapter<BusinessRev
                 }
             });
 
-            businessName = (TextView) v.findViewById(R.id.business_name);
-
+            userName = (TextView) v.findViewById(R.id.user_name);
+            userThumbnail = (ImageView) v.findViewById(R.id.user_thumbnail);
+            dateReview = (TextView) v.findViewById(R.id.date_review);
+            reviewContent = (TextView) v.findViewById(R.id.user_review_content);
+            userRating = (RatingBar) v.findViewById(R.id.user_rating);
 
         }
 
 
-        public TextView getBusinessName() {
-            return businessName;
+        public TextView getUserName() {
+            return userName;
         }
 
+        public ImageView getUserThumbnail() {
+            return userThumbnail;
+        }
 
+        public TextView getDateReview() {
+            return dateReview;
+        }
+
+        public TextView getReviewContent() {
+            return reviewContent;
+        }
+
+        public RatingBar getUserRating() {
+            return userRating;
+        }
     }
 
 
@@ -69,9 +93,12 @@ public class BusinessReviewsListAdapter extends RecyclerView.Adapter<BusinessRev
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         //Log.d(TAG, "Element " + position + " set.");
 
-        Business review = mDataSet.get(position);
-        viewHolder.getBusinessName().setText("");
-
+        Review review = mDataSet.get(position);
+        viewHolder.getUserName().setText(review.getReviewer());
+        viewHolder.getDateReview().setText(review.getDate().toString());
+        viewHolder.getUserRating().setRating(review.getRating());
+        viewHolder.getUserThumbnail().setImageResource(R.drawable.hotels);
+        viewHolder.getReviewContent().setText(review.getContent());
     }
 
     @Override

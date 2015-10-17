@@ -10,39 +10,21 @@ import android.view.ViewGroup;
 
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.BusinessReviewsListAdapter;
-import com.trytara.tara.adapters.BusinessStaffAdapter;
+import com.trytara.tara.models.Business;
 import com.trytara.tara.models.BusinessDataSource;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BusinessReviewFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class BusinessReviewFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
+    private static final String ARG_BUSINESS_POSITION = "arg_business_position";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int mBusinessPosition;
 
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BusinessReviewFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BusinessReviewFragment newInstance(String param1, String param2) {
+    public static BusinessReviewFragment newInstance(int businessPosition) {
         BusinessReviewFragment fragment = new BusinessReviewFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_BUSINESS_POSITION, businessPosition);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,8 +37,7 @@ public class BusinessReviewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mBusinessPosition = getArguments().getInt(ARG_BUSINESS_POSITION);
         }
     }
 
@@ -67,8 +48,8 @@ public class BusinessReviewFragment extends Fragment {
 
         RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessReviewsList);
 
-        BusinessReviewsListAdapter adapter = new BusinessReviewsListAdapter(getActivity(),
-                BusinessDataSource.get(getActivity()).getBusinesses());
+        Business business = BusinessDataSource.get(getActivity()).getBusiness(mBusinessPosition);
+        BusinessReviewsListAdapter adapter = new BusinessReviewsListAdapter(getActivity(),business.getReviews());
 
         rvBusinessMenuList.setAdapter(adapter);
 

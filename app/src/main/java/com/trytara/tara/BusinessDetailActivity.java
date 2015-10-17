@@ -1,5 +1,7 @@
 package com.trytara.tara;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +16,15 @@ import com.trytara.tara.fragments.BusinessReviewFragment;
 public class BusinessDetailActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
+    private static final String EXTRA_PREFIX = "com.trytara.tara.";
+    private static final String EXTRA_BUSINESS_POSITION = EXTRA_PREFIX + "business_position";
+    private int mBusinessPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mBusinessPosition = getIntent().getIntExtra(EXTRA_BUSINESS_POSITION, 0);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_detail);
 
@@ -58,11 +66,17 @@ public class BusinessDetailActivity extends AppCompatActivity {
 
     }
 
+    public static Intent newIntent(Context packageContext, int position) {
+        Intent intent = new Intent(packageContext, BusinessDetailActivity.class);
+        intent.putExtra(EXTRA_BUSINESS_POSITION, position);
+        return intent;
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new BusinessMenuFragment(), "Menu");
         adapter.addFrag(new BusinessAboutFragment(), "About");
-        adapter.addFrag(new BusinessReviewFragment(), "Reviews");
+        adapter.addFrag(BusinessReviewFragment.newInstance(mBusinessPosition), "Reviews");
         adapter.addFrag(new BusinessMenuFragment(), "Contact");
         viewPager.setAdapter(adapter);
     }

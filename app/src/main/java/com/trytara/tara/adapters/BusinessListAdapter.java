@@ -15,7 +15,7 @@ import com.trytara.tara.models.Business;
 
 import java.util.List;
 
-public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.ViewHolder>{
+public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.ViewHolder> {
     private static final String TAG = "BusinessListAdapter";
 
     private List<Business> mDataSet;
@@ -27,7 +27,8 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private Business mBusiness;
         private final TextView businessName;
         private final TextView businessDescription;
         private final TextView businessDistance;
@@ -36,13 +37,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
         public ViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View.
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(mContext, BusinessDetailActivity.class);
-                    mContext.startActivity(i);
-                }
-            });
+            v.setOnClickListener(this);
 
             businessName = (TextView) v.findViewById(R.id.business_name);
             businessDescription = (TextView) v.findViewById(R.id.business_description);
@@ -68,9 +63,12 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
         }
 
 
+        @Override
+        public void onClick(View v) {
+            Intent i = BusinessDetailActivity.newIntent(mContext, this.getLayoutPosition());
+            mContext.startActivity(i);
+        }
     }
-
-
 
 
     @Override

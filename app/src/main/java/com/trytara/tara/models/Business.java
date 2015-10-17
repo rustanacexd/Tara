@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import static com.trytara.tara.models.Categories.Category;
 
-public class Business {
+public class Business{
     private String mName;
     private String mDescription;
     private String mContactNumber;
@@ -16,6 +17,7 @@ public class Business {
     private Category mCategory;
     private List<Review> mReviews;
     private List<MenuItem> mMenus;
+    private UUID mId;
 
     public Business(String name, String description, String contactNumber, String address, BusinessDataSource.RandomEnum<Category> category) {
         mName = name;
@@ -24,6 +26,11 @@ public class Business {
         mAddress = address;
         mReviews = new ArrayList<>();
         mMenus = new ArrayList<>();
+        mId = UUID.randomUUID();
+    }
+
+    public UUID getId() {
+        return mId;
     }
 
     public String getName() {
@@ -78,11 +85,11 @@ public class Business {
     public static class Review {
         //TODO: Implement Class
         private String mContent;
-        private Double mRating;
+        private float mRating;
         private Date mDate;
         private String mReviewer;
 
-        public Review(String content, Double rating, String reviewer) {
+        public Review(String content, float rating, String reviewer) {
             mContent = content;
             mRating = rating;
             mDate = new Date();
@@ -93,7 +100,7 @@ public class Business {
             return mContent;
         }
 
-        public Double getRating() {
+        public float getRating() {
             return mRating;
         }
 
