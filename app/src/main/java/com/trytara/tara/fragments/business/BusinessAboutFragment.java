@@ -1,23 +1,23 @@
-package com.trytara.tara.fragments;
+package com.trytara.tara.fragments.business;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.trytara.tara.R;
-import com.trytara.tara.adapters.BusinessDetailMenuAdapter;
+import com.trytara.tara.adapters.BusinessStaffAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link BusinessMenuFragment#newInstance} factory method to
+ * Use the {@link BusinessAboutFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BusinessMenuFragment extends Fragment {
+public class BusinessAboutFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,11 +34,11 @@ public class BusinessMenuFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BusinessMenuFragment.
+     * @return A new instance of fragment BusinessAboutFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BusinessMenuFragment newInstance(String param1, String param2) {
-        BusinessMenuFragment fragment = new BusinessMenuFragment();
+    public static BusinessAboutFragment newInstance(String param1, String param2) {
+        BusinessAboutFragment fragment = new BusinessAboutFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -46,7 +46,7 @@ public class BusinessMenuFragment extends Fragment {
         return fragment;
     }
 
-    public BusinessMenuFragment() {
+    public BusinessAboutFragment() {
         // Required empty public constructor
     }
 
@@ -63,12 +63,18 @@ public class BusinessMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_business_menu, container, false);
+        View view = inflater.inflate(R.layout.fragment_business_about, container, false);
 
-        RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessMenuList);
-        BusinessDetailMenuAdapter adapter = new BusinessDetailMenuAdapter(getActivity());
+        RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvStaffList);
+        BusinessStaffAdapter adapter = new BusinessStaffAdapter(getActivity());
+
+        rvBusinessMenuList.setHasFixedSize(true);
         rvBusinessMenuList.setAdapter(adapter);
-        rvBusinessMenuList.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        rvBusinessMenuList.setLayoutManager(manager);
 
         return view;
     }

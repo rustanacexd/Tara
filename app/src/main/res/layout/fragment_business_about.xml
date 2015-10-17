@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:fillViewport="true"
     android:padding="@dimen/activity_vertical_margin"
-    tools:context="com.trytara.tara.fragments.BusinessAboutFragment">
+    tools:context="com.trytara.tara.fragments.business.BusinessAboutFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

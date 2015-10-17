@@ -9,10 +9,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.trytara.tara.adapters.ViewPagerAdapter;
-import com.trytara.tara.fragments.BusinessAboutFragment;
-import com.trytara.tara.fragments.BusinessContactFragment;
-import com.trytara.tara.fragments.BusinessMenuFragment;
-import com.trytara.tara.fragments.BusinessReviewFragment;
+import com.trytara.tara.fragments.business.BusinessAboutFragment;
+import com.trytara.tara.fragments.business.BusinessContactFragment;
+import com.trytara.tara.fragments.business.BusinessMenuFragment;
+import com.trytara.tara.fragments.business.BusinessReviewFragment;
 
 public class BusinessDetailActivity extends AppCompatActivity {
 
