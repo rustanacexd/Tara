@@ -2,55 +2,69 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="80dp"
+              android:layout_height="wrap_content"
               android:orientation="horizontal"
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
-              tools:layout_height="80dp">
+              tools:layout_height="250dp">
 
 
     <ImageView
-        android:id="@+id/business_thumbnail"
+        android:id="@+id/user_thumbnail"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_weight="15"
         android:scaleType="centerCrop"
         android:src="@drawable/hotels"
         tools:ignore="ContentDescription"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="85"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
 
         <TextView
-            android:id="@+id/business_name"
+            android:id="@+id/user_name"
             style="@android:style/TextAppearance.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
             tools:text="Bob's Diner"/>
 
+        <RatingBar
+            android:rating="3.8"
+            android:stepSize="0.1"
+            android:id="@+id/user_rating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <TextView
-            android:id="@+id/business_description"
+            android:id="@+id/date_review"
             style="@android:style/TextAppearance.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/business_name"
             android:singleLine="true"
-            tools:text="Lorem ipsum grabeh ka nonsense lol Lorem ipsum grabeh ka nonsense lol"/>
+            tools:text="10/09/2015"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/darker_gray"/>
 
         <TextView
-            android:id="@+id/business_distance"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            tools:text="0.8km"/>
+            android:layout_height="wrap_content"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

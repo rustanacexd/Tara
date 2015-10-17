@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.BusinessReviewsListAdapter;
 import com.trytara.tara.adapters.BusinessStaffAdapter;
+import com.trytara.tara.models.BusinessDataSource;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,14 +65,15 @@ public class BusinessReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_business_review, container, false);
 
-        /*RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessReviewsList);
-        BusinessReviewsListAdapter adapter = new BusinessReviewsListAdapter(getActivity(), );
+        RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessReviewsList);
 
-        rvBusinessMenuList.setHasFixedSize(true);
+        BusinessReviewsListAdapter adapter = new BusinessReviewsListAdapter(getActivity(),
+                BusinessDataSource.get(getActivity()).getBusinesses());
+
         rvBusinessMenuList.setAdapter(adapter);
 
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        rvBusinessMenuList.setLayoutManager(manager);*/
+        rvBusinessMenuList.setLayoutManager(manager);
 
         return view;
     }

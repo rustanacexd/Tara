@@ -75,9 +75,6 @@ public class Business {
     }
 
 
-
-
-
     public static class Review {
         //TODO: Implement Class
         private String mContent;

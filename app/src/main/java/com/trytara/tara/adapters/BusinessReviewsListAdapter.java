@@ -18,10 +18,10 @@ import java.util.List;
 public class BusinessReviewsListAdapter extends RecyclerView.Adapter<BusinessReviewsListAdapter.ViewHolder> {
     private static final String TAG = "BusinessReviewsListAdapter";
 
-    private List<Business.Review> mDataSet;
+    private List<Business> mDataSet;
     private static Context mContext;
 
-    public BusinessReviewsListAdapter(Context context, List<Business.Review> dataSet) {
+    public BusinessReviewsListAdapter(Context context, List<Business> dataSet) {
         mContext = context;
         mDataSet = dataSet;
     }
@@ -69,8 +69,8 @@ public class BusinessReviewsListAdapter extends RecyclerView.Adapter<BusinessRev
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         //Log.d(TAG, "Element " + position + " set.");
 
-        Business.Review review = mDataSet.get(position);
-        viewHolder.getBusinessName().setText(review.getContent());
+        Business review = mDataSet.get(position);
+        viewHolder.getBusinessName().setText("");
 
     }
 

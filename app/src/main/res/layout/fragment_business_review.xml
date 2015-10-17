@@ -30,9 +30,9 @@
         android:background="@android:color/darker_gray"/>
 
     <RelativeLayout
-        android:layout_gravity="left"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="left">
 
         <TextView
             android:id="@+id/average_rating"
@@ -42,24 +42,24 @@
             android:textSize="46sp"/>
 
         <RatingBar
-            android:layout_marginTop="4dp"
             android:id="@+id/total_rating"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/average_rating"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/average_rating"
             android:numStars="5"
             android:rating="4.5"
             android:stepSize="0.1"/>
 
         <TextView
-            android:layout_marginTop="2dp"
-            android:layout_alignLeft="@id/total_rating"
-            android:text="1,422"
-            android:layout_below="@id/total_rating"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/total_rating"
+            android:layout_below="@id/total_rating"
+            android:layout_marginTop="2dp"
+            android:text="1,422"/>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
