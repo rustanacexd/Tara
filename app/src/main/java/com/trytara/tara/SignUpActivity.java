@@ -86,14 +86,14 @@ public class SignUpActivity extends AppCompatActivity {
         super.onResume();
 
         //Hide Status Bar
-        View decorView = getWindow().getDecorView();
+        /*View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.hide();
-        }
+        }*/
 
 
     }
