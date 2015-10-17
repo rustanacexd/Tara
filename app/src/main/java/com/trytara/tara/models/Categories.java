@@ -46,6 +46,10 @@ public class Categories {
                 R.drawable.restaurant, Category.RESTAURANT));
     }
 
+    public static List<CategoryItem> getCategoryItemsList() {
+        return sCategoryItemsList;
+    }
+
     private static void addItem(CategoryItem item) {
         sCategoryItemsList.add(item);
         sCategoryItemsMap.put(item.mName, item);

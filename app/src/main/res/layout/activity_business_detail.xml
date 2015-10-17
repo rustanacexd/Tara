@@ -85,7 +85,7 @@
         android:layout_marginBottom="15dp"
         android:layout_marginRight="15dp"
         android:clickable="true"
-        android:src="@drawable/ic_cast_dark"
+        android:src="@drawable/common_ic_googleplayservices"
         app:backgroundTint="?attr/colorPrimary"
         app:fabSize="normal"
         app:layout_anchor="@+id/coord_layout"

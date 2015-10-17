@@ -259,11 +259,11 @@ public class LoginActivity extends AppCompatActivity {
                 currentUser.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        if (e == null) {
-                            finish();
-                        }
+
                     }
                 });
+
+                finish();
             }
         }).executeAsync();
     }

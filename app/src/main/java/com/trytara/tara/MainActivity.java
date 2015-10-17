@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .replace(R.id.fragment_container, new CategoryListFragment())
                 .commit();
 
-
     }
 
     @Override
@@ -81,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onResume() {
-
         super.onResume();
         if (ParseUser.getCurrentUser() != null) {
             mProfilePictureView.setProfileId(ParseUser.getCurrentUser().getString("facebookID"));
