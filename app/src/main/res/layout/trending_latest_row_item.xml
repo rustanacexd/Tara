@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:background="@android:color/white"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/white"
                 android:paddingTop="@dimen/activity_vertical_margin">
 
-    <ImageView
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="24dp"
         android:scaleType="centerCrop"
-        tools:src="@drawable/hotels"/>
+        tools:src="@drawable/hotels"
+        />
 
     <TextView
         android:id="@+id/user_name"

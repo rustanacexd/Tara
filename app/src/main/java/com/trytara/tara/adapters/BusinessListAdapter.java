@@ -28,7 +28,6 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private Business mBusiness;
         private final TextView businessName;
         private final TextView businessDescription;
         private final TextView businessDistance;

@@ -9,7 +9,6 @@
 
     <ImageView
         android:id="@+id/category_image"
-        android:tint="@color/colorBlackTint"
         android:scaleType="centerCrop"
         tools:src="@drawable/hotels"
         android:layout_width="match_parent"

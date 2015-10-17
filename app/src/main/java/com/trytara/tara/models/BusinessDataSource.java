@@ -17,7 +17,7 @@ public class BusinessDataSource {
 
     private BusinessDataSource(Context context) {
         mContext = context.getApplicationContext();
-        mBusinesses = createBusinessList(15);
+        mBusinesses = createBusinessList(200);
     }
 
     public synchronized static BusinessDataSource get(Context context) {

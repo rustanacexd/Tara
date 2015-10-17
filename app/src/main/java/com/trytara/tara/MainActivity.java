@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.login.widget.ProfilePictureView;
@@ -51,6 +53,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mFacebookName = (TextView) findViewById(R.id.facebook_name);
         mAddress = (TextView) findViewById(R.id.address);
+
+        Button logOutButton = (Button) findViewById(R.id.logout);
+        logOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOut();
+            }
+        });
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new CategoryListFragment())

@@ -26,7 +26,7 @@ public class TrendingDataSource {
     private List<Trending> createTrendingList() {
         List<Trending> trendingList = new ArrayList<>();
 
-        for (int i = 0; i <= 15; i++) {
+        for (int i = 0; i <= 30; i++) {
             trendingList.add(new Trending("Trending Sharer Username " + i, "#Dummyhashtag",
                     "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
                             "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
