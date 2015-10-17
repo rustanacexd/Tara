@@ -17,6 +17,7 @@ import com.facebook.login.widget.ProfilePictureView;
 
 import com.parse.ParseUser;
 import com.trytara.tara.fragments.CategoryListFragment;
+import com.trytara.tara.fragments.TrendingListFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ParseUser.logOut();
+        //ParseUser.logOut();
         checkIfSignIn();
         setContentView(R.layout.activity_main);
 
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_search:
                 break;
             case R.id.nav_trending:
+                fragment = new TrendingListFragment();
                 break;
             case R.id.nav_favorites:
                 break;

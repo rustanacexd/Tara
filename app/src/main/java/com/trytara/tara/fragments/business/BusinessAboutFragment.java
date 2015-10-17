@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.trytara.tara.R;
-import com.trytara.tara.adapters.BusinessStaffAdapter;
+import com.trytara.tara.adapters.business.BusinessStaffAdapter;
 
 /**
  * A simple {@link Fragment} subclass.

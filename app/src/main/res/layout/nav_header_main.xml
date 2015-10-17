@@ -42,7 +42,7 @@
         <Button
             android:id="@+id/logout"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            style="@style/Base.Widget.AppCompat.Button.BlueButton"
+            style="@style/BlueButton"
             android:text="@string/com_facebook_loginview_log_out_action"
             android:layout_width="150dp"
             android:layout_height="wrap_content"/>

@@ -1,4 +1,4 @@
-package com.trytara.tara.adapters;
+package com.trytara.tara.adapters.business;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

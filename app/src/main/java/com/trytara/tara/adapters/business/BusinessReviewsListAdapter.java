@@ -1,4 +1,4 @@
-package com.trytara.tara.adapters;
+package com.trytara.tara.adapters.business;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.trytara.tara.BusinessDetailActivity;
 import com.trytara.tara.R;
-import com.trytara.tara.models.Business;
 
 import java.util.List;
 
@@ -43,8 +42,8 @@ public class BusinessReviewsListAdapter extends RecyclerView.Adapter<BusinessRev
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(mContext, BusinessDetailActivity.class);
-                    mContext.startActivity(i);
+                    /*Intent i = new Intent(mContext, BusinessDetailActivity.class);
+                    mContext.startActivity(i);*/
                 }
             });
 
