@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 showProgress(true);
                 ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginActivity.this,
                         Arrays.asList("user_location, email, user_birthday"), new LogInCallback() {
@@ -70,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
                                     getFacebookInfo();
                                 } else {
                                     Log.d(TAG, "CURRENT USER: " + parseUser.toString());
-                                    finish();
                                 }
                             }
 
@@ -109,15 +107,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        //Hide Status Bar
-        /*View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
-
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }*/
     }
 
     @Override
@@ -125,14 +114,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         showProgress(false);
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
-
-
         if (resultCode != Activity.RESULT_OK) return;
-
-
-        if (requestCode == REQUEST_SIGNUP) {
-            finish();
-        }
+        finish();
     }
 
 
@@ -262,10 +245,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
-
-                finish();
             }
         }).executeAsync();
+
     }
 }
 

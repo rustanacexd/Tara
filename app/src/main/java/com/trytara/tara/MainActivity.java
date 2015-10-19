@@ -32,13 +32,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ProfilePictureView mProfilePictureView;
     private TextView mFacebookName;
     private TextView mAddress;
-    private List<Trending> mTrendingList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //ParseUser.logOut();
+        ParseUser.logOut();
         checkIfSignIn();
         setContentView(R.layout.activity_main);
 
@@ -131,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_search:
                 break;
             case R.id.nav_trending:
-                mTrendingList = new TrendingDataSource(this).getTrendingList();
                 fragment = new TrendingListFragment();
                 break;
             case R.id.nav_favorites:
@@ -160,10 +157,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTitle(item.getTitle());
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public List<Trending> getTrendingList() {
-        return mTrendingList;
     }
 
     private void checkIfSignIn() {
