@@ -6,6 +6,6 @@
     <color name="colorGray">#e7e7e7</color>
     <color name="colorLightGray">#f3f3f3</color>
     <color name="colorDarkGray">#797979</color>
-    <color name="colorBlackTint">#99000000</color>
+    <color name="colorBlackTint">#80000000</color>
     <color name="colorWhiteTint">#80FFFFFF</color>
 </resources>

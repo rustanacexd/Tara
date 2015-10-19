@@ -20,6 +20,10 @@ import com.facebook.login.widget.ProfilePictureView;
 import com.parse.ParseUser;
 import com.trytara.tara.fragments.CategoryListFragment;
 import com.trytara.tara.fragments.TrendingListFragment;
+import com.trytara.tara.models.Trending;
+import com.trytara.tara.models.TrendingDataSource;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ProfilePictureView mProfilePictureView;
     private TextView mFacebookName;
     private TextView mAddress;
+    private List<Trending> mTrendingList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_search:
                 break;
             case R.id.nav_trending:
+                mTrendingList = new TrendingDataSource(this).getTrendingList();
                 fragment = new TrendingListFragment();
                 break;
             case R.id.nav_favorites:
@@ -153,6 +160,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTitle(item.getTitle());
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public List<Trending> getTrendingList() {
+        return mTrendingList;
     }
 
     private void checkIfSignIn() {

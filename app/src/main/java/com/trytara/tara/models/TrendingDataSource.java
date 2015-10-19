@@ -6,21 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrendingDataSource {
-    private static TrendingDataSource sTrendingDataSource;
     private List<Trending> mTrendingList;
     private Context mContext;
 
-    private TrendingDataSource(Context context) {
+    public TrendingDataSource(Context context) {
         mContext = context.getApplicationContext();
         mTrendingList = createTrendingList();
-    }
-
-    public synchronized static TrendingDataSource get(Context context) {
-        if (sTrendingDataSource == null) {
-            sTrendingDataSource = new TrendingDataSource(context);
-        }
-
-        return sTrendingDataSource;
     }
 
     private List<Trending> createTrendingList() {

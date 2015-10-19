@@ -1,6 +1,7 @@
 package com.trytara.tara.fragments;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -47,6 +48,7 @@ public class TrendingListFragment extends Fragment {
                 mViewPager.setCurrentItem(tab.getPosition());
                 switch (tab.getPosition()) {
                     case 0:
+
                         break;
                     case 1:
                         break;
@@ -68,7 +70,7 @@ public class TrendingListFragment extends Fragment {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFrag(new TrendingLatestFragment(), "Latest");
         adapter.addFrag(new BusinessAboutFragment(), "Popular");
         viewPager.setAdapter(adapter);

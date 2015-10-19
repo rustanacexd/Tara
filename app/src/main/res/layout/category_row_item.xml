@@ -8,7 +8,6 @@
     android:orientation="vertical">
 
     <ImageView
-        android:tint="@color/colorBlackTint"
         android:id="@+id/category_image"
         android:scaleType="centerCrop"
         tools:src="@drawable/hotels"
