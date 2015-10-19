@@ -4,11 +4,12 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.UUID;
 
-import static com.trytara.tara.models.Business.*;
+import static com.trytara.tara.models.Business.BusinessBuilder;
+import static com.trytara.tara.models.Business.ReviewBuilder;
 
-public class BusinessDataSource {
+public class BusinessDataSource implements BusinessDAO {
 
     private static BusinessDataSource sBusinessDataSource;
     private List<Business> mBusinesses;
@@ -28,22 +29,18 @@ public class BusinessDataSource {
         return sBusinessDataSource;
     }
 
-    private static final RandomEnum<Categories.Category> r = new RandomEnum<>(Categories.Category.class);
-
     private List<Business> createBusinessList(int numBusiness) {
         List<Business> businesses = new ArrayList<>();
         for (int i = 1; i <= numBusiness; i++) {
-            Business business = new Business();
-            business.setName("Business " + i);
-            business.setDescription("Lorem ipsum nonsense lol");
-            business.setContactNumber("062-2142-406");
-            business.setAddress("Pagadian City");
+
+
+            Business business = new BusinessBuilder("Business " + i, "Lorem ipsum nonsense " +
+                    "lol", "062-2142406", "Pagadian City").build();
 
             for (int j = 0; j <= 10; j++) {
                 String temporaryReviewContent = "Review " + j + " Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
                         "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam";
-
-                business.addReview(temporaryReviewContent, 4.5f, "Reviewer " + j);
+                business.addReview(new ReviewBuilder(temporaryReviewContent, 4.5f, "Reviewer Full name " + j).build());
             }
 
             businesses.add(business);
@@ -53,27 +50,24 @@ public class BusinessDataSource {
     }
 
 
-    public List<Business> getBusinesses() {
+    @Override
+    public List<Business> getAllBusinesses() {
         return mBusinesses;
     }
 
-    public Business getBusiness(int position) {
-        return mBusinesses.get(position);
+    @Override
+    public Business getBusiness(int id) {
+        return mBusinesses.get(id);
     }
 
-    public static class RandomEnum<E extends Enum> {
+    @Override
+    public void updateBusiness(Business business) {
 
-        private static final Random RND = new Random();
-        private final E[] values;
-
-        public RandomEnum(Class<E> token) {
-            values = token.getEnumConstants();
-        }
-
-        public E random() {
-            return values[RND.nextInt(values.length)];
-        }
     }
 
+    @Override
+    public void deleteBusiness(Business business) {
+
+    }
 
 }

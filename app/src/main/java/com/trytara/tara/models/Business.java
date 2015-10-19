@@ -48,7 +48,6 @@ public class Business {
         return mAddress;
     }
 
-
     public List<Review> getReviews() {
         return mReviews;
     }
@@ -65,7 +64,7 @@ public class Business {
         mItems.add(item);
     }
 
-    private static class Review {
+    public static class Review {
         private String mContent;
         private float mRating;
         private Date mDate;

@@ -77,7 +77,7 @@ public class BusinessListFragment extends Fragment {
 
         RecyclerView rvBusiness = (RecyclerView) view.findViewById(R.id.rvBusiness);
         BusinessListAdapter adapter = new BusinessListAdapter(getActivity(),
-                BusinessDataSource.get(getActivity()).getBusinesses());
+                BusinessDataSource.get(getActivity()).getAllBusinesses());
 
         rvBusiness.setAdapter(adapter);
         rvBusiness.setLayoutManager(new LinearLayoutManager(getActivity()));
