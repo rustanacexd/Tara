@@ -101,7 +101,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         Location location = locationManager.getLastKnownLocation(bestProvider);
         if (location != null) {
-            onLocationChanged(location);
+           updateCurrentLocation(location);
         }
 
         locationManager.requestLocationUpdates(bestProvider, 2000, 0, this);
@@ -119,6 +119,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onLocationChanged(Location location) {
+        //updateCurrentLocation(location);
+    }
+
+    private void updateCurrentLocation(Location location) {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
         LatLng latLng = new LatLng(latitude, longitude);
