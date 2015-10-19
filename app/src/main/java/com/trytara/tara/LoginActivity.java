@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -90,8 +94,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // Set up the login form.
         mUsernameView = (EditText) findViewById(R.id.username);
+        mUsernameView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         mPasswordView = (EditText) findViewById(R.id.password);
-
+        mPasswordView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         Button mEmailSignInButton = (Button) findViewById(R.id.username_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -161,7 +166,7 @@ public class LoginActivity extends AppCompatActivity {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-
+            hideSoftKeyboard(this);
             ParseUser.logInInBackground(username, password, new LogInCallback() {
                 public void done(ParseUser user, ParseException e) {
                     if (user != null) {
@@ -263,6 +268,16 @@ public class LoginActivity extends AppCompatActivity {
         if (ParseUser.getCurrentUser() != null) {
             startApp();
         }
+    }
+
+    public void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        mPasswordView.requestFocus();
+        if (activity.getCurrentFocus() != null) {
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        }
+
+
     }
 }
 
