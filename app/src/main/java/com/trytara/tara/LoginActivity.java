@@ -54,16 +54,18 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        ParseUser.logOut();
+        checkIfSignIn();
 
         ImageView loginButton = (ImageView) findViewById(R.id.facebook_login);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showProgress(true);
                 ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginActivity.this,
                         Arrays.asList("user_location, email, user_birthday"), new LogInCallback() {
                             @Override
                             public void done(ParseUser parseUser, ParseException e) {
+                                showProgress(true);
                                 if (parseUser == null) {
                                 } else if (parseUser.isNew()) {
                                     getFacebookInfo();
@@ -71,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.d(TAG, "CURRENT USER: " + parseUser.toString());
                                 }
                             }
-
                         });
             }
         });
@@ -112,10 +113,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        showProgress(false);
+        showProgress(true);
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != Activity.RESULT_OK) return;
-        finish();
+//        if (resultCode != Activity.RESULT_OK) return;
+
     }
 
 
@@ -242,12 +243,21 @@ public class LoginActivity extends AppCompatActivity {
                 currentUser.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(i);
                     }
                 });
             }
         }).executeAsync();
 
+    }
+
+
+    private void checkIfSignIn() {
+        if (ParseUser.getCurrentUser() != null) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
     }
 }
 

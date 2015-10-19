@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,9 +37,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ParseUser.logOut();
-        checkIfSignIn();
         setContentView(R.layout.activity_main);
+
+        Log.d(TAG, "onCreate running");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,6 +67,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+
+        if (ParseUser.getCurrentUser() != null) {
+            Log.d(TAG, "UPDATE FB INFO");
+            mProfilePictureView.setProfileId(ParseUser.getCurrentUser().getString("facebookID"));
+            mFacebookName.setText(ParseUser.getCurrentUser().getString("name"));
+            mAddress.setText(ParseUser.getCurrentUser().getString("address"));
+        }
+
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new CategoryListFragment())
                 .commit();
@@ -85,12 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        if (ParseUser.getCurrentUser() != null) {
-            mProfilePictureView.setProfileId(ParseUser.getCurrentUser().getString("facebookID"));
-            mFacebookName.setText(ParseUser.getCurrentUser().getString("name"));
-            mAddress.setText(ParseUser.getCurrentUser().getString("address"));
-        }
-
     }
 
     @Override
@@ -157,13 +160,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTitle(item.getTitle());
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void checkIfSignIn() {
-        if (ParseUser.getCurrentUser() == null) {
-            Intent i = new Intent(this, LoginActivity.class);
-            startActivity(i);
-        }
     }
 
 }
