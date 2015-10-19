@@ -4,28 +4,27 @@ package com.trytara.tara.models;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import static com.trytara.tara.models.Categories.Category;
 
-public class Business{
-    private String mName;
-    private String mDescription;
-    private String mContactNumber;
-    private String mAddress;
+public class Business {
+    private final String mName;
+    private final String mDescription;
+    private final String mContactNumber;
+    private final String mAddress;
     private Category mCategory;
     private List<Review> mReviews;
-    private List<MenuItem> mMenus;
-    private UUID mId;
+    private List<Item> mItems;
+    private final UUID mId;
 
-    public Business(String name, String description, String contactNumber, String address, BusinessDataSource.RandomEnum<Category> category) {
-        mName = name;
-        mDescription = description;
-        mContactNumber = contactNumber;
-        mAddress = address;
+    private Business(BusinessBuilder builder) {
+        mName = builder.mName;
+        mDescription = builder.mDescription;
+        mContactNumber = builder.mContactNumber;
+        mAddress = builder.mAddress;
         mReviews = new ArrayList<>();
-        mMenus = new ArrayList<>();
+        mItems = new ArrayList<>();
         mId = UUID.randomUUID();
     }
 
@@ -37,33 +36,18 @@ public class Business{
         return mName;
     }
 
-    public void setName(String name) {
-        mName = name;
-    }
-
     public String getDescription() {
         return mDescription;
-    }
-
-    public void setDescription(String description) {
-        mDescription = description;
     }
 
     public String getContactNumber() {
         return mContactNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
-        mContactNumber = contactNumber;
-    }
-
     public String getAddress() {
         return mAddress;
     }
 
-    public void setAddress(String address) {
-        mAddress = address;
-    }
 
     public List<Review> getReviews() {
         return mReviews;
@@ -73,27 +57,25 @@ public class Business{
         mReviews.add(review);
     }
 
-    public List<MenuItem> getMenus() {
-        return mMenus;
+    public List<Item> getItems() {
+        return mItems;
     }
 
-    public void addMenu(MenuItem menu) {
-        mMenus.add(menu);
+    public void addMenu(Item item) {
+        mItems.add(item);
     }
 
-
-    public static class Review {
-        //TODO: Implement Class
+    private static class Review {
         private String mContent;
         private float mRating;
         private Date mDate;
         private String mReviewer;
 
-        public Review(String content, float rating, String reviewer) {
-            mContent = content;
-            mRating = rating;
+        private Review(ReviewBuilder builder) {
+            mContent = builder.mContent;
+            mRating = builder.mRating;
+            mReviewer = builder.mReviewer;
             mDate = new Date();
-            mReviewer = reviewer;
         }
 
         public String getContent() {
@@ -112,39 +94,33 @@ public class Business{
             return mReviewer;
         }
 
-        @Override
-        public String toString() {
-            return "Review{" +
-                    "mContent='" + mContent + '\'' +
-                    ", mRating=" + mRating +
-                    ", mDate=" + mDate +
-                    ", mReviewer='" + mReviewer + '\'' +
-                    '}';
-        }
     }
 
-    public static class MenuItem {
-        //TODO: Implement Class
-        private String mTitle;
-        private String mPrice;
-        private String mDescription;
-        private List<MenuItemCategory> mMenuItemCategories;
-        private String mStatus;
+    private static class Item {
+        private final String mTitle;
+        private final String mPrice;
+        private final String mDescription;
+        private final String mStatus;
+        private final String mCategory;
+
+        public Item(ItemBuilder builder) {
+            mTitle = builder.mTitle;
+            mPrice = builder.mPrice;
+            mDescription = builder.mDescription;
+            mStatus = builder.mStatus;
+            mCategory = builder.mCategory;
+        }
+
+        public String getCategory() {
+            return mCategory;
+        }
 
         public String getStatus() {
             return mStatus;
         }
 
-        public void setStatus(String status) {
-            mStatus = status;
-        }
-
         public String getDescription() {
             return mDescription;
-        }
-
-        public void setDescription(String description) {
-            mDescription = description;
         }
 
 
@@ -152,60 +128,77 @@ public class Business{
             return mTitle;
         }
 
-        public void setTitle(String title) {
-            mTitle = title;
-        }
-
-        public List<MenuItemCategory> getMenuItemCategories() {
-            return mMenuItemCategories;
-        }
-
-        public void addMenuItemCategory(MenuItemCategory menuItemCategory) {
-            mMenuItemCategories.add(menuItemCategory);
-        }
-
         public String getPrice() {
             return mPrice;
         }
 
-        public void setPrice(String price) {
+    }
+
+    public static class BusinessBuilder {
+        private final String mName;
+        private final String mDescription;
+        private final String mContactNumber;
+        private final String mAddress;
+
+        public BusinessBuilder(String name, String description, String contactNumber,
+                               String address) {
+            mName = name;
+            mDescription = description;
+            mContactNumber = contactNumber;
+            mAddress = address;
+        }
+
+        public Business build() {
+            return new Business(this);
+        }
+    }
+
+    public static class ReviewBuilder {
+        private final String mContent;
+        private final float mRating;
+        private final String mReviewer;
+
+        public ReviewBuilder(String content, float rating, String reviewer) {
+            mContent = content;
+            mRating = rating;
+            mReviewer = reviewer;
+        }
+
+        public Review build() {
+            return new Review(this);
+        }
+    }
+
+    public static class ItemBuilder {
+        private final String mTitle;
+        private final String mPrice;
+        private String mDescription;
+        private String mStatus;
+        private String mCategory;
+
+        public ItemBuilder(String title, String price) {
+            mTitle = title;
             mPrice = price;
         }
 
-        private class MenuItemCategory {
-            private String mName;
-
-            public String getName() {
-                return mName;
-            }
-
-            public void setName(String name) {
-                mName = name;
-            }
+        public ItemBuilder description(String description) {
+            mDescription = description;
+            return this;
         }
 
-        @Override
-        public String toString() {
-            return "MenuItem{" +
-                    "mTitle='" + mTitle + '\'' +
-                    ", mPrice='" + mPrice + '\'' +
-                    ", mDescription='" + mDescription + '\'' +
-                    ", mMenuItemCategories=" + mMenuItemCategories +
-                    ", mStatus='" + mStatus + '\'' +
-                    '}';
+        public ItemBuilder status(String status) {
+            mStatus = status;
+            return this;
+        }
+
+        public ItemBuilder category(String category) {
+            mCategory = mCategory;
+            return this;
+        }
+
+        public Item build() {
+            return new Item(this);
         }
     }
 
-    @Override
-    public String toString() {
-        return "Business{" +
-                "mName='" + mName + '\'' +
-                ", mDescription='" + mDescription + '\'' +
-                ", mContactNumber='" + mContactNumber + '\'' +
-                ", mAddress='" + mAddress + '\'' +
-                ", mCategory=" + mCategory +
-                ", mReviews=" + mReviews +
-                ", mMenus=" + mMenus +
-                '}';
-    }
 }

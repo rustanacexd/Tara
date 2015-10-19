@@ -33,17 +33,18 @@ public class BusinessDataSource {
     private List<Business> createBusinessList(int numBusiness) {
         List<Business> businesses = new ArrayList<>();
         for (int i = 1; i <= numBusiness; i++) {
-
-            Business business = new Business("Business " + i, "Lorem ipsum nonsense lol", "2142406",
-                    "Pagadian City", r);
+            Business business = new Business();
+            business.setName("Business " + i);
+            business.setDescription("Lorem ipsum nonsense lol");
+            business.setContactNumber("062-2142-406");
+            business.setAddress("Pagadian City");
 
             for (int j = 0; j <= 10; j++) {
-                Review review = new Review("Review " + j + " Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-                        "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", (float) 4.6, "Reviewer Username " + j);
+                String temporaryReviewContent = "Review " + j + " Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
+                        "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam";
 
-                business.addReview(review);
+                business.addReview(temporaryReviewContent, 4.5f, "Reviewer " + j);
             }
-
 
             businesses.add(business);
         }
