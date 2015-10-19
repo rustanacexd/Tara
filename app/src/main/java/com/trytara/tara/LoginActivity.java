@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                                 } else if (parseUser.isNew()) {
                                     getFacebookInfo();
                                 } else {
+                                    startApp();
                                     Log.d(TAG, "CURRENT USER: " + parseUser.toString());
                                 }
                             }
@@ -164,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
             ParseUser.logInInBackground(username, password, new LogInCallback() {
                 public void done(ParseUser user, ParseException e) {
                     if (user != null) {
-                        finish();
+                        startApp();
                     } else {
                         Snackbar.make(findViewById(android.R.id.content), e.getLocalizedMessage(), Snackbar.LENGTH_LONG)
                                 .setAction("Ok", null)
@@ -243,8 +244,7 @@ public class LoginActivity extends AppCompatActivity {
                 currentUser.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(i);
+                        startApp();
                     }
                 });
             }
@@ -252,11 +252,16 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void startApp() {
+        finish();
+        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(i);
+    }
+
 
     private void checkIfSignIn() {
         if (ParseUser.getCurrentUser() != null) {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
+            startApp();
         }
     }
 }
