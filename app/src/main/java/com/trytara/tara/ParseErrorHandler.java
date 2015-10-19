@@ -1,6 +1,5 @@
 package com.trytara.tara;
 
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import com.parse.ParseException;

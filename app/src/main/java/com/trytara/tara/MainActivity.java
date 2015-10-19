@@ -1,6 +1,5 @@
 package com.trytara.tara;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -21,10 +20,7 @@ import com.facebook.login.widget.ProfilePictureView;
 import com.parse.ParseUser;
 import com.trytara.tara.fragments.CategoryListFragment;
 import com.trytara.tara.fragments.TrendingListFragment;
-import com.trytara.tara.models.Trending;
-import com.trytara.tara.models.TrendingDataSource;
 
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

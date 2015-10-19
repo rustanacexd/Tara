@@ -12,11 +12,7 @@ import android.view.ViewGroup;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.business.BusinessStaffAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BusinessAboutFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class BusinessAboutFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

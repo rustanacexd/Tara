@@ -1,8 +1,6 @@
 package com.trytara.tara.models;
 
 
-import java.util.List;
-
 public class Trending {
     private String mUsername;
     private String mHashTags;

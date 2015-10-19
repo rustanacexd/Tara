@@ -8,25 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.BusinessListAdapter;
-import com.trytara.tara.models.Business;
 import com.trytara.tara.models.BusinessDataSource;
-import com.trytara.tara.models.Categories;
 
-import java.util.ArrayList;
-import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BusinessListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class BusinessListFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,8 +72,6 @@ public class BusinessListFragment extends Fragment {
 
         return view;
     }
-
-
 
 
 }

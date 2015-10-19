@@ -4,7 +4,6 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static com.trytara.tara.models.Business.BusinessBuilder;
 import static com.trytara.tara.models.Business.ReviewBuilder;

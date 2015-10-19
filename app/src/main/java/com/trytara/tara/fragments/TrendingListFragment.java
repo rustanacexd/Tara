@@ -1,7 +1,6 @@
 package com.trytara.tara.fragments;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,22 +12,15 @@ import android.view.ViewGroup;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.ViewPagerAdapter;
 import com.trytara.tara.fragments.business.BusinessAboutFragment;
-import com.trytara.tara.fragments.business.BusinessMenuFragment;
 import com.trytara.tara.fragments.trending.TrendingLatestFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class TrendingListFragment extends Fragment {
 
     private ViewPager mViewPager;
 
     public TrendingListFragment() {
-        // Required empty public constructor
-
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

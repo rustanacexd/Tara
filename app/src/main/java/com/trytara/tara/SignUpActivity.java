@@ -3,7 +3,6 @@ package com.trytara.tara;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.content.Intent;
 
 import android.graphics.Bitmap;
@@ -15,14 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -79,23 +75,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        //Hide Status Bar
-        /*View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
-
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }*/
-
-
     }
 
     @Override

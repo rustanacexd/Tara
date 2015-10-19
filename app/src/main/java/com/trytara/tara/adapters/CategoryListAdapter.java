@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.trytara.tara.BusinessDetailActivity;
 import com.trytara.tara.MapsActivity;
 import com.trytara.tara.R;
-import com.trytara.tara.models.Business;
 import com.trytara.tara.models.Categories;
 
 import java.util.List;
