@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void done(ParseUser parseUser, ParseException e) {
                                 showProgress(true);
                                 if (parseUser == null) {
+                                    showProgress(false);
                                 } else if (parseUser.isNew()) {
                                     getFacebookInfo();
                                 } else {
@@ -119,9 +120,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        showProgress(true);
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode != Activity.RESULT_OK) return;
+        if (resultCode != Activity.RESULT_OK) return;
 
     }
 
