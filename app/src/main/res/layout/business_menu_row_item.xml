@@ -22,6 +22,8 @@
             tools:src="@drawable/hotels"/>
 
         <TextView
+            android:textSize="16sp"
+            android:singleLine="true"
             android:layout_marginTop="8dp"
             style="@style/TextAppearance.AppCompat.Title"
             android:id="@+id/menu_title"
@@ -30,6 +32,7 @@
             android:text="Adobong Manok"/>
 
         <TextView
+            android:singleLine="true"
             style="@style/TextAppearance.AppCompat.Body1"
             android:id="@+id/menu_price"
             android:layout_width="wrap_content"

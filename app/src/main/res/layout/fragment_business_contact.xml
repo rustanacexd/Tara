@@ -2,28 +2,29 @@
                                             xmlns:tools="http://schemas.android.com/tools"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:fillViewport="true"
                                             android:padding="@dimen/activity_vertical_margin"
                                             tools:context="com.trytara.tara.fragments.business.BusinessContactFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/contact_caption"
             style="@style/TextAppearance.AppCompat.Caption"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:text="You may contact us in the following details"/>
 
         <TextView
             android:id="@+id/landline_caption"
-            android:layout_width="wrap_content"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/contact_caption"
             android:text="Landline: "
-            android:textSize="18sp"
             />
 
         <TextView
@@ -31,30 +32,21 @@
             style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/landline_caption"
-            android:layout_toRightOf="@id/landline_caption"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:singleLine="true"
             android:text="2142406"
             android:textSize="18sp"
+
             />
 
-        <View
-            android:id="@+id/landline_caption_separator"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/landline_caption"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="@android:color/darker_gray"/>
 
         <TextView
             android:id="@+id/phone_caption"
-            android:layout_width="wrap_content"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/landline_caption_separator"
             android:text="Mobile Phone: "
-            android:textSize="18sp"
             />
 
         <TextView
@@ -62,31 +54,21 @@
             style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/phone_caption"
-            android:layout_toRightOf="@id/phone_caption"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:singleLine="true"
             android:text="09189361384"
+
             android:textSize="18sp"
             />
-
-        <View
-            android:id="@+id/phone_caption_separator"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/phone_caption"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="@android:color/darker_gray"/>
 
 
         <TextView
             android:id="@+id/email_caption"
-            android:layout_width="wrap_content"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/phone_caption_separator"
             android:text="Email Address: "
-            android:textSize="18sp"
             />
 
         <TextView
@@ -94,56 +76,46 @@
             style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/email_caption"
-            android:layout_toRightOf="@id/email_caption"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:singleLine="true"
             android:text="rustan@gmail.commmmmmm"
+
             android:textSize="18sp"
             />
 
-        <View
-            android:id="@+id/email_caption_separator"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/email_caption"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="@android:color/darker_gray"/>
 
         <TextView
             android:id="@+id/address_caption"
-            android:layout_width="wrap_content"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/email_caption_separator"
             android:text="Address: "
-            android:textSize="18sp"
             />
 
         <TextView
             android:id="@+id/address"
             style="@style/TextAppearance.AppCompat.Body2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/address_caption"
-            android:layout_toRightOf="@id/address_caption"
-            android:maxLines="10"
+            android:layout_marginBottom="50dp"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:minLines="3"
             android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:text="Vicencio Sagun Street,
-Pagadian City,
-Zamboanga del Sur,
-Philippines"
+            android:scrollbars="vertical"
+            android:singleLine="false"
+            android:text="Vicencio Sagun Street,\nPagadian City,\nZamboanga del Sur,\nPhilippines"
             android:textSize="18sp"
             />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/email_caption"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="@android:color/darker_gray"/>
-    </RelativeLayout>
+
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Call us"/>
+    </LinearLayout>
 
 
 </android.support.v4.widget.NestedScrollView>
