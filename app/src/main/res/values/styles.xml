@@ -28,4 +28,9 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="WhiteTextInputFields">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+    </style>
+
 </resources>

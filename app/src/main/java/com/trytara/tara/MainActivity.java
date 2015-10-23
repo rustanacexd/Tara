@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         mProfilePictureView = (ProfilePictureView) headerLayout.findViewById(R.id.facebook_profile_photo);
-        mProfilePictureView.setPresetSize(ProfilePictureView.NORMAL);
+        mProfilePictureView.setPresetSize(ProfilePictureView.SMALL);
 
         mFacebookName = (TextView) headerLayout.findViewById(R.id.facebook_name);
         mAddress = (TextView) headerLayout.findViewById(R.id.address);
@@ -76,7 +77,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d(TAG, "UPDATE FB INFO");
             mProfilePictureView.setProfileId(ParseUser.getCurrentUser().getString("facebookID"));
             mFacebookName.setText(ParseUser.getCurrentUser().getString("name"));
-            mAddress.setText(ParseUser.getCurrentUser().getString("address"));
+            String address = ParseUser.getCurrentUser().getString("address");
+            if (TextUtils.isEmpty(address)) {
+                mAddress.setText("No address given");
+            } else {
+                mAddress.setText(ParseUser.getCurrentUser().getString("address"));
+            }
         }
 
         getSupportFragmentManager().beginTransaction()

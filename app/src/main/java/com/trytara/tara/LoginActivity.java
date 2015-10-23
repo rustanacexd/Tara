@@ -55,10 +55,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /*ParseUser.logOut();
-        checkIfSignIn();*/
+        ParseUser.logOut();
+        checkIfSignIn();
 
-        startApp();
+        //startApp();
 
         ImageView loginButton = (ImageView) findViewById(R.id.facebook_login);
         loginButton.setOnClickListener(new View.OnClickListener() {
