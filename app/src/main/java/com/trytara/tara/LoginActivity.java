@@ -58,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
         ParseUser.logOut();
         checkIfSignIn();
 
+        //startApp();
+
         ImageView loginButton = (ImageView) findViewById(R.id.facebook_login);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,7 +243,11 @@ public class LoginActivity extends AppCompatActivity {
                 currentUser.put("name", user.optString("name"));
                 currentUser.setEmail(user.optString("email"));
                 currentUser.put("facebookID", user.optString("id"));
-                currentUser.put("address", user.optJSONObject("location").optString("name"));
+
+                if (user.optJSONObject("location") != null) {
+                    currentUser.put("address", user.optJSONObject("location").optString("name"));
+                }
+
 
                 currentUser.saveInBackground(new SaveCallback() {
                     @Override

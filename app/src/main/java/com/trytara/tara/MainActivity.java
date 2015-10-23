@@ -47,15 +47,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mProfilePictureView = (ProfilePictureView) findViewById(R.id.facebook_profile_photo);
+        mProfilePictureView = (ProfilePictureView) headerLayout.findViewById(R.id.facebook_profile_photo);
         mProfilePictureView.setPresetSize(ProfilePictureView.LARGE);
 
-        mFacebookName = (TextView) findViewById(R.id.facebook_name);
-        mAddress = (TextView) findViewById(R.id.address);
+        mFacebookName = (TextView) headerLayout.findViewById(R.id.facebook_name);
+        mAddress = (TextView) headerLayout.findViewById(R.id.address);
 
-        Button logOutButton = (Button) findViewById(R.id.logout);
+        Button logOutButton = (Button) headerLayout.findViewById(R.id.logout);
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

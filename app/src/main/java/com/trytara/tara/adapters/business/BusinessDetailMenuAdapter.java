@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.trytara.tara.R;
 
@@ -15,13 +16,13 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
     private static final String TAG = "BusinessDetailMenuAdapter";
 
     //private List<Business> mDataSet;
-    int[] imgList = { R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,
+    int[] imgList = {R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.coffee_shop, R.drawable.restaurant,
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.coffee_shop, R.drawable.restaurant,
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.coffee_shop, R.drawable.restaurant,
-            R.drawable.pharmacy };
+            R.drawable.pharmacy};
 
     private static Context mContext;
 
@@ -34,6 +35,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView menuImage;
+        private final TextView menuTitle, menuPrice;
 
         public ViewHolder(View v) {
             super(v);
@@ -43,17 +45,25 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
                 public void onClick(View v) {
                     /*Intent i = new Intent(mContext, BusinessDetailActivity.class);
                     mContext.startActivity(i);*/
-                  menuImage.clearColorFilter();
                 }
             });
 
             menuImage = (ImageView) v.findViewById(R.id.menu_image);
+            menuTitle = (TextView) v.findViewById(R.id.menu_title);
+            menuPrice = (TextView) v.findViewById(R.id.menu_price);
         }
 
         public ImageView getMenuImage() {
             return menuImage;
         }
 
+        public TextView getMenuTitle() {
+            return menuTitle;
+        }
+
+        public TextView getMenuPrice() {
+            return menuPrice;
+        }
     }
 
 
@@ -70,7 +80,6 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         //Log.d(TAG, "Element " + position + " set.");
-        viewHolder.getMenuImage().setColorFilter(Color.argb(100, 255, 255, 255));
         viewHolder.getMenuImage().setImageResource(imgList[position]);
     }
 

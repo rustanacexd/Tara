@@ -3,6 +3,7 @@ package com.trytara.tara.fragments.business;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -64,7 +65,7 @@ public class BusinessMenuFragment extends Fragment {
         RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessMenuList);
         BusinessDetailMenuAdapter adapter = new BusinessDetailMenuAdapter(getActivity());
         rvBusinessMenuList.setAdapter(adapter);
-        rvBusinessMenuList.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+        rvBusinessMenuList.setLayoutManager(new GridLayoutManager(getActivity(),2));
 
         return view;
     }

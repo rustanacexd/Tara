@@ -66,6 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@color/colorLightGray"
+            style="@style/MyTabLayoutTextAppearance"
+            app:tabMode="fixed"
             app:tabGravity="fill"
             app:theme="@style/ThemeOverlay.AppCompat.Light"/>
 

@@ -1,72 +1,82 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center_horizontal"
-              android:orientation="vertical"
-              android:padding="@dimen/activity_vertical_margin"
-              tools:context="com.trytara.tara.fragments.business.BusinessReviewFragment">
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            xmlns:tools="http://schemas.android.com/tools"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
 
-    <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:rating="2.2"
-        android:stepSize="0.1"/>
+                                            android:orientation="vertical"
+                                            android:fillViewport="true"
+                                            android:padding="@dimen/activity_vertical_margin"
+                                            tools:context="com.trytara.tara.fragments.business.BusinessReviewFragment">
 
-    <TextView
-        style="@style/TextAppearance.AppCompat.Medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Write us a review"/>
 
-    <View
+    <LinearLayout
+        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@android:color/darker_gray"/>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left">
-
-        <TextView
-            android:id="@+id/average_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4.5"
-            android:textSize="46sp"/>
+        android:orientation="vertical">
 
         <RatingBar
-            android:id="@+id/total_rating"
-            style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_toRightOf="@id/average_rating"
             android:numStars="5"
-            android:rating="4.5"
+            android:rating="2.2"
             android:stepSize="0.1"/>
 
         <TextView
+            style="@style/TextAppearance.AppCompat.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/total_rating"
-            android:layout_below="@id/total_rating"
-            android:layout_marginTop="2dp"
-            android:text="1,422"/>
-    </RelativeLayout>
+            android:text="Write us a review"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvBusinessReviewsList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left">
+
+            <TextView
+                android:id="@+id/average_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.5"
+                android:textSize="36sp"/>
+
+            <RatingBar
+                android:id="@+id/total_rating"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@id/average_rating"
+                android:numStars="5"
+                android:rating="4.5"
+                android:stepSize="0.1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/total_rating"
+                android:layout_below="@id/total_rating"
+                android:layout_marginTop="2dp"
+                android:text="1,422"/>
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvBusinessReviewsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

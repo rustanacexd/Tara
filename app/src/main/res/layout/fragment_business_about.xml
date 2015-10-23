@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/white"
     android:fillViewport="true"
-    android:padding="@dimen/activity_vertical_margin"
     tools:context="com.trytara.tara.fragments.business.BusinessAboutFragment">
 
     <LinearLayout
@@ -13,10 +13,13 @@
         android:orientation="vertical">
 
         <TextView
+            android:paddingTop="@dimen/activity_vertical_margin"
             android:id="@+id/about_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin"
             android:text="What we offer:"/>
 
 
@@ -25,6 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin"
             android:text="Lorem ipsum dolor sit amet, consectetur ad
 ipisicing elit, sed do eiusmod tempor incididunt
 ut labore et dolore magna aliqua. Ut enim ad
@@ -36,29 +41,19 @@ in reprehenderit in voluptate velit esse cillum
 dolore eu fugiat nulla pariatur. sed do eiusmod
 tempor incididunt ut labore et"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:text="Lorem ipsum dolor sit amet, consectetur ad
-ipisicing elit, sed do eiusmod tempor incididunt
-ut labore et dolore magna aliqua. Ut enim ad
-minim veniam, quis nostrud exercitation ullam
-co laboris nisi ut aliquip ex ea.
-
-	Commodo consequat. Duis aute irure dolor
-in reprehenderit in voluptate velit esse cillum
-dolore eu fugiat nulla pariatur. sed do eiusmod
-tempor incididunt ut labore et"/>
 
         <TextView
             android:id="@+id/staff_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin"
             android:text="Our Staffs:"/>
 
         <android.support.v7.widget.RecyclerView
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:id="@+id/rvStaffList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
