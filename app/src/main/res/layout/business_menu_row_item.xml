@@ -29,7 +29,7 @@
             android:id="@+id/menu_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adobong Manok"/>
+            tools:text="Adobong Manok"/>
 
         <TextView
             android:singleLine="true"
@@ -37,7 +37,7 @@
             android:id="@+id/menu_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PHP 310.00"/>
+            tools:text="PHP 310.00"/>
 
 
 </GridLayout>

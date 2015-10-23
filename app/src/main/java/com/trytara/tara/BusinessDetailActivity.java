@@ -75,7 +75,7 @@ public class BusinessDetailActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new BusinessMenuFragment(), "Menu");
+        adapter.addFrag(BusinessMenuFragment.newInstance(mBusinessPosition), "Menu");
         adapter.addFrag(new BusinessAboutFragment(), "About");
         adapter.addFrag(BusinessReviewFragment.newInstance(mBusinessPosition), "Reviews");
         adapter.addFrag(new BusinessContactFragment(), "Contact");

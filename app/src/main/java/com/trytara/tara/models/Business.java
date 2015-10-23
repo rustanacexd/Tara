@@ -60,7 +60,7 @@ public class Business {
         return mItems;
     }
 
-    public void addMenu(Item item) {
+    public void addItem(Item item) {
         mItems.add(item);
     }
 
@@ -95,9 +95,9 @@ public class Business {
 
     }
 
-    private static class Item {
+    public static class Item {
         private final String mTitle;
-        private final String mPrice;
+        private final Double mPrice;
         private final String mDescription;
         private final String mStatus;
         private final String mCategory;
@@ -127,7 +127,7 @@ public class Business {
             return mTitle;
         }
 
-        public String getPrice() {
+        public Double getPrice() {
             return mPrice;
         }
 
@@ -170,12 +170,12 @@ public class Business {
 
     public static class ItemBuilder {
         private final String mTitle;
-        private final String mPrice;
+        private final Double mPrice;
         private String mDescription;
         private String mStatus;
         private String mCategory;
 
-        public ItemBuilder(String title, String price) {
+        public ItemBuilder(String title, Double price) {
             mTitle = title;
             mPrice = price;
         }

@@ -17,7 +17,7 @@ public class BusinessDataSource implements BusinessDAO {
 
     private BusinessDataSource(Context context) {
         mContext = context.getApplicationContext();
-        mBusinesses = createBusinessList(200);
+        mBusinesses = createBusinessList(200, 20, 20);
     }
 
     public synchronized static BusinessDataSource get(Context context) {
@@ -28,7 +28,7 @@ public class BusinessDataSource implements BusinessDAO {
         return sBusinessDataSource;
     }
 
-    private List<Business> createBusinessList(int numBusiness) {
+    private List<Business> createBusinessList(int numBusiness, int numReviews, int numItems) {
         List<Business> businesses = new ArrayList<>();
         for (int i = 1; i <= numBusiness; i++) {
 
@@ -36,10 +36,15 @@ public class BusinessDataSource implements BusinessDAO {
             Business business = new BusinessBuilder("Business " + i, "Lorem ipsum grabeh ka nonsense lol Lorem ipsum grabeh ka nonsense lol" +
                     "lol", "062-2142406", "Pagadian City").build();
 
-            for (int j = 0; j <= 10; j++) {
+            for (int j = 0; j <= numReviews; j++) {
                 String temporaryReviewContent = "Review " + j + " Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
                         "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam";
                 business.addReview(new ReviewBuilder(temporaryReviewContent, 4.5f, "Reviewer Full name " + j).build());
+            }
+
+            for (int j = 0; j <= numItems; j++) {
+                String temporaryItemContent = "Temporary Business Item " + j;
+                business.addItem(new Business.ItemBuilder(temporaryItemContent, 400.0).build());
             }
 
             businesses.add(business);

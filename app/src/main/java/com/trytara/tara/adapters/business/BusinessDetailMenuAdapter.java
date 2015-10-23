@@ -12,12 +12,15 @@ import android.widget.TextView;
 
 import com.trytara.tara.BusinessItemDetailActivity;
 import com.trytara.tara.R;
+import com.trytara.tara.models.Business.Item;
+
+import java.util.List;
 
 public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDetailMenuAdapter.ViewHolder> {
 
     private static final String TAG = "BusinessDetailMenuAdapter";
 
-    //private List<Business> mDataSet;
+    private List<Item> mDataSet;
     int[] imgList = {R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.coffee_shop, R.drawable.restaurant,
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,
@@ -28,9 +31,9 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
 
     private static Context mContext;
 
-    public BusinessDetailMenuAdapter(Context context) {
+    public BusinessDetailMenuAdapter(Context context, List<Item> dataSet) {
         mContext = context;
-        //mDataSet = dataSet;
+        mDataSet = dataSet;
     }
 
 
@@ -82,11 +85,14 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         //Log.d(TAG, "Element " + position + " set.");
+        Item currentItem = mDataSet.get(position);
+        viewHolder.getMenuTitle().setText(currentItem.getTitle());
+        viewHolder.getMenuPrice().setText("PHP " + currentItem.getPrice());
         viewHolder.getMenuImage().setImageResource(imgList[position]);
     }
 
     @Override
     public int getItemCount() {
-        return imgList.length;
+        return mDataSet.size();
     }
 }

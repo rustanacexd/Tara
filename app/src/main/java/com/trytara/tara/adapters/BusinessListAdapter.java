@@ -17,6 +17,7 @@ import java.util.List;
 
 public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.ViewHolder> {
     private static final String TAG = "BusinessListAdapter";
+    private static final String EXTRA_POSITION = "com.trytara.tara.adapters.EXTRA_POSITION";
 
     private List<Business> mDataSet;
     private static Context mContext;
