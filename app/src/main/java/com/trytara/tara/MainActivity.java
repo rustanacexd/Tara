@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         mProfilePictureView = (ProfilePictureView) headerLayout.findViewById(R.id.facebook_profile_photo);
-        mProfilePictureView.setPresetSize(ProfilePictureView.LARGE);
+        mProfilePictureView.setPresetSize(ProfilePictureView.NORMAL);
 
         mFacebookName = (TextView) headerLayout.findViewById(R.id.facebook_name);
         mAddress = (TextView) headerLayout.findViewById(R.id.address);

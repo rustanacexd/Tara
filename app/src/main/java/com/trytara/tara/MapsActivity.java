@@ -62,7 +62,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMapFragment.getMapAsync(this);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, mMapFragment, "MapFragment")
+                .replace(R.id.fragment_container, new BusinessListFragment(), "ListFragment")
                 .commit();
 
     }
@@ -168,15 +168,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //noinspection SimplifiableIfStatement
         if (id == R.id.switch_view_settings) {
 
-            Fragment fragment = getSupportFragmentManager().findFragmentByTag("MapFragment");
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag("ListFragment");
 
             if (fragment != null && fragment.isVisible()) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new BusinessListFragment(), "ListFragment")
+                        .replace(R.id.fragment_container, mMapFragment, "MapFragment")
                         .commit();
             } else {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, mMapFragment, "MapFragment")
+                        .replace(R.id.fragment_container, new BusinessListFragment(), "ListFragment")
                         .commit();
             }
 

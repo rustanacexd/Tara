@@ -16,11 +16,11 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="220dp"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="left"
-            app:expandedTitleMarginBottom="20dp"
+            app:expandedTitleMarginBottom="50dp"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="@dimen/activity_horizontal_margin"
             app:expandedTitleTextAppearance="@style/ParallaxBusinessTitle"
