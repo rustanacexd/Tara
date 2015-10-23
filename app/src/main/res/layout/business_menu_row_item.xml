@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+<GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_margin="@dimen/activity_vertical_margin"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:clipToPadding="false"
+    android:paddingLeft="8dp"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="8dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/menu_image"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/hotels"/>
+
+        <TextView
+            android:layout_marginTop="8dp"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:id="@+id/menu_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adobong Manok"/>
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:id="@+id/menu_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PHP 310.00"/>
 
 
-    <ImageView
-        android:id="@+id/menu_image"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/hotels"/>
-
-    <TextView
-        android:layout_marginTop="8dp"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:id="@+id/menu_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/menu_image"
-        android:text="Adobong Manok"/>
-
-    <TextView
-        style="@style/TextAppearance.AppCompat.Body1"
-        android:id="@+id/menu_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/menu_title"
-        android:text="PHP 310.00"/>
-
-</RelativeLayout>
+</GridLayout>
 
