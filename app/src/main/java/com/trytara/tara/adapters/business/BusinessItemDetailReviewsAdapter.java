@@ -26,16 +26,17 @@ public class BusinessItemDetailReviewsAdapter extends RecyclerView.Adapter<Recyc
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
         if (viewType == TYPE_ITEM) {
             //inflate your layout and pass it to view holder
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.business_item_detail_review_row, parent, false);
-            return new VHItem(v);
+            return new VHItem(inflater.inflate(R.layout.business_item_detail_review_row,
+                    parent, false));
 
         } else if (viewType == TYPE_HEADER) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.rv_business_item_menu_reviews_header, parent, false);
-            return new VHHeader(v);
+            return new VHHeader(inflater.inflate(R.layout.rv_business_item_menu_reviews_header,
+                    parent, false));
         }
 
         throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
@@ -49,6 +50,8 @@ public class BusinessItemDetailReviewsAdapter extends RecyclerView.Adapter<Recyc
         } else if (holder instanceof VHHeader) {
             //cast holder to VHHeader and set data for header.
         }
+
+
     }
 
     @Override

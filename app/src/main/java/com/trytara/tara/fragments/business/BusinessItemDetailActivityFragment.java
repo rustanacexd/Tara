@@ -31,8 +31,21 @@ public class BusinessItemDetailActivityFragment extends Fragment {
         BusinessItemDetailReviewsAdapter adapter = new BusinessItemDetailReviewsAdapter();
         rvBusinessItemReviews.setAdapter(adapter);
         rvBusinessItemReviews.setLayoutManager(new LinearLayoutManager(getActivity()));
+        /*rvBusinessItemReviews.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (recyclerView.getChildAt(0) != null) {
+                    View view = recyclerView.getChildAt(0);
+                    view.setTranslationY(-view.getTop() / 2);
+                }
+
+
+            }
+        });*/
         rvBusinessItemReviews.setHasFixedSize(true);
 
         return view;
     }
+
 }
