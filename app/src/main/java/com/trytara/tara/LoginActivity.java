@@ -111,25 +111,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) return;
+        showProgress(true);
 
     }
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptLogin() {
 
         // Reset errors.
@@ -247,7 +236,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (user.optJSONObject("location") != null) {
                     currentUser.put("address", user.optJSONObject("location").optString("name"));
                 }
-
 
                 currentUser.saveInBackground(new SaveCallback() {
                     @Override

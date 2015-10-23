@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.facebook.login.widget.ProfilePictureView;
 
+import com.parse.LogOutCallback;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.trytara.tara.fragments.CategoryListFragment;
 import com.trytara.tara.fragments.TrendingListFragment;
@@ -60,7 +62,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ParseUser.logOut();
+                ParseUser.logOutInBackground(new LogOutCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        finish();
+                    }
+                });
             }
         });
 
@@ -98,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
-        return false;
+        return true;
     }
 
     @Override

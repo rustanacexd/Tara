@@ -4,12 +4,9 @@
       tools:context=".MapsActivity">
 
     <item
-        android:id="@+id/switch_view_settings"
-        android:title="Switch View"
-        app:showAsAction="ifRoom"/>
-
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        app:showAsAction="never"/>
+        android:id="@+id/search_view"
+        android:title="@string/search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView"/>
 </menu>

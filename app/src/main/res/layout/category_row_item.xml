@@ -8,7 +8,6 @@
     android:orientation="vertical">
 
     <ImageView
-        android:tint="@color/colorWhiteTint"
         android:id="@+id/category_image"
         android:scaleType="centerCrop"
         tools:src="@drawable/hotels"
@@ -19,7 +18,7 @@
         android:layout_centerInParent="true"
         android:id="@+id/category_name"
         android:textStyle="bold"
-        style="@android:style/TextAppearance.Large.Inverse"
+        style="@android:style/TextAppearance.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Restaurant"/>
@@ -27,7 +26,7 @@
     <TextView
         android:textStyle="bold"
         android:id="@+id/category_descripton"
-        style="@android:style/TextAppearance.Small.Inverse"
+        style="@android:style/TextAppearance.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/category_name"
