@@ -1,6 +1,7 @@
 package com.trytara.tara.adapters.business;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.trytara.tara.BusinessItemDetailActivity;
 import com.trytara.tara.R;
 
 public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDetailMenuAdapter.ViewHolder> {
@@ -43,8 +45,8 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*Intent i = new Intent(mContext, BusinessDetailActivity.class);
-                    mContext.startActivity(i);*/
+                    Intent i = new Intent(mContext, BusinessItemDetailActivity.class);
+                    mContext.startActivity(i);
                 }
             });
 

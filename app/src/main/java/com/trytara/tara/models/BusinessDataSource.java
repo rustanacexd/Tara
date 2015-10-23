@@ -33,7 +33,7 @@ public class BusinessDataSource implements BusinessDAO {
         for (int i = 1; i <= numBusiness; i++) {
 
 
-            Business business = new BusinessBuilder("Business " + i, "Lorem ipsum nonsense " +
+            Business business = new BusinessBuilder("Business " + i, "Lorem ipsum grabeh ka nonsense lol Lorem ipsum grabeh ka nonsense lol" +
                     "lol", "062-2142406", "Pagadian City").build();
 
             for (int j = 0; j <= 10; j++) {

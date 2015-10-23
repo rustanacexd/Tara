@@ -2,19 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="80dp"
+              android:layout_height="88dp"
               android:background="@android:color/white"
               android:orientation="horizontal"
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
-              tools:layout_height="80dp">
+              tools:layout_height="88dp">
 
 
     <ImageView
         android:id="@+id/business_thumbnail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="15"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/hotels"
         tools:ignore="ContentDescription"/>
@@ -22,11 +21,12 @@
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="85"
+        android:layout_weight="100"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
 
         <TextView
+            android:textSize="16sp"
             android:id="@+id/business_name"
             style="@android:style/TextAppearance.Medium"
             android:layout_width="wrap_content"
@@ -35,15 +35,18 @@
             tools:text="Bob's Diner"/>
 
         <TextView
+            android:textSize="14sp"
             android:id="@+id/business_description"
             style="@android:style/TextAppearance.Small"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/business_name"
             android:singleLine="true"
+            android:ellipsize="end"
             tools:text="Lorem ipsum grabeh ka nonsense lol Lorem ipsum grabeh ka nonsense lol"/>
 
         <TextView
+            style="@style/Base.TextAppearance.AppCompat.Caption"
             android:id="@+id/business_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
