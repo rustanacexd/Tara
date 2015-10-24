@@ -16,7 +16,7 @@ import com.trytara.tara.models.BusinessDataSource;
 
 
 public class BusinessMenuFragment extends Fragment {
-    private static final String ARG_POSITION = "com.trytara.tara.fragments.business.position";
+    private static final String ARG_POSITION = "com.trytara.tara.fragments.business.BusinessMenuFragment.position";
 
     private int mPosition;
 

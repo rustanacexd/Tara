@@ -9,14 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.trytara.tara.R;
-import com.trytara.tara.adapters.BusinessListAdapter;
 import com.trytara.tara.adapters.business.BusinessItemDetailReviewsAdapter;
-import com.trytara.tara.models.BusinessDataSource;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class BusinessItemDetailActivityFragment extends Fragment {
+
+    private static final String ARG_POSITION = "com.trytara.tara.fragments.business.BusinessItemDetailActivityFragment.position";
+
+    private int mPosition;
 
     public BusinessItemDetailActivityFragment() {
     }
@@ -46,6 +48,22 @@ public class BusinessItemDetailActivityFragment extends Fragment {
         rvBusinessItemReviews.setHasFixedSize(true);
 
         return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mPosition = getArguments().getInt(ARG_POSITION);
+        }
+    }
+
+    public static BusinessItemDetailActivityFragment newInstance(int position) {
+        BusinessItemDetailActivityFragment fragment = new BusinessItemDetailActivityFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_POSITION, position);
+        fragment.setArguments(args);
+        return fragment;
     }
 
 }

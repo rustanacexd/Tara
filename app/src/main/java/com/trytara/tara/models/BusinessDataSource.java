@@ -36,15 +36,19 @@ public class BusinessDataSource implements BusinessDAO {
             Business business = new BusinessBuilder("Business " + i, "Lorem ipsum grabeh ka nonsense lol Lorem ipsum grabeh ka nonsense lol" +
                     "lol", "062-2142406", "Pagadian City").build();
 
-            for (int j = 0; j <= numReviews; j++) {
-                String temporaryReviewContent = "Review " + j + " Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-                        "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam";
-                business.addReview(new ReviewBuilder(temporaryReviewContent, 4.5f, "Reviewer Full name " + j).build());
-            }
+            String temporaryReviewContent = "Review Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
+                    "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam";
 
             for (int j = 0; j <= numItems; j++) {
                 String temporaryItemContent = "Temporary Business Item " + j;
-                business.addItem(new Business.ItemBuilder(temporaryItemContent, 400.0).build());
+                Business.Item item = new Business.ItemBuilder(temporaryItemContent, 400.0).build();
+
+                for (int k = 0; k <= numReviews; k++) {
+                    Business.Review review = new ReviewBuilder(temporaryReviewContent, 4.5f, "Reviewer Full name " + k).build();
+                    business.addReview(review);
+                    item.addReview(review);
+                }
+                business.addItem(item);
             }
 
             businesses.add(business);

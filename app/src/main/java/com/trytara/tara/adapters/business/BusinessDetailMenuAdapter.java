@@ -2,7 +2,6 @@ package com.trytara.tara.adapters.business;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +36,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView menuImage;
         private final TextView menuTitle, menuPrice;
@@ -45,13 +44,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
         public ViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View.
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(mContext, BusinessItemDetailActivity.class);
-                    mContext.startActivity(i);
-                }
-            });
+            v.setOnClickListener(this);
 
             menuImage = (ImageView) v.findViewById(R.id.menu_image);
             menuTitle = (TextView) v.findViewById(R.id.menu_title);
@@ -68,6 +61,12 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
 
         public TextView getMenuPrice() {
             return menuPrice;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent i = BusinessItemDetailActivity.newIntent(mContext, this.getAdapterPosition());
+            mContext.startActivity(i);
         }
     }
 

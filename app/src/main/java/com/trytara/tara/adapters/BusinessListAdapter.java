@@ -65,7 +65,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
 
         @Override
         public void onClick(View v) {
-            Intent i = BusinessDetailActivity.newIntent(mContext, this.getLayoutPosition());
+            Intent i = BusinessDetailActivity.newIntent(mContext, this.getAdapterPosition());
             mContext.startActivity(i);
         }
     }
