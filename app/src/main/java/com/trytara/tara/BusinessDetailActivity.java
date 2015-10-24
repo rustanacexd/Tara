@@ -13,18 +13,19 @@ import com.trytara.tara.fragments.business.BusinessAboutFragment;
 import com.trytara.tara.fragments.business.BusinessContactFragment;
 import com.trytara.tara.fragments.business.BusinessMenuFragment;
 import com.trytara.tara.fragments.business.BusinessReviewFragment;
+import com.trytara.tara.models.Business;
 
 public class BusinessDetailActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private static final String EXTRA_PREFIX = "com.trytara.tara.";
-    private static final String EXTRA_BUSINESS_POSITION = EXTRA_PREFIX + "business_position";
-    private int mBusinessPosition;
+    private static final String EXTRA_BUSINESS = EXTRA_PREFIX + "business";
+    private Business mBusiness;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mBusinessPosition = getIntent().getIntExtra(EXTRA_BUSINESS_POSITION, 0);
+        mBusiness = getIntent().getParcelableExtra(EXTRA_BUSINESS);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_detail);
@@ -32,8 +33,6 @@ public class BusinessDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.business_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        /*CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("Business Name");*/
         getSupportActionBar().setTitle("Business Name");
 
         mViewPager = (ViewPager) findViewById(R.id.business_viewpager);
@@ -67,17 +66,17 @@ public class BusinessDetailActivity extends AppCompatActivity {
 
     }
 
-    public static Intent newIntent(Context packageContext, int position) {
+    public static Intent newIntent(Context packageContext, Business business) {
         Intent intent = new Intent(packageContext, BusinessDetailActivity.class);
-        intent.putExtra(EXTRA_BUSINESS_POSITION, position);
+        intent.putExtra(EXTRA_BUSINESS, business);
         return intent;
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(BusinessMenuFragment.newInstance(mBusinessPosition), "Menu");
+        adapter.addFrag(BusinessMenuFragment.newInstance(mBusiness), "Menu");
         adapter.addFrag(new BusinessAboutFragment(), "About");
-        adapter.addFrag(BusinessReviewFragment.newInstance(mBusinessPosition), "Reviews");
+        adapter.addFrag(BusinessReviewFragment.newInstance(mBusiness), "Reviews");
         adapter.addFrag(new BusinessContactFragment(), "Contact");
         viewPager.setAdapter(adapter);
     }

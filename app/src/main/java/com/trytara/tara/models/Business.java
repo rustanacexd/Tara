@@ -17,16 +17,14 @@ public class Business implements Parcelable {
     private final String mContactNumber;
     private final String mAddress;
     private Category mCategory;
-    private List<Review> mReviews;
-    private List<Item> mItems;
+    private List<Review> mReviews = new ArrayList<>();
+    private List<Item> mItems = new ArrayList<>();
 
     private Business(BusinessBuilder builder) {
         mName = builder.mName;
         mDescription = builder.mDescription;
         mContactNumber = builder.mContactNumber;
         mAddress = builder.mAddress;
-        mReviews = new ArrayList<>();
-        mItems = new ArrayList<>();
     }
 
     private Business(Parcel parcel) {
@@ -176,7 +174,7 @@ public class Business implements Parcelable {
         private final String mDescription;
         private final String mStatus;
         private final String mCategory;
-        private List<Review> mReviews;
+        private List<Review> mReviews = new ArrayList<>();
 
         private Item(ItemBuilder builder) {
             mTitle = builder.mTitle;
@@ -184,7 +182,6 @@ public class Business implements Parcelable {
             mDescription = builder.mDescription;
             mStatus = builder.mStatus;
             mCategory = builder.mCategory;
-            mReviews = new ArrayList<>();
         }
 
         private Item(Parcel parcel) {

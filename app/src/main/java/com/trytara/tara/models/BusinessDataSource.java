@@ -1,7 +1,5 @@
 package com.trytara.tara.models;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,29 +8,15 @@ import static com.trytara.tara.models.Business.ReviewBuilder;
 
 public class BusinessDataSource implements BusinessDAO {
 
-    private static BusinessDataSource sBusinessDataSource;
     private List<Business> mBusinesses;
-    private Context mContext;
 
-
-    private BusinessDataSource(Context context) {
-        mContext = context.getApplicationContext();
+    public BusinessDataSource() {
         mBusinesses = createBusinessList(200, 20, 20);
-    }
-
-    public synchronized static BusinessDataSource get(Context context) {
-        if (sBusinessDataSource == null) {
-            sBusinessDataSource = new BusinessDataSource(context);
-        }
-
-        return sBusinessDataSource;
     }
 
     private List<Business> createBusinessList(int numBusiness, int numReviews, int numItems) {
         List<Business> businesses = new ArrayList<>();
         for (int i = 1; i <= numBusiness; i++) {
-
-
             Business business = new BusinessBuilder("Business " + i, "Lorem ipsum grabeh ka nonsense lol Lorem ipsum grabeh ka nonsense lol" +
                     "lol", "062-2142406", "Pagadian City").build();
 
@@ -77,5 +61,4 @@ public class BusinessDataSource implements BusinessDAO {
     public void deleteBusiness(Business business) {
 
     }
-
 }

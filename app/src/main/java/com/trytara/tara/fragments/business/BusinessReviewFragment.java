@@ -16,15 +16,15 @@ import com.trytara.tara.models.BusinessDataSource;
 
 public class BusinessReviewFragment extends Fragment {
 
-    private static final String ARG_BUSINESS_POSITION = "arg_business_position";
+    private static final String ARG_BUSINESS = "com.trytara.tara.fragments.business.arg_business";
 
     // TODO: Rename and change types of parameters
-    private int mBusinessPosition;
+    private Business mBusiness;
 
-    public static BusinessReviewFragment newInstance(int businessPosition) {
+    public static BusinessReviewFragment newInstance(Business business) {
         BusinessReviewFragment fragment = new BusinessReviewFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_BUSINESS_POSITION, businessPosition);
+        args.putParcelable(ARG_BUSINESS, business);
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,7 +37,7 @@ public class BusinessReviewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mBusinessPosition = getArguments().getInt(ARG_BUSINESS_POSITION);
+            mBusiness = getArguments().getParcelable(ARG_BUSINESS);
         }
     }
 
@@ -47,9 +47,7 @@ public class BusinessReviewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_business_review, container, false);
 
         RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessReviewsList);
-
-        Business business = BusinessDataSource.get(getActivity()).getBusiness(mBusinessPosition);
-        BusinessReviewsListAdapter adapter = new BusinessReviewsListAdapter(getActivity(),business.getReviews());
+        BusinessReviewsListAdapter adapter = new BusinessReviewsListAdapter(getActivity(), mBusiness.getReviews());
 
         rvBusinessMenuList.setAdapter(adapter);
 

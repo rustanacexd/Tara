@@ -17,7 +17,6 @@ import java.util.List;
 
 public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.ViewHolder> {
     private static final String TAG = "BusinessListAdapter";
-    private static final String EXTRA_POSITION = "com.trytara.tara.adapters.EXTRA_POSITION";
 
     private List<Business> mDataSet;
     private static Context mContext;
@@ -33,6 +32,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
         private final TextView businessDescription;
         private final TextView businessDistance;
         private final ImageView businessThumbnail;
+        private Business mBusiness;
 
         public ViewHolder(View v) {
             super(v);
@@ -46,26 +46,17 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
 
         }
 
-        public TextView getBusinessDistance() {
-            return businessDistance;
-        }
-
-        public TextView getBusinessName() {
-            return businessName;
-        }
-
-        public TextView getBusinessDescription() {
-            return businessDescription;
-        }
-
-        public ImageView getBusinessThumbnail() {
-            return businessThumbnail;
+        public void bindBusiness(Business business) {
+            mBusiness = business;
+            businessName.setText(mBusiness.getName());
+            businessDescription.setText(mBusiness.getDescription());
+            businessDistance.setText("82km");
         }
 
 
         @Override
         public void onClick(View v) {
-            Intent i = BusinessDetailActivity.newIntent(mContext, this.getAdapterPosition());
+            Intent i = BusinessDetailActivity.newIntent(mContext, mBusiness);
             mContext.startActivity(i);
         }
     }
@@ -86,9 +77,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
         //Log.d(TAG, "Element " + position + " set.");
 
         Business business = mDataSet.get(position);
-        viewHolder.getBusinessName().setText(business.getName());
-        viewHolder.getBusinessDescription().setText(business.getDescription());
-        viewHolder.getBusinessDistance().setText("82km");
+        viewHolder.bindBusiness(business);
     }
 
     @Override

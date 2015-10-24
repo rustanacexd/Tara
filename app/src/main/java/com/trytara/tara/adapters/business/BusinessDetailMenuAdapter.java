@@ -51,16 +51,13 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
             menuPrice = (TextView) v.findViewById(R.id.menu_price);
         }
 
+        public void bindItem(Item item) {
+            menuTitle.setText(item.getTitle());
+            menuPrice.setText(item.getPrice() + " PHP");
+        }
+
         public ImageView getMenuImage() {
             return menuImage;
-        }
-
-        public TextView getMenuTitle() {
-            return menuTitle;
-        }
-
-        public TextView getMenuPrice() {
-            return menuPrice;
         }
 
         @Override
@@ -68,6 +65,8 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
             Intent i = BusinessItemDetailActivity.newIntent(mContext, this.getAdapterPosition());
             mContext.startActivity(i);
         }
+
+
     }
 
 
@@ -85,8 +84,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         //Log.d(TAG, "Element " + position + " set.");
         Item currentItem = mDataSet.get(position);
-        viewHolder.getMenuTitle().setText(currentItem.getTitle());
-        viewHolder.getMenuPrice().setText("PHP " + currentItem.getPrice());
+        viewHolder.bindItem(currentItem);
         viewHolder.getMenuImage().setImageResource(imgList[position]);
     }
 

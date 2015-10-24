@@ -12,19 +12,18 @@ import android.view.ViewGroup;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.business.BusinessDetailMenuAdapter;
 import com.trytara.tara.models.Business;
-import com.trytara.tara.models.BusinessDataSource;
 
 
 public class BusinessMenuFragment extends Fragment {
-    private static final String ARG_POSITION = "com.trytara.tara.fragments.business.BusinessMenuFragment.position";
+    private static final String ARG_BUSINESS = "com.trytara.tara.fragments.business.BusinessMenuFragment.business";
 
-    private int mPosition;
+    private Business mBusiness;
 
 
-    public static BusinessMenuFragment newInstance(int param1) {
+    public static BusinessMenuFragment newInstance(Business business) {
         BusinessMenuFragment fragment = new BusinessMenuFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_POSITION, param1);
+        args.putParcelable(ARG_BUSINESS, business);
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,7 +36,7 @@ public class BusinessMenuFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mPosition = getArguments().getInt(ARG_POSITION);
+            mBusiness = getArguments().getParcelable(ARG_BUSINESS);
         }
     }
 
@@ -48,8 +47,7 @@ public class BusinessMenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_business_menu, container, false);
 
         RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessMenuList);
-        Business business = BusinessDataSource.get(getActivity()).getBusiness(mPosition);
-        BusinessDetailMenuAdapter adapter = new BusinessDetailMenuAdapter(getActivity(), business.getItems());
+        BusinessDetailMenuAdapter adapter = new BusinessDetailMenuAdapter(getActivity(), mBusiness.getItems());
         rvBusinessMenuList.setAdapter(adapter);
         rvBusinessMenuList.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
