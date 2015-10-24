@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.trytara.tara.adapters.ViewPagerAdapter;
 import com.trytara.tara.fragments.business.BusinessAboutFragment;
@@ -18,7 +19,7 @@ import com.trytara.tara.models.Business;
 public class BusinessDetailActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
-    private static final String EXTRA_PREFIX = "com.trytara.tara.";
+    private static final String EXTRA_PREFIX = "com.trytara.tara.BusinessDetailActivity";
     private static final String EXTRA_BUSINESS = EXTRA_PREFIX + "business";
     private Business mBusiness;
 
@@ -33,7 +34,10 @@ public class BusinessDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.business_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Business Name");
+        getSupportActionBar().setTitle(mBusiness.getName());
+
+        TextView businessDescription = (TextView) findViewById(R.id.business_description);
+        businessDescription.setText(mBusiness.getDescription());
 
         mViewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(mViewPager);

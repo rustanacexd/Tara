@@ -61,7 +61,7 @@
             android:layout_toRightOf="@id/item_image"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Adobong Manok"
+            tools:text="Adobong Manok"
             android:textSize="16sp"/>
 
         <TextView
@@ -72,7 +72,7 @@
             android:layout_alignLeft="@id/item_title"
             android:layout_below="@id/item_title"
             android:layout_marginTop="4dp"
-            android:text="PHP 200.00"
+            tools:text="PHP 200.00"
             android:textColor="@android:color/black"
             android:textSize="14sp"/>
 

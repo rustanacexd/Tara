@@ -9,10 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.trytara.tara.fragments.business.BusinessItemDetailActivityFragment;
+import com.trytara.tara.models.Business.Item;
 
 public class BusinessItemDetailActivity extends AppCompatActivity {
 
-    private static final String EXTRA_POSITION = "com.trytara.tara.BusinessItemDetailActivity.position";
+    private static final String EXTRA_ITEM = "com.trytara.tara.BusinessItemDetailActivity.item";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,22 +24,22 @@ public class BusinessItemDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment);
+        Fragment fragment = fm.findFragmentById(R.id.item_fragment);
 
-        int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
+        Item item = getIntent().getParcelableExtra(EXTRA_ITEM);
 
         if (fragment == null) {
-            fragment = BusinessItemDetailActivityFragment.newInstance(position);
+            fragment = BusinessItemDetailActivityFragment.newInstance(item);
             fm.beginTransaction()
-                    .add(R.id.fragment, fragment)
+                    .add(R.id.item_fragment, fragment)
                     .commit();
 
         }
     }
 
-    public static Intent newIntent(Context packageContext, int position) {
+    public static Intent newIntent(Context packageContext, Item item) {
         Intent intent = new Intent(packageContext, BusinessItemDetailActivity.class);
-        intent.putExtra(EXTRA_POSITION, position);
+        intent.putExtra(EXTRA_ITEM, item);
         return intent;
     }
 

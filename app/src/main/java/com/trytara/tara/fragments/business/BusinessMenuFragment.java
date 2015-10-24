@@ -19,7 +19,6 @@ public class BusinessMenuFragment extends Fragment {
 
     private Business mBusiness;
 
-
     public static BusinessMenuFragment newInstance(Business business) {
         BusinessMenuFragment fragment = new BusinessMenuFragment();
         Bundle args = new Bundle();

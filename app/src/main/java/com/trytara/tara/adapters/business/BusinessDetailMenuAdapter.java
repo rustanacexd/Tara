@@ -40,6 +40,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
 
         private final ImageView menuImage;
         private final TextView menuTitle, menuPrice;
+        private Item mItem;
 
         public ViewHolder(View v) {
             super(v);
@@ -52,6 +53,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
         }
 
         public void bindItem(Item item) {
+            mItem = item;
             menuTitle.setText(item.getTitle());
             menuPrice.setText(item.getPrice() + " PHP");
         }
@@ -62,7 +64,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
 
         @Override
         public void onClick(View v) {
-            Intent i = BusinessItemDetailActivity.newIntent(mContext, this.getAdapterPosition());
+            Intent i = BusinessItemDetailActivity.newIntent(mContext, mItem);
             mContext.startActivity(i);
         }
 
