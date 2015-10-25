@@ -38,6 +38,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int MY_LOCATION_REQUEST_CODE = 119;
     private static final int CAMERA_ZOOM_LEVEL = 19;
     private SupportMapFragment mMapFragment;
+    private GoogleMapOptions mOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +52,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(currentCategorySelected);
 
-        GoogleMapOptions options = new GoogleMapOptions();
-        options.mapType(GoogleMap.MAP_TYPE_NORMAL)
+        mOptions = new GoogleMapOptions();
+        mOptions.mapType(GoogleMap.MAP_TYPE_NORMAL)
                 .compassEnabled(false)
                 .rotateGesturesEnabled(false)
                 .tiltGesturesEnabled(false);
 
-
-        mMapFragment = SupportMapFragment.newInstance(options);
+        mMapFragment = SupportMapFragment.newInstance(mOptions);
         mMapFragment.getMapAsync(this);
-
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new BusinessListFragment(), "ListFragment")
                 .commit();
