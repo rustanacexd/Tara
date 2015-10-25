@@ -65,7 +65,7 @@ public class BusinessItemDetailActivity extends AppCompatActivity {
 
     private void setBackData() {
         Intent data = new Intent();
-        data.putExtra("key", mBusiness);
+        data.putExtra(EXTRA_BUSINESS, mBusiness);
         setResult(RESULT_OK, data);
     }
 

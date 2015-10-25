@@ -41,10 +41,10 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         Toolbar toolbar = (Toolbar) findViewById(R.id.business_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setTitle(mBusiness.getName());
 
         TextView businessDescription = (TextView) findViewById(R.id.business_description);
-        //businessDescription.setText(mBusiness.getDescription());
+        businessDescription.setText(mBusiness.getDescription());
+        getSupportActionBar().setTitle(mBusiness.getName());
 
         mViewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(mViewPager);
@@ -76,6 +76,7 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         });
 
     }
+    
 
     public static Intent newIntent(Context packageContext, Business business) {
         Intent intent = new Intent(packageContext, BusinessDetailActivity.class);
@@ -104,7 +105,7 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) return;
         if (requestCode == REQUEST_BACK) {
-            mBusiness = data.getParcelableExtra("key");
+            mBusiness = data.getParcelableExtra(BusinessItemDetailActivity.EXTRA_BUSINESS);
         }
     }
 }
