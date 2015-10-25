@@ -1,5 +1,6 @@
 <android.support.v7.widget.RecyclerView
     android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:background="@android:color/white"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:id="@+id/rvBusinessReviewsList"
     xmlns:android="http://schemas.android.com/apk/res/android"

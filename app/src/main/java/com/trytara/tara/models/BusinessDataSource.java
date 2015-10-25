@@ -11,7 +11,7 @@ public class BusinessDataSource implements BusinessDAO {
     private List<Business> mBusinesses;
 
     public BusinessDataSource() {
-        mBusinesses = createBusinessList(200, 20, 20);
+        mBusinesses = createBusinessList(50, 10, 10);
     }
 
     private List<Business> createBusinessList(int numBusiness, int numReviews, int numItems) {

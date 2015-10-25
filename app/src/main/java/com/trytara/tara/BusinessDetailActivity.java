@@ -76,7 +76,7 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         });
 
     }
-    
+
 
     public static Intent newIntent(Context packageContext, Business business) {
         Intent intent = new Intent(packageContext, BusinessDetailActivity.class);
