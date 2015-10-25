@@ -17,6 +17,7 @@ import com.trytara.tara.fragments.business.BusinessContactFragment;
 import com.trytara.tara.fragments.business.BusinessDetailMenuFragment;
 import com.trytara.tara.fragments.business.BusinessReviewFragment;
 import com.trytara.tara.models.Business;
+import com.trytara.tara.models.Item;
 
 public class BusinessDetailActivity extends AppCompatActivity implements BusinessDetailMenuAdapter.OnBusinessItemClickListener {
 
@@ -95,7 +96,7 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
 
 
     @Override
-    public void onBusinessItemClick(Business.Item item) {
+    public void onBusinessItemClick(Item item) {
         Intent i = BusinessItemDetailActivity.newIntent(this, item, mBusiness);
         startActivityForResult(i, REQUEST_BACK);
     }

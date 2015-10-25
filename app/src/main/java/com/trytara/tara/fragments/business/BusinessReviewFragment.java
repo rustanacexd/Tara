@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import com.trytara.tara.BusinessDetailActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.business.BusinessReviewsListAdapter;
-import com.trytara.tara.models.Business;
-import com.trytara.tara.models.BusinessDataSource;
 
 
 public class BusinessReviewFragment extends Fragment {

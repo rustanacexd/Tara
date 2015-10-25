@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 import com.trytara.tara.fragments.business.BusinessItemDetailActivityFragment;
 import com.trytara.tara.models.Business;
-import com.trytara.tara.models.Business.Item;
+import com.trytara.tara.models.Item;
 
 public class BusinessItemDetailActivity extends AppCompatActivity {
 

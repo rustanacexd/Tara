@@ -11,10 +11,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.trytara.tara.R;
+import com.trytara.tara.models.Review;
 
 import java.util.List;
 
-import static com.trytara.tara.models.Business.*;
 
 public class BusinessReviewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = "BusinessReviewsListAdapter";
@@ -115,7 +115,7 @@ public class BusinessReviewsListAdapter extends RecyclerView.Adapter<RecyclerVie
             VHItem viewHolder = (VHItem) holder;
             Review review = getItem(position);
             viewHolder.getUserName().setText(review.getReviewer());
-            viewHolder.getDateReview().setText(review.getDate().toString());
+            viewHolder.getDateReview().setText("June 5 ,1989");
             viewHolder.getUserRating().setRating(review.getRating());
             viewHolder.getUserThumbnail().setImageResource(R.drawable.hotels);
             viewHolder.getReviewContent().setText(review.getContent());

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.trytara.tara.BusinessItemDetailActivity;
 import com.trytara.tara.R;
-import com.trytara.tara.models.Business.Item;
+import com.trytara.tara.models.Item;
 
 import java.util.List;
 

@@ -11,8 +11,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.trytara.tara.R;
-import com.trytara.tara.models.Business.Review;
-import com.trytara.tara.models.Business.Item;
+import com.trytara.tara.models.Item;
+import com.trytara.tara.models.Review;
 
 import java.util.ArrayList;
 import java.util.List;

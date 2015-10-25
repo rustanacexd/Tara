@@ -1,64 +1,55 @@
 package com.trytara.tara.models;
 
+import android.util.Log;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.trytara.tara.models.Business.BusinessBuilder;
-import static com.trytara.tara.models.Business.ReviewBuilder;
-
-public class BusinessDataSource implements BusinessDAO {
-
-    private List<Business> mBusinesses;
+public class BusinessDataSource {
 
     public BusinessDataSource() {
-        mBusinesses = createBusinessList(50, 10, 10);
     }
 
-    private List<Business> createBusinessList(int numBusiness, int numReviews, int numItems) {
-        List<Business> businesses = new ArrayList<>();
-        for (int i = 1; i <= numBusiness; i++) {
-            Business business = new BusinessBuilder("Business " + i, "Lorem ipsum grabeh ka nonsense lol Lorem ipsum grabeh ka nonsense lol" +
-                    "lol", "062-2142406", "Pagadian City").build();
+    public static void getAllBusinesses(final BusinessDataCallbacks callback) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Business");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if (e == null) {
+                    Log.d("DEBUG", list.toString());
+                    List<Business> businessList = new ArrayList<>();
+                    for (ParseObject object : list) {
+                        businessList.add(parseObjectToBusiness(object));
+                    }
 
-            String temporaryReviewContent = "Review Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-                    "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam";
+                    if (callback != null) {
+                        callback.onBusinessesFetch(businessList);
+                    }
 
-            for (int j = 0; j <= numItems; j++) {
-                String temporaryItemContent = "Temporary Business Item " + j;
-                Business.Item item = new Business.ItemBuilder(temporaryItemContent, 400.0).build();
-
-                for (int k = 0; k <= numReviews; k++) {
-                    Business.Review review = new ReviewBuilder(temporaryReviewContent, 4.5f, "Reviewer Full name " + k).build();
-                    business.addReview(review);
-                    item.addReview(review);
+                } else {
+                    Log.d("DEBUG", e.getLocalizedMessage());
                 }
-                business.addItem(item);
             }
-
-            businesses.add(business);
-        }
-
-        return businesses;
-    }
-
-
-    @Override
-    public List<Business> getAllBusinesses() {
-        return mBusinesses;
-    }
-
-    @Override
-    public Business getBusiness(int id) {
-        return mBusinesses.get(id);
-    }
-
-    @Override
-    public void updateBusiness(Business business) {
+        });
 
     }
 
-    @Override
-    public void deleteBusiness(Business business) {
-
+    private static Business parseObjectToBusiness(ParseObject object) {
+        return new Business.BusinessBuilder(
+                object.getString("name"),
+                object.getString("description"),
+                object.getString("contactNumber"),
+                object.getString("address")
+        ).build();
     }
+
+    public interface BusinessDataCallbacks {
+        public void onBusinessesFetch(List<Business> businesses);
+    }
+
 }
