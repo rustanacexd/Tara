@@ -8,29 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.trytara.tara.BusinessItemDetailActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.business.BusinessItemDetailReviewsAdapter;
-import com.trytara.tara.models.Business.Item;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class BusinessItemDetailActivityFragment extends Fragment {
 
-    private static final String ARG_ITEM = "com.trytara.tara.fragments.business.BusinessItemDetailActivityFragment.item";
-
-    private Item mItem;
-
     public BusinessItemDetailActivityFragment() {
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mItem = getArguments().getParcelable(ARG_ITEM);
-        }
     }
 
     @Override
@@ -40,7 +25,9 @@ public class BusinessItemDetailActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_business_item_detail, container, false);
 
         RecyclerView rvBusinessItemReviews = (RecyclerView) view.findViewById(R.id.rvBusinessItemMenuReviews);
-        BusinessItemDetailReviewsAdapter adapter = new BusinessItemDetailReviewsAdapter(mItem);
+        BusinessItemDetailReviewsAdapter adapter = new BusinessItemDetailReviewsAdapter((
+                (BusinessItemDetailActivity) getActivity()).getItem());
+
         rvBusinessItemReviews.setAdapter(adapter);
         rvBusinessItemReviews.setLayoutManager(new LinearLayoutManager(getActivity()));
         /*rvBusinessItemReviews.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -60,13 +47,5 @@ public class BusinessItemDetailActivityFragment extends Fragment {
         return view;
     }
 
-
-    public static BusinessItemDetailActivityFragment newInstance(Item item) {
-        BusinessItemDetailActivityFragment fragment = new BusinessItemDetailActivityFragment();
-        Bundle args = new Bundle();
-        args.putParcelable(ARG_ITEM, item);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
 }

@@ -19,6 +19,8 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
 
     private static final String TAG = "BusinessDetailMenuAdapter";
 
+    OnBusinessItemClickListener mListener;
+
     private List<Item> mDataSet;
     int[] imgList = {R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.coffee_shop, R.drawable.restaurant,
@@ -30,13 +32,19 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
 
     private static Context mContext;
 
-    public BusinessDetailMenuAdapter(Context context, List<Item> dataSet) {
+    public BusinessDetailMenuAdapter(Context context, List<Item> dataSet,
+                                     OnBusinessItemClickListener listener) {
         mContext = context;
         mDataSet = dataSet;
+        mListener = listener;
+    }
+
+    public interface OnBusinessItemClickListener {
+        public void onBusinessItemClick(Item item);
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView menuImage;
         private final TextView menuTitle, menuPrice;
@@ -64,8 +72,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
 
         @Override
         public void onClick(View v) {
-            Intent i = BusinessItemDetailActivity.newIntent(mContext, mItem);
-            mContext.startActivity(i);
+            mListener.onBusinessItemClick(mItem);
         }
 
 

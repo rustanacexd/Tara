@@ -5,7 +5,7 @@
              android:paddingLeft="8dp"
              android:paddingTop="8dp"
              android:paddingRight="8dp"
-             tools:context="com.trytara.tara.fragments.business.BusinessMenuFragment">
+             tools:context="com.trytara.tara.fragments.business.BusinessDetailMenuFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvBusinessMenuList"
