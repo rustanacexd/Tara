@@ -1,6 +1,5 @@
 package com.trytara.tara;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,20 +10,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.trytara.tara.fragments.business.BusinessItemDetailActivityFragment;
-import com.trytara.tara.models.Business;
 import com.trytara.tara.models.Item;
+
 
 public class BusinessItemDetailActivity extends AppCompatActivity {
 
     private static final String EXTRA_ITEM = "com.trytara.tara.BusinessItemDetailActivity.item";
-    public static final String EXTRA_BUSINESS = "com.trytara.tara.BusinessItemDetailActivity.business";
 
-    private Business mBusiness;
-    private Item mItem;
+    private String mItemId;
 
-
-    public Item getItem() {
-        return mItem;
+    public String getItemId() {
+        return mItemId;
     }
 
     @Override
@@ -38,8 +34,7 @@ public class BusinessItemDetailActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.item_fragment);
 
-        mItem = getIntent().getParcelableExtra(EXTRA_ITEM);
-        mBusiness = getIntent().getParcelableExtra(EXTRA_BUSINESS);
+        mItemId = getIntent().getStringExtra(EXTRA_ITEM);
 
         if (fragment == null) {
             fragment = new BusinessItemDetailActivityFragment();
@@ -50,22 +45,19 @@ public class BusinessItemDetailActivity extends AppCompatActivity {
         }
     }
 
-    public static Intent newIntent(Context packageContext, Item item, Business business) {
+    public static Intent newIntent(Context packageContext, Item item) {
         Intent intent = new Intent(packageContext, BusinessItemDetailActivity.class);
-        intent.putExtra(EXTRA_ITEM, item);
-        intent.putExtra(EXTRA_BUSINESS, business);
+        //intent.putExtra(EXTRA_ITEM, item);
         return intent;
     }
 
     @Override
     public void onBackPressed() {
-        setBackData();
         super.onBackPressed();
     }
 
     private void setBackData() {
         Intent data = new Intent();
-        data.putExtra(EXTRA_BUSINESS, mBusiness);
         setResult(RESULT_OK, data);
     }
 
@@ -73,7 +65,6 @@ public class BusinessItemDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                setBackData();
                 finish();
                 return true;
 

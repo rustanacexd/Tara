@@ -15,7 +15,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,7 +26,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.trytara.tara.fragments.BusinessListFragment;
-import com.trytara.tara.models.Business;
+import com.trytara.tara.models.POJOBusiness;
 
 import java.util.ArrayList;
 
@@ -42,7 +41,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int CAMERA_ZOOM_LEVEL = 19;
     private SupportMapFragment mMapFragment;
 
-    private ArrayList<Business> mBusinessList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

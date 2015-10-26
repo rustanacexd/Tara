@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import com.trytara.tara.BusinessDetailActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.business.BusinessDetailMenuAdapter;
+import com.trytara.tara.models.Item;
+
+import java.util.ArrayList;
 
 
 public class BusinessDetailMenuFragment extends Fragment {
@@ -26,7 +29,7 @@ public class BusinessDetailMenuFragment extends Fragment {
 
         RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessMenuList);
         BusinessDetailMenuAdapter adapter = new BusinessDetailMenuAdapter(activity,
-                activity.getBusiness().getItems(), activity);
+                new ArrayList<Item>(), activity);
 
         rvBusinessMenuList.setAdapter(adapter);
         rvBusinessMenuList.setLayoutManager(new GridLayoutManager(getActivity(), 2));

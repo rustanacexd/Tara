@@ -1,87 +1,36 @@
 package com.trytara.tara.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
-public class Review implements Parcelable {
-    private final String mId;
-    private String mContent;
-    private float mRating;
-    private String mReviewer;
+@ParseClassName("Review")
+public class Review extends ParseObject {
 
-    private Review(ReviewBuilder builder) {
-        mId = builder.mId;
-        mContent = builder.mContent;
-        mRating = builder.mRating;
-        mReviewer = builder.mReviewer;
+    private static final String CONTENT = "content";
+    private static final String RATING = "rating";
+    private static final String REVIEWER = "reviewer";
 
-    }
-
-    private Review(Parcel parcel) {
-        mId = parcel.readString();
-        mContent = parcel.readString();
-        mRating = parcel.readFloat();
-        mReviewer = parcel.readString();
+    public Review() {
     }
 
     public String getContent() {
-        return mContent;
+        return getString(CONTENT);
     }
 
-    public float getRating() {
-        return mRating;
+    public void setContent(String content) {
+        put(CONTENT, content);
     }
 
-
-    public String getReviewer() {
-        return mReviewer;
+    public double getRating() {
+        return getDouble(RATING);
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setRating(Double rating) {
+        put(RATING, rating);
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mId);
-        dest.writeString(mContent);
-        dest.writeFloat(mRating);
-        dest.writeString(mReviewer);
-    }
-
-    public static final Parcelable.Creator<Review> CREATOR = new ClassLoaderCreator<Review>() {
-        @Override
-        public Review createFromParcel(Parcel source, ClassLoader loader) {
-            return new Review(source);
-        }
-
-        @Override
-        public Review createFromParcel(Parcel source) {
-            return new Review(source);
-        }
-
-        @Override
-        public Review[] newArray(int size) {
-            return new Review[size];
-        }
-    };
-
-    public static class ReviewBuilder {
-        private final String mId;
-        private final String mContent;
-        private final float mRating;
-        private final String mReviewer;
-
-        public ReviewBuilder(String id, String content, float rating, String reviewer) {
-            mId = id;
-            mContent = content;
-            mRating = rating;
-            mReviewer = reviewer;
-        }
-
-        public Review build() {
-            return new Review(this);
-        }
+    public ParseUser getReviewer() {
+        return getParseUser(REVIEWER);
     }
 }

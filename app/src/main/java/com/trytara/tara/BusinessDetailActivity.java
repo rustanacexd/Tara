@@ -1,9 +1,7 @@
 package com.trytara.tara;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +11,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.trytara.tara.adapters.ViewPagerAdapter;
 import com.trytara.tara.adapters.business.BusinessDetailMenuAdapter;
 import com.trytara.tara.fragments.business.BusinessAboutFragment;
@@ -22,16 +23,14 @@ import com.trytara.tara.fragments.business.BusinessReviewFragment;
 import com.trytara.tara.models.Business;
 import com.trytara.tara.models.Item;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BusinessDetailActivity extends AppCompatActivity implements BusinessDetailMenuAdapter.OnBusinessItemClickListener {
 
     private ViewPager mViewPager;
     private static final String EXTRA_PREFIX = "com.trytara.tara.BusinessDetailActivity";
-    private static final String EXTRA_BUSINESS = EXTRA_PREFIX + "business";
+    private static final String EXTRA_BUSINESS_ID = EXTRA_PREFIX + "businessId";
     private static final int REQUEST_BACK = 563;
     private Business mBusiness;
+    private TextView mBusinessDescription;
 
     public Business getBusiness() {
         return mBusiness;
@@ -40,7 +39,6 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mBusiness = getIntent().getParcelableExtra(EXTRA_BUSINESS);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_detail);
@@ -48,10 +46,26 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         Toolbar toolbar = (Toolbar) findViewById(R.id.business_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mBusinessDescription = (TextView) findViewById(R.id.business_description);
+        String businessId = getIntent().getStringExtra(EXTRA_BUSINESS_ID);
+        ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
+        query.fromLocalDatastore();
+        query.getInBackground(businessId, new GetCallback<Business>() {
+            @Override
+            public void done(Business business, ParseException e) {
+                if (e == null) {
+                    Log.d("DEBUG", business.toString());
+                    mBusiness = business;
+                    mBusinessDescription.setText(mBusiness.getDescription());
+                    getSupportActionBar().setTitle(mBusiness.getName());
+                } else {
+                    Log.d("DEBUG", e.getLocalizedMessage());
+                }
+            }
+        });
 
-        TextView businessDescription = (TextView) findViewById(R.id.business_description);
-        businessDescription.setText(mBusiness.getDescription());
-        getSupportActionBar().setTitle(mBusiness.getName());
+
+
 
         mViewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(mViewPager);
@@ -85,9 +99,9 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
     }
 
 
-    public static Intent newIntent(Context packageContext, Business business) {
+    public static Intent newIntent(Context packageContext, String businessId) {
         Intent intent = new Intent(packageContext, BusinessDetailActivity.class);
-        intent.putExtra(EXTRA_BUSINESS, business);
+        intent.putExtra(EXTRA_BUSINESS_ID, businessId);
         return intent;
     }
 
@@ -120,16 +134,16 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
 
     @Override
     public void onBusinessItemClick(Item item) {
-        Intent i = BusinessItemDetailActivity.newIntent(this, item, mBusiness);
+        Intent i = BusinessItemDetailActivity.newIntent(this, item);
         startActivityForResult(i, REQUEST_BACK);
     }
 
-    @Override
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) return;
         if (requestCode == REQUEST_BACK) {
             mBusiness = data.getParcelableExtra(BusinessItemDetailActivity.EXTRA_BUSINESS);
         }
-    }
+    }*/
 }

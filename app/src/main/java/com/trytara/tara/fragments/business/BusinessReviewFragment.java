@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import com.trytara.tara.BusinessDetailActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.business.BusinessReviewsListAdapter;
+import com.trytara.tara.models.Review;
+
+import java.util.ArrayList;
 
 
 public class BusinessReviewFragment extends Fragment {
@@ -28,7 +31,7 @@ public class BusinessReviewFragment extends Fragment {
 
         RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessReviewsList);
         BusinessReviewsListAdapter adapter = new BusinessReviewsListAdapter(activity,
-                activity.getBusiness().getReviews());
+                new ArrayList<Review>());
 
         rvBusinessMenuList.setAdapter(adapter);
 

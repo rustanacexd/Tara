@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.trytara.tara.BusinessItemDetailActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.business.BusinessItemDetailReviewsAdapter;
+import com.trytara.tara.models.Item;
 
 
 public class BusinessItemDetailActivityFragment extends Fragment {
@@ -25,8 +26,7 @@ public class BusinessItemDetailActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_business_item_detail, container, false);
 
         RecyclerView rvBusinessItemReviews = (RecyclerView) view.findViewById(R.id.rvBusinessItemMenuReviews);
-        BusinessItemDetailReviewsAdapter adapter = new BusinessItemDetailReviewsAdapter((
-                (BusinessItemDetailActivity) getActivity()).getItem());
+        BusinessItemDetailReviewsAdapter adapter = new BusinessItemDetailReviewsAdapter(new Item());
 
         rvBusinessItemReviews.setAdapter(adapter);
         rvBusinessItemReviews.setLayoutManager(new LinearLayoutManager(getActivity()));

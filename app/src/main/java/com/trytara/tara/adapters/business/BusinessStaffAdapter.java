@@ -13,7 +13,7 @@ public class BusinessStaffAdapter extends RecyclerView.Adapter<BusinessStaffAdap
 
     private static final String TAG = "BusinessStaffAdapter";
 
-    //private List<Business> mDataSet;
+    //private List<POJOBusiness> mDataSet;
     int[] imgList = { R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.coffee_shop, R.drawable.restaurant,
             R.drawable.pharmacy, R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,

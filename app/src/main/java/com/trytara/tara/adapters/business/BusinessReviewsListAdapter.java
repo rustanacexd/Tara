@@ -11,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.trytara.tara.R;
+import com.trytara.tara.models.POJOReview;
 import com.trytara.tara.models.Review;
 
 import java.util.List;
@@ -110,13 +111,13 @@ public class BusinessReviewsListAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof VHItem) {
-            //String dataItem = getItem(position);
+            //String dataItem = getItemId(position);
             //cast holder to VHItem and set data
             VHItem viewHolder = (VHItem) holder;
             Review review = getItem(position);
-            viewHolder.getUserName().setText(review.getReviewer());
+            viewHolder.getUserName().setText("TEST username");
             viewHolder.getDateReview().setText("June 5 ,1989");
-            viewHolder.getUserRating().setRating(review.getRating());
+            viewHolder.getUserRating().setRating(25);
             viewHolder.getUserThumbnail().setImageResource(R.drawable.hotels);
             viewHolder.getReviewContent().setText(review.getContent());
         } else if (holder instanceof VHHeader) {

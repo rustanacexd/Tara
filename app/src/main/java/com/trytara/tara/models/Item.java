@@ -1,136 +1,44 @@
 package com.trytara.tara.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
 
-import java.util.ArrayList;
-import java.util.List;
+@ParseClassName("Item")
+public class Item extends ParseObject {
 
-public class Item implements Parcelable {
-    private final String mId;
-    private final String mTitle;
-    private final Double mPrice;
-    private final String mDescription;
-    private final String mStatus;
-    private final String mCategory;
-    private List<Review> mReviews = new ArrayList<>();
+    private static final String TITLE = "title";
+    private static final String PRICE = "price";
+    private static final String DESCRIPTION = "description";
+    private static final String CATEGORY = "category";
 
-    private Item(ItemBuilder builder) {
-        mId = builder.mId;
-        mTitle = builder.mTitle;
-        mPrice = builder.mPrice;
-        mDescription = builder.mDescription;
-        mStatus = builder.mStatus;
-        mCategory = builder.mCategory;
-    }
-
-    private Item(Parcel parcel) {
-        mId = parcel.readString();
-        mTitle = parcel.readString();
-        mPrice = parcel.readDouble();
-        mDescription = parcel.readString();
-        mStatus = parcel.readString();
-        mCategory = parcel.readString();
-        parcel.readTypedList(mReviews, Review.CREATOR);
-    }
-
-    public String getId() {
-        return mId;
-    }
-
-    public String getCategory() {
-        return mCategory;
-    }
-
-    public String getStatus() {
-        return mStatus;
-    }
-
-    public String getDescription() {
-        return mDescription;
+    public Item() {
     }
 
     public String getTitle() {
-        return mTitle;
+        return getString(TITLE);
+    }
+
+    public void setTitle(String title) {
+        put(TITLE, title);
     }
 
     public Double getPrice() {
-        return mPrice;
+        return getDouble(PRICE);
     }
 
-    public List<Review> getReviews() {
-        return mReviews;
+    public String getDescription() {
+        return getString(DESCRIPTION);
     }
 
-    public void addReview(Review review) {
-        mReviews.add(review);
+    public void setDescription(String description) {
+        put(DESCRIPTION, description);
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getCategory() {
+        return getString(CATEGORY);
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mTitle);
-        dest.writeDouble(mPrice);
-        dest.writeString(mDescription);
-        dest.writeString(mStatus);
-        dest.writeString(mCategory);
-        dest.writeTypedList(mReviews);
+    public void setCategory(String title) {
+        put(CATEGORY, title);
     }
-
-    public static final Parcelable.Creator<Item> CREATOR = new ClassLoaderCreator<Item>() {
-        @Override
-        public Item createFromParcel(Parcel source, ClassLoader loader) {
-            return new Item(source);
-        }
-
-        @Override
-        public Item createFromParcel(Parcel source) {
-            return new Item(source);
-        }
-
-        @Override
-        public Item[] newArray(int size) {
-            return new Item[size];
-        }
-    };
-
-    public static class ItemBuilder {
-        private final String mId;
-        private final String mTitle;
-        private final Double mPrice;
-        private String mDescription;
-        private String mStatus;
-        private String mCategory;
-
-        public ItemBuilder(String id,String title, Double price) {
-            mId = id;
-            mTitle = title;
-            mPrice = price;
-        }
-
-        public ItemBuilder description(String description) {
-            mDescription = description;
-            return this;
-        }
-
-        public ItemBuilder status(String status) {
-            mStatus = status;
-            return this;
-        }
-
-        public ItemBuilder category(String category) {
-            mCategory = mCategory;
-            return this;
-        }
-
-        public Item build() {
-            return new Item(this);
-        }
-    }
-
-
 }

@@ -6,7 +6,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.trytara.tara.models.Item;
+import com.trytara.tara.models.POJOItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +18,14 @@ public class ItemDataSource {
     private static final String KEY_DESCRIPTION = "description";
 
     public static void getItems(String id, final ItemDataSourceCallbacks callback) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Item");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("POJOItem");
         query.whereEqualTo("business", id);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
-                    Log.d("DEBUG", "Item Lists: " + list);
-                    List<Item> itemList = new ArrayList<>();
+                    Log.d("DEBUG", "POJOItem Lists: " + list);
+                    List<POJOItem> itemList = new ArrayList<>();
 
                     for (ParseObject object : list) {
                         itemList.add(parseObjectToItem(object));
@@ -45,11 +45,11 @@ public class ItemDataSource {
     }
 
     public interface ItemDataSourceCallbacks {
-        public void onItemFetchList(List<Item> itemList);
+        public void onItemFetchList(List<POJOItem> itemList);
     }
 
-    private static Item parseObjectToItem(ParseObject object) {
-        return new Item.ItemBuilder(
+    private static POJOItem parseObjectToItem(ParseObject object) {
+        return new POJOItem.ItemBuilder(
                 object.getObjectId(),
                 object.getString(KEY_TITLE),
                 object.getDouble(KEY_PRICE))

@@ -1,17 +1,15 @@
 package com.trytara.tara.adapters.business;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.trytara.tara.R;
 import com.trytara.tara.models.Item;
+import com.trytara.tara.models.POJOItem;
+import com.trytara.tara.models.POJOReview;
 import com.trytara.tara.models.Review;
 
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ public class BusinessItemDetailReviewsAdapter extends RecyclerView.Adapter<Recyc
 
     public BusinessItemDetailReviewsAdapter(Item item) {
         mItem = item;
-        mReviews = item.getReviews();
+        //mReviews = item.getReviews();
     }
 
     @Override

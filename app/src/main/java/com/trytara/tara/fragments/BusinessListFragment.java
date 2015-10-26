@@ -67,7 +67,8 @@ public class BusinessListFragment extends Fragment implements BusinessListAdapte
 
     @Override
     public void OnBusinessListItemClick(Business business) {
-        Intent i = BusinessDetailActivity.newIntent(getActivity(), business);
+        business.pinInBackground();
+        Intent i = BusinessDetailActivity.newIntent(getActivity(), business.getObjectId());
         startActivity(i);
     }
 
