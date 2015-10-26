@@ -3,11 +3,14 @@ package com.trytara.tara;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.trytara.tara.adapters.ViewPagerAdapter;
@@ -18,6 +21,9 @@ import com.trytara.tara.fragments.business.BusinessDetailMenuFragment;
 import com.trytara.tara.fragments.business.BusinessReviewFragment;
 import com.trytara.tara.models.Business;
 import com.trytara.tara.models.Item;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BusinessDetailActivity extends AppCompatActivity implements BusinessDetailMenuAdapter.OnBusinessItemClickListener {
 
@@ -92,6 +98,23 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         adapter.addFrag(new BusinessReviewFragment(), "Reviews");
         adapter.addFrag(new BusinessContactFragment(), "Contact");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
 

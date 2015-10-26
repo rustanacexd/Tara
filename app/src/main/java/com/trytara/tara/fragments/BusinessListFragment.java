@@ -1,6 +1,7 @@
 package com.trytara.tara.fragments;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,9 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.trytara.tara.BusinessDetailActivity;
 import com.trytara.tara.LoginActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.BusinessListAdapter;
@@ -21,18 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class BusinessListFragment extends Fragment {
+public class BusinessListFragment extends Fragment implements BusinessListAdapter.OnBusinessListItemClickListener{
 
     private BusinessListAdapter mAdapter;
-    private List<Business> mBusinessList;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d("DEBUG", "onCreate running");
-
-
-    }
+    private ArrayList<Business> mBusinessList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +44,7 @@ public class BusinessListFragment extends Fragment {
         rvBusiness.setVisibility(View.GONE);
 
         mBusinessList = new ArrayList<>();
-        mAdapter = new BusinessListAdapter(getActivity(), mBusinessList);
+        mAdapter = new BusinessListAdapter(getActivity(), mBusinessList, this);
         rvBusiness.setAdapter(mAdapter);
         rvBusiness.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvBusiness.setHasFixedSize(true);
@@ -70,6 +65,14 @@ public class BusinessListFragment extends Fragment {
 
     public BusinessListFragment() {
         // Required empty public constructor
+    }
+
+
+
+    @Override
+    public void OnBusinessListItemClick(Business business) {
+        Intent i = BusinessDetailActivity.newIntent(getActivity(), business);
+        startActivity(i);
     }
 
 }

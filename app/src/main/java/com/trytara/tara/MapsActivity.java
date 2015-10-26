@@ -27,6 +27,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.trytara.tara.fragments.BusinessListFragment;
+import com.trytara.tara.models.Business;
+
+import java.util.ArrayList;
 
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener{
@@ -38,7 +41,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int MY_LOCATION_REQUEST_CODE = 119;
     private static final int CAMERA_ZOOM_LEVEL = 19;
     private SupportMapFragment mMapFragment;
-    private GoogleMapOptions mOptions;
+
+    private ArrayList<Business> mBusinessList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +56,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(currentCategorySelected);
 
-        mOptions = new GoogleMapOptions();
-        mOptions.mapType(GoogleMap.MAP_TYPE_NORMAL)
+        GoogleMapOptions options = new GoogleMapOptions();
+        options.mapType(GoogleMap.MAP_TYPE_NORMAL)
                 .compassEnabled(false)
                 .rotateGesturesEnabled(false)
                 .tiltGesturesEnabled(false);
 
-        mMapFragment = SupportMapFragment.newInstance(mOptions);
+        mMapFragment = SupportMapFragment.newInstance(options);
         mMapFragment.getMapAsync(this);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new BusinessListFragment(), "ListFragment")
@@ -148,6 +152,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 999) {
+
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

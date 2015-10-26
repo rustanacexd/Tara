@@ -226,7 +226,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onCompleted(GraphResponse response) {
 
                 JSONObject user = response.getJSONObject();
-                Log.d(TAG, "RESPONSE OBJECT: " + user);
+//                Log.d(TAG, "RESPONSE OBJECT: " + user);
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 currentUser.put("name", user.optString("name"));

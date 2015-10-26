@@ -18,16 +18,23 @@ import java.util.List;
 public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.ViewHolder> {
     private static final String TAG = "BusinessListAdapter";
 
+    private OnBusinessListItemClickListener mListener;
+
     private List<Business> mDataSet;
     private static Context mContext;
 
-    public BusinessListAdapter(Context context, List<Business> dataSet) {
+    public BusinessListAdapter(Context context, List<Business> dataSet, OnBusinessListItemClickListener listener) {
         mContext = context;
         mDataSet = dataSet;
+        mListener = listener;
+    }
+
+    public interface OnBusinessListItemClickListener {
+        public void OnBusinessListItemClick(Business business);
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView businessName;
         private final TextView businessDescription;
         private final TextView businessDistance;
@@ -56,8 +63,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
 
         @Override
         public void onClick(View v) {
-            Intent i = BusinessDetailActivity.newIntent(mContext, mBusiness);
-            mContext.startActivity(i);
+            mListener.OnBusinessListItemClick(mDataSet.get(getAdapterPosition()));
         }
     }
 

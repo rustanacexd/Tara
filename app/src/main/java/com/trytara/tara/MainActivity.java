@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d(TAG, "onCreate running");
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         if (ParseUser.getCurrentUser() != null) {
-            Log.d(TAG, "UPDATE FB INFO");
+//            Log.d(TAG, "UPDATE FB INFO");
             mProfilePictureView.setProfileId(ParseUser.getCurrentUser().getString("facebookID"));
             mFacebookName.setText(ParseUser.getCurrentUser().getString("name"));
             String address = ParseUser.getCurrentUser().getString("address");
