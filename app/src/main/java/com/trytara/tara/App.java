@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseQuery;
 
 public class App extends Application {
 
@@ -17,6 +18,6 @@ public class App extends Application {
                 "AqlegT294eVrHhDaIkJWkTzNI4qsvZasFYNJrtCd");
         ParseFacebookUtils.initialize(this);
 
-
+        
     }
 }

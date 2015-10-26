@@ -6,6 +6,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 import com.trytara.tara.models.Business;
 
 import java.util.ArrayList;
@@ -22,14 +23,49 @@ public class BusinessDataSource {
     }
 
     public static void getAllBusinesses(final BusinessDataCallbacks callback) {
+
+        /*ParseQuery<ParseObject> itemsQuery = ParseQuery.getQuery("Item");
+        itemsQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(final List<ParseObject> itemsList, ParseException e) {
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("Business");
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> list, ParseException e) {
+                        if (e == null) {
+                            Log.d("DEBUG", "Business List: " + list);
+                            List<Business> businessList = new ArrayList<>();
+                            for (ParseObject object : list) {
+                                businessList.add(parseObjectToBusiness(object));
+                                object.put("items", itemsList);
+                                object.saveInBackground(new SaveCallback() {
+                                    @Override
+                                    public void done(ParseException e) {
+                                        Log.d("DEBUG", "object updated");
+                                    }
+                                });
+                            }
+
+                            if (callback != null) {
+                                callback.onBusinessListFetch(businessList);
+                            }
+
+                        } else {
+                            Log.d("DEBUG", e.getLocalizedMessage());
+                        }
+                    }
+                });
+            }
+        });*/
+
+
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Business");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
-                    Log.d("DEBUG","Business List: " + list);
+                    Log.d("DEBUG", "Business List: " + list);
                     List<Business> businessList = new ArrayList<>();
-
                     for (ParseObject object : list) {
                         businessList.add(parseObjectToBusiness(object));
                     }
@@ -43,6 +79,7 @@ public class BusinessDataSource {
                 }
             }
         });
+
 
     }
 

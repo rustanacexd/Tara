@@ -1,7 +1,5 @@
 package com.trytara.tara.fragments;
 
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,22 +7,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.trytara.tara.BusinessDetailActivity;
-import com.trytara.tara.LoginActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.BusinessListAdapter;
+import com.trytara.tara.datasource.BusinessDataSource;
 import com.trytara.tara.models.Business;
-import com.trytara.tara.models.BusinessDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class BusinessListFragment extends Fragment implements BusinessListAdapter.OnBusinessListItemClickListener{
+public class BusinessListFragment extends Fragment implements BusinessListAdapter.OnBusinessListItemClickListener {
 
     private BusinessListAdapter mAdapter;
     private ArrayList<Business> mBusinessList;
@@ -51,12 +47,13 @@ public class BusinessListFragment extends Fragment implements BusinessListAdapte
 
         BusinessDataSource.getAllBusinesses(new BusinessDataSource.BusinessDataCallbacks() {
             @Override
-            public void onBusinessesFetch(List<Business> businesses) {
+            public void onBusinessListFetch(List<Business> businessList) {
                 progress.setVisibility(View.GONE);
                 rvBusiness.setVisibility(View.VISIBLE);
-                mBusinessList.addAll(businesses);
+                mBusinessList.addAll(businessList);
                 mAdapter.notifyDataSetChanged();
             }
+
         });
 
 
@@ -66,7 +63,6 @@ public class BusinessListFragment extends Fragment implements BusinessListAdapte
     public BusinessListFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
