@@ -9,6 +9,7 @@ import java.util.List;
 
 
 public class Business implements Parcelable {
+    private final String mId;
     private final String mName;
     private final String mDescription;
     private final String mContactNumber;
@@ -17,6 +18,7 @@ public class Business implements Parcelable {
     private List<Item> mItems = new ArrayList<>();
 
     private Business(BusinessBuilder builder) {
+        mId = builder.mId;
         mName = builder.mName;
         mDescription = builder.mDescription;
         mContactNumber = builder.mContactNumber;
@@ -24,12 +26,17 @@ public class Business implements Parcelable {
     }
 
     private Business(Parcel parcel) {
+        mId = parcel.readString();
         mName = parcel.readString();
         mDescription = parcel.readString();
         mContactNumber = parcel.readString();
         mAddress = parcel.readString();
         parcel.readTypedList(mReviews, Review.CREATOR);
         parcel.readTypedList(mItems, Item.CREATOR);
+    }
+
+    public String getId() {
+        return mId;
     }
 
     public String getName() {
@@ -71,6 +78,7 @@ public class Business implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mId);
         dest.writeString(mName);
         dest.writeString(mDescription);
         dest.writeString(mContactNumber);
@@ -97,13 +105,15 @@ public class Business implements Parcelable {
     };
 
     public static class BusinessBuilder {
+        private final String mId;
         private final String mName;
         private final String mDescription;
         private final String mContactNumber;
         private final String mAddress;
 
-        public BusinessBuilder(String name, String description, String contactNumber,
+        public BusinessBuilder(String id, String name, String description, String contactNumber,
                                String address) {
+            mId = id;
             mName = name;
             mDescription = description;
             mContactNumber = contactNumber;

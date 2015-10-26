@@ -4,11 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Review implements Parcelable {
+    private final String mId;
     private String mContent;
     private float mRating;
     private String mReviewer;
 
     private Review(ReviewBuilder builder) {
+        mId = builder.mId;
         mContent = builder.mContent;
         mRating = builder.mRating;
         mReviewer = builder.mReviewer;
@@ -16,6 +18,7 @@ public class Review implements Parcelable {
     }
 
     private Review(Parcel parcel) {
+        mId = parcel.readString();
         mContent = parcel.readString();
         mRating = parcel.readFloat();
         mReviewer = parcel.readString();
@@ -41,6 +44,7 @@ public class Review implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mId);
         dest.writeString(mContent);
         dest.writeFloat(mRating);
         dest.writeString(mReviewer);
@@ -64,11 +68,13 @@ public class Review implements Parcelable {
     };
 
     public static class ReviewBuilder {
+        private final String mId;
         private final String mContent;
         private final float mRating;
         private final String mReviewer;
 
-        public ReviewBuilder(String content, float rating, String reviewer) {
+        public ReviewBuilder(String id, String content, float rating, String reviewer) {
+            mId = id;
             mContent = content;
             mRating = rating;
             mReviewer = reviewer;

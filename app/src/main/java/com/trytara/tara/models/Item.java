@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Item implements Parcelable {
+    private final String mId;
     private final String mTitle;
     private final Double mPrice;
     private final String mDescription;
@@ -15,6 +16,7 @@ public class Item implements Parcelable {
     private List<Review> mReviews = new ArrayList<>();
 
     private Item(ItemBuilder builder) {
+        mId = builder.mId;
         mTitle = builder.mTitle;
         mPrice = builder.mPrice;
         mDescription = builder.mDescription;
@@ -23,12 +25,17 @@ public class Item implements Parcelable {
     }
 
     private Item(Parcel parcel) {
+        mId = parcel.readString();
         mTitle = parcel.readString();
         mPrice = parcel.readDouble();
         mDescription = parcel.readString();
         mStatus = parcel.readString();
         mCategory = parcel.readString();
         parcel.readTypedList(mReviews, Review.CREATOR);
+    }
+
+    public String getId() {
+        return mId;
     }
 
     public String getCategory() {
@@ -92,13 +99,15 @@ public class Item implements Parcelable {
     };
 
     public static class ItemBuilder {
+        private final String mId;
         private final String mTitle;
         private final Double mPrice;
         private String mDescription;
         private String mStatus;
         private String mCategory;
 
-        public ItemBuilder(String title, Double price) {
+        public ItemBuilder(String id,String title, Double price) {
+            mId = id;
             mTitle = title;
             mPrice = price;
         }

@@ -1,4 +1,4 @@
-package com.trytara.tara.models;
+package com.trytara.tara.datasource;
 
 import android.util.Log;
 
@@ -6,11 +6,17 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.trytara.tara.models.Business;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessDataSource {
+
+    private static final String KEY_NAME = "name";
+    private static final String KEY_DESCRIPTION = "description";
+    private static final String KEY_CONTACT_NUMBER = "contactNumber";
+    private static final String KEY_ADDRESS = "address";
 
     public BusinessDataSource() {
     }
@@ -21,14 +27,15 @@ public class BusinessDataSource {
             @Override
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
-                    Log.d("DEBUG", list.toString());
+                    Log.d("DEBUG","Business List: " + list);
                     List<Business> businessList = new ArrayList<>();
+
                     for (ParseObject object : list) {
                         businessList.add(parseObjectToBusiness(object));
                     }
 
                     if (callback != null) {
-                        callback.onBusinessesFetch(businessList);
+                        callback.onBusinessListFetch(businessList);
                     }
 
                 } else {
@@ -39,18 +46,19 @@ public class BusinessDataSource {
 
     }
 
+
     private static Business parseObjectToBusiness(ParseObject object) {
         return new Business.BusinessBuilder(
                 object.getObjectId(),
-                object.getString("name"),
-                object.getString("description"),
-                object.getString("contactNumber"),
-                object.getString("address")
+                object.getString(KEY_NAME),
+                object.getString(KEY_DESCRIPTION),
+                object.getString(KEY_CONTACT_NUMBER),
+                object.getString(KEY_ADDRESS)
         ).build();
     }
 
     public interface BusinessDataCallbacks {
-        public void onBusinessesFetch(List<Business> businesses);
+        public void onBusinessListFetch(List<Business> businessList);
     }
 
 }
