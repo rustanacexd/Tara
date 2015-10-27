@@ -8,6 +8,7 @@ import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.trytara.tara.App;
 
 import java.util.List;
 
@@ -46,37 +47,37 @@ public class Business extends ParseObject {
         put(ADDRESS, address);
     }
 
-    public static void getAllBusinesses(final OnBusinessListFetchListener callback) {
+    public static void getAllBusiness(final OnGetAllBusinessCallback callback) {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         query.findInBackground(new FindCallback<Business>() {
             @Override
             public void done(List<Business> list, ParseException e) {
                 if (e == null) {
                     if (callback != null) {
-                        callback.onBusinessListFetch(list);
+                        callback.onGetAllBusiness(list);
                     }
                 } else {
-                    Log.d("DEBUG", e.getLocalizedMessage());
+                    Log.d(App.TAG, e.getLocalizedMessage());
                 }
             }
         });
     }
 
-    public static void getBusiness(String businessId, final OnGetSelectedBusinessListener callback) {
+    public static void getBusiness(String businessId, final onGetBusinessCallback callback) {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         query.include(ITEMS);
         query.getInBackground(businessId, new GetCallback<Business>() {
             @Override
             public void done(Business business, ParseException e) {
                 if (e == null) {
                     if (callback != null) {
-                        callback.onGetSelectedBusiness(business);
+                        callback.onGetBusiness(business);
                     }
 
                 } else {
-                    Log.d("DEBUG", e.getLocalizedMessage());
+                    Log.d(App.TAG, e.getLocalizedMessage());
                 }
             }
         });
@@ -86,12 +87,12 @@ public class Business extends ParseObject {
         return (List<Item>) this.get("items");
     }
 
-    public interface OnBusinessListFetchListener {
-        void onBusinessListFetch(List<Business> businessList);
+    public interface OnGetAllBusinessCallback {
+        void onGetAllBusiness(List<Business> businessList);
     }
 
-    public interface OnGetSelectedBusinessListener {
-        void onGetSelectedBusiness(Business business);
+    public interface onGetBusinessCallback {
+        void onGetBusiness(Business business);
     }
 
     @Override

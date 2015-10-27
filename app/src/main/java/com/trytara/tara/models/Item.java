@@ -3,12 +3,13 @@ package com.trytara.tara.models;
 import android.util.Log;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.trytara.tara.App;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @ParseClassName("Item")
@@ -50,38 +51,54 @@ public class Item extends ParseObject {
         put(CATEGORY, title);
     }
 
-    public static void getAllItems(final OnGetAllItemsListener callback) {
+    public static void getAllItems(final OnGetAllItemsCallback callback) {
         ParseQuery<Item> query = ParseQuery.getQuery(Item.class);
         query.findInBackground(new FindCallback<Item>() {
             @Override
             public void done(List<Item> list, ParseException e) {
                 if (e == null) {
-                    Log.d("DEBUG", "Item Lists: " + list);
+                    Log.d(App.TAG, "getAllItems: " + list);
 
                     if (callback != null) {
                         callback.OnGetAllItems(list);
                     }
 
                 } else {
-                    Log.d("DEBUG", e.getLocalizedMessage());
+                    Log.d(App.TAG, e.getLocalizedMessage());
                 }
             }
         });
     }
 
-    public static void getItems(Business business, OnGetAllItemsListener callback) {
-        if (callback != null) {
-            ArrayList<Item> itemList = (ArrayList<Item>) business.get("items");
-            callback.OnGetAllItems(itemList);
-        }
+    public static void getItem(String itemId, final OnGetItemCallback callback) {
+        ParseQuery<Item> query = ParseQuery.getQuery(Item.class);
+        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        query.getInBackground(itemId, new GetCallback<Item>() {
+            @Override
+            public void done(Item item, ParseException e) {
+                if (e == null) {
+                    Log.d(App.TAG, "getItem: " + item.toString());
+                    if (callback != null) {
+                        callback.onGetItem(item);
+                    }
+                } else {
+                    Log.d(App.TAG, e.getLocalizedMessage());
+                }
+            }
+        });
     }
 
-    public interface OnGetAllItemsListener {
+    @Override
+    public String toString() {
+        return "Item{" + getTitle() + "}";
+    }
+
+    public interface OnGetAllItemsCallback {
         void OnGetAllItems(List<Item> itemList);
     }
 
-    public interface OnGetItemsListener {
-        void onGetItems(List<Item> itemList);
+    public interface OnGetItemCallback {
+        void onGetItem(Item item);
     }
 
 }

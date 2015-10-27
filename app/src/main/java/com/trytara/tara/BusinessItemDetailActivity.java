@@ -8,19 +8,21 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.trytara.tara.fragments.business.BusinessItemDetailActivityFragment;
+import com.trytara.tara.fragments.business.BusinessItemDetailFragment;
 import com.trytara.tara.models.Item;
 
 
 public class BusinessItemDetailActivity extends AppCompatActivity {
 
-    private static final String EXTRA_ITEM = "com.trytara.tara.BusinessItemDetailActivity.item";
+    private static final String EXTRA_ITEM_ID = "com.trytara.tara.BusinessItemDetailActivity.item";
 
-    private String mItemId;
+    private Item mItem;
+    private View mProgress;
 
-    public String getItemId() {
-        return mItemId;
+    public View getProgress() {
+        return mProgress;
     }
 
     @Override
@@ -31,34 +33,38 @@ public class BusinessItemDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.item_fragment);
+        String itemId = getIntent().getStringExtra(EXTRA_ITEM_ID);
 
-        mItemId = getIntent().getStringExtra(EXTRA_ITEM);
+        mProgress = findViewById(R.id.progress);
+        mProgress.setVisibility(View.VISIBLE);
 
-        if (fragment == null) {
-            fragment = new BusinessItemDetailActivityFragment();
-            fm.beginTransaction()
-                    .add(R.id.item_fragment, fragment)
-                    .commit();
+        Item.getItem(itemId, new Item.OnGetItemCallback() {
+            @Override
+            public void onGetItem(Item item) {
+                mItem = item;
+                FragmentManager fm = getSupportFragmentManager();
+                Fragment fragment = fm.findFragmentById(R.id.item_fragment);
+                if (fragment == null) {
+                    fragment = new BusinessItemDetailFragment();
+                    fm.beginTransaction()
+                            .add(R.id.item_fragment, fragment)
+                            .commit();
 
-        }
+                }
+            }
+        });
+
+
     }
 
-    public static Intent newIntent(Context packageContext, Item item) {
+    public Item getItem() {
+        return mItem;
+    }
+
+    public static Intent newIntent(Context packageContext, String itemId) {
         Intent intent = new Intent(packageContext, BusinessItemDetailActivity.class);
-        //intent.putExtra(EXTRA_ITEM, item);
+        intent.putExtra(EXTRA_ITEM_ID, itemId);
         return intent;
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
-    private void setBackData() {
-        Intent data = new Intent();
-        setResult(RESULT_OK, data);
     }
 
     @Override

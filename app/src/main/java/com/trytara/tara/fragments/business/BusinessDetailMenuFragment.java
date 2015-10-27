@@ -30,14 +30,20 @@ public class BusinessDetailMenuFragment extends Fragment {
 
         final BusinessDetailActivity activity = (BusinessDetailActivity) getActivity();
 
-        RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessMenuList);
+        final RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessMenuList);
         mItemsList = new ArrayList<>();
 
         mAdapter = new BusinessDetailMenuAdapter(activity, mItemsList, activity);
+        final View progress = view.findViewById(R.id.progress);
 
-        Business.getBusiness(activity.getBusinessId(), new Business.OnGetSelectedBusinessListener() {
+        progress.setVisibility(View.VISIBLE);
+        rvBusinessMenuList.setVisibility(View.GONE);
+
+        Business.getBusiness(activity.getBusinessId(), new Business.onGetBusinessCallback() {
             @Override
-            public void onGetSelectedBusiness(Business business) {
+            public void onGetBusiness(Business business) {
+                progress.setVisibility(View.GONE);
+                rvBusinessMenuList.setVisibility(View.VISIBLE);
                 mItemsList.addAll(business.getItems());
                 mAdapter.notifyDataSetChanged();
 

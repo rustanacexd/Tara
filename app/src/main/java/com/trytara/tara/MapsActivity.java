@@ -26,9 +26,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.trytara.tara.fragments.BusinessListFragment;
-import com.trytara.tara.models.POJOBusiness;
-
-import java.util.ArrayList;
 
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener{

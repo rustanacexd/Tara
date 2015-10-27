@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.trytara.tara.R;
 import com.trytara.tara.models.Business;
-import com.trytara.tara.models.POJOBusiness;
 
 import java.util.List;
 

@@ -12,6 +12,8 @@ import com.trytara.tara.models.Review;
 
 public class App extends Application {
 
+    public static final String TAG = "DEBUG";
+
     @Override
     public void onCreate() {
         super.onCreate();

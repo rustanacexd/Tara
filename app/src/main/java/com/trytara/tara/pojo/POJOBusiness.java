@@ -1,4 +1,4 @@
-package com.trytara.tara.models;
+package com.trytara.tara.pojo;
 
 
 import android.os.Parcel;

@@ -44,9 +44,9 @@ public class BusinessListFragment extends Fragment implements BusinessListAdapte
         rvBusiness.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvBusiness.setHasFixedSize(true);
 
-        Business.getAllBusinesses(new Business.OnBusinessListFetchListener() {
+        Business.getAllBusiness(new Business.OnGetAllBusinessCallback() {
             @Override
-            public void onBusinessListFetch(List<Business> businessList) {
+            public void onGetAllBusiness(List<Business> businessList) {
                 progress.setVisibility(View.GONE);
                 rvBusiness.setVisibility(View.VISIBLE);
                 mBusinessList.addAll(businessList);

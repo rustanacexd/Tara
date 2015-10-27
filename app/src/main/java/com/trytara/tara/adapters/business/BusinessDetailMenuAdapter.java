@@ -8,12 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.trytara.tara.R;
 import com.trytara.tara.models.Item;
-import com.trytara.tara.models.POJOItem;
 
 import java.util.List;
 

@@ -93,18 +93,8 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
 
     @Override
     public void onBusinessItemClick(Item item) {
-        Intent i = BusinessItemDetailActivity.newIntent(this, item);
+        Intent i = BusinessItemDetailActivity.newIntent(this, item.getObjectId());
         startActivityForResult(i, REQUEST_BACK);
     }
 
-
-
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK) return;
-        if (requestCode == REQUEST_BACK) {
-            mBusiness = data.getParcelableExtra(BusinessItemDetailActivity.EXTRA_BUSINESS);
-        }
-    }*/
 }

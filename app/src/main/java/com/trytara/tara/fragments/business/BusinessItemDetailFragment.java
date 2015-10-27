@@ -14,9 +14,11 @@ import com.trytara.tara.adapters.business.BusinessItemDetailReviewsAdapter;
 import com.trytara.tara.models.Item;
 
 
-public class BusinessItemDetailActivityFragment extends Fragment {
+public class BusinessItemDetailFragment extends Fragment {
 
-    public BusinessItemDetailActivityFragment() {
+    private BusinessItemDetailReviewsAdapter mAdapter;
+
+    public BusinessItemDetailFragment() {
     }
 
     @Override
@@ -26,10 +28,12 @@ public class BusinessItemDetailActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_business_item_detail, container, false);
 
         RecyclerView rvBusinessItemReviews = (RecyclerView) view.findViewById(R.id.rvBusinessItemMenuReviews);
-        BusinessItemDetailReviewsAdapter adapter = new BusinessItemDetailReviewsAdapter(new Item());
 
-        rvBusinessItemReviews.setAdapter(adapter);
+        mAdapter = new BusinessItemDetailReviewsAdapter(((BusinessItemDetailActivity) getActivity()).getItem());
+        rvBusinessItemReviews.setAdapter(mAdapter);
         rvBusinessItemReviews.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ((BusinessItemDetailActivity) getActivity()).getProgress().setVisibility(View.GONE);
+
         /*rvBusinessItemReviews.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -38,8 +42,6 @@ public class BusinessItemDetailActivityFragment extends Fragment {
                     View view = recyclerView.getChildAt(0);
                     view.setTranslationY(-view.getTop() / 2);
                 }
-
-
             }
         });*/
         rvBusinessItemReviews.setHasFixedSize(true);
