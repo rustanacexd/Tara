@@ -63,14 +63,9 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
         }
 
         public void bindItem(Item item) {
-            item.fetchIfNeededInBackground(new GetCallback<Item>() {
-                @Override
-                public void done(Item object, ParseException e) {
-                    mItem = object;
-                    menuTitle.setText(object.getTitle());
-                    menuPrice.setText(object.getPrice() + " PHP");
-                }
-            });
+            mItem = item;
+            menuTitle.setText(item.getTitle());
+            menuPrice.setText(item.getPrice() + " PHP");
 
         }
 

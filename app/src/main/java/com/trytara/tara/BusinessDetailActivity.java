@@ -16,19 +16,17 @@ import com.trytara.tara.fragments.business.BusinessAboutFragment;
 import com.trytara.tara.fragments.business.BusinessContactFragment;
 import com.trytara.tara.fragments.business.BusinessDetailMenuFragment;
 import com.trytara.tara.fragments.business.BusinessReviewFragment;
-import com.trytara.tara.models.Business;
 import com.trytara.tara.models.Item;
 
-public class BusinessDetailActivity extends AppCompatActivity implements BusinessDetailMenuAdapter.OnBusinessItemClickListener{
+public class BusinessDetailActivity extends AppCompatActivity implements BusinessDetailMenuAdapter.OnBusinessItemClickListener {
 
     private static final String EXTRA_PREFIX = "com.trytara.tara.BusinessDetailActivity";
     private static final String EXTRA_BUSINESS_ID = EXTRA_PREFIX + "businessId";
     private static final String EXTRA_BUSINESS_TITLE = EXTRA_PREFIX + "businessTitle";
+    private static final String EXTRA_BUSINESS_DESCRIPTION = EXTRA_PREFIX + "businessDescription";
 
     private static final int REQUEST_BACK = 563;
-    private Business mBusiness;
-    private TextView mBusinessDescription;
-    private String mSelectedBusinessId;
+    private String mBusinessId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +38,10 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         Toolbar toolbar = (Toolbar) findViewById(R.id.business_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mBusinessDescription = (TextView) findViewById(R.id.business_description);
-
-        mSelectedBusinessId = getIntent().getStringExtra(EXTRA_BUSINESS_ID);
-
-//        Business.getSelectedBusiness(mSelectedBusinessId, new Business.OnGetSelectedBusinessListener() {
-//            @Override
-//            public void onGetSelectedBusiness(Business business) {
-//                mBusiness = business;
-//                mBusinessDescription.setText(business.getDescription());
-//            }
-//        });
-
-        //mBusinessDescription.setText(mBusiness.getDescription());
-
         getSupportActionBar().setTitle(getIntent().getStringExtra(EXTRA_BUSINESS_TITLE));
+        TextView businessDescriptionView = (TextView) findViewById(R.id.business_description);
+        mBusinessId = getIntent().getStringExtra(EXTRA_BUSINESS_ID);
+        businessDescriptionView.setText(getIntent().getStringExtra(EXTRA_BUSINESS_DESCRIPTION));
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(viewPager);
@@ -63,23 +50,17 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    public Business getBusiness() {
-        return mBusiness;
-    }
-
-    public void setBusiness(Business business) {
-        mBusiness = business;
-    }
-
-    public String getSelectedBusinessId() {
-        return mSelectedBusinessId;
+    public String getBusinessId() {
+        return mBusinessId;
     }
 
 
-    public static Intent newIntent(Context packageContext, String businessId, String businessName) {
+    public static Intent newIntent(Context packageContext, String businessId, String businessName,
+                                   String businessDescription) {
         Intent intent = new Intent(packageContext, BusinessDetailActivity.class);
         intent.putExtra(EXTRA_BUSINESS_ID, businessId);
         intent.putExtra(EXTRA_BUSINESS_TITLE, businessName);
+        intent.putExtra(EXTRA_BUSINESS_DESCRIPTION, businessDescription);
         return intent;
     }
 

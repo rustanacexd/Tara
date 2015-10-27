@@ -17,6 +17,7 @@ public class Business extends ParseObject {
     private static final String NAME = "name";
     private static final String DESCRIPTION = "description";
     private static final String ADDRESS = "address";
+    private static final String ITEMS = "items";
 
     public Business() {
     }
@@ -46,8 +47,8 @@ public class Business extends ParseObject {
     }
 
     public static void getAllBusinesses(final OnBusinessListFetchListener callback) {
-
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
+        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
         query.findInBackground(new FindCallback<Business>() {
             @Override
             public void done(List<Business> list, ParseException e) {
@@ -62,9 +63,10 @@ public class Business extends ParseObject {
         });
     }
 
-    public static void getSelectedBusiness(String businessId, final OnGetSelectedBusinessListener callback) {
+    public static void getBusiness(String businessId, final OnGetSelectedBusinessListener callback) {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.fromLocalDatastore();
+        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        query.include(ITEMS);
         query.getInBackground(businessId, new GetCallback<Business>() {
             @Override
             public void done(Business business, ParseException e) {
@@ -78,6 +80,10 @@ public class Business extends ParseObject {
                 }
             }
         });
+    }
+
+    public List<Item> getItems() {
+        return (List<Item>) this.get("items");
     }
 
     public interface OnBusinessListFetchListener {

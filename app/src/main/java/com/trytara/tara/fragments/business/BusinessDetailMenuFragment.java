@@ -15,11 +15,9 @@ import com.trytara.tara.models.Business;
 import com.trytara.tara.models.Item;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class BusinessDetailMenuFragment extends Fragment {
-
 
     private ArrayList<Item> mItemsList;
     private BusinessDetailMenuAdapter mAdapter;
@@ -32,40 +30,22 @@ public class BusinessDetailMenuFragment extends Fragment {
 
         final BusinessDetailActivity activity = (BusinessDetailActivity) getActivity();
 
-
         RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessMenuList);
         mItemsList = new ArrayList<>();
 
         mAdapter = new BusinessDetailMenuAdapter(activity, mItemsList, activity);
 
-        Business.getSelectedBusiness(activity.getSelectedBusinessId(), new Business.OnGetSelectedBusinessListener() {
+        Business.getBusiness(activity.getBusinessId(), new Business.OnGetSelectedBusinessListener() {
             @Override
             public void onGetSelectedBusiness(Business business) {
-                activity.setBusiness(business);
-                Item.getItems(business, new Item.OnGetAllItemsListener() {
-                    @Override
-                    public void OnGetAllItems(List<Item> itemList) {
-                        mItemsList.addAll(itemList);
-                        mAdapter.notifyDataSetChanged();
-                    }
-                });
+                mItemsList.addAll(business.getItems());
+                mAdapter.notifyDataSetChanged();
+
             }
         });
 
-
-
-
         rvBusinessMenuList.setAdapter(mAdapter);
         rvBusinessMenuList.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-
-       /* Item.getAllItems(new Item.OnGetAllItemsListener() {
-            @Override
-            public void OnGetAllItems(List<Item> itemList) {
-                mItemsList.addAll(itemList);
-                mAdapter.notifyDataSetChanged();
-            }
-        });*/
-
 
         return view;
     }
