@@ -11,13 +11,18 @@ import android.view.ViewGroup;
 import com.trytara.tara.BusinessDetailActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.business.BusinessDetailMenuAdapter;
+import com.trytara.tara.models.Business;
 import com.trytara.tara.models.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class BusinessDetailMenuFragment extends Fragment {
 
+
+    private ArrayList<Item> mItemsList;
+    private BusinessDetailMenuAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,14 +30,42 @@ public class BusinessDetailMenuFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_business_menu, container, false);
 
-        BusinessDetailActivity activity = (BusinessDetailActivity) getActivity();
+        final BusinessDetailActivity activity = (BusinessDetailActivity) getActivity();
+
 
         RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessMenuList);
-        BusinessDetailMenuAdapter adapter = new BusinessDetailMenuAdapter(activity,
-                new ArrayList<Item>(), activity);
+        mItemsList = new ArrayList<>();
 
-        rvBusinessMenuList.setAdapter(adapter);
+        mAdapter = new BusinessDetailMenuAdapter(activity, mItemsList, activity);
+
+        Business.getSelectedBusiness(activity.getSelectedBusinessId(), new Business.OnGetSelectedBusinessListener() {
+            @Override
+            public void onGetSelectedBusiness(Business business) {
+                activity.setBusiness(business);
+                Item.getItems(business, new Item.OnGetAllItemsListener() {
+                    @Override
+                    public void OnGetAllItems(List<Item> itemList) {
+                        mItemsList.addAll(itemList);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+
+
+
+
+        rvBusinessMenuList.setAdapter(mAdapter);
         rvBusinessMenuList.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
+       /* Item.getAllItems(new Item.OnGetAllItemsListener() {
+            @Override
+            public void OnGetAllItems(List<Item> itemList) {
+                mItemsList.addAll(itemList);
+                mAdapter.notifyDataSetChanged();
+            }
+        });*/
+
 
         return view;
     }

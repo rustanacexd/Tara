@@ -7,13 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.trytara.tara.adapters.ViewPagerAdapter;
 import com.trytara.tara.adapters.business.BusinessDetailMenuAdapter;
 import com.trytara.tara.fragments.business.BusinessAboutFragment;
@@ -23,18 +19,16 @@ import com.trytara.tara.fragments.business.BusinessReviewFragment;
 import com.trytara.tara.models.Business;
 import com.trytara.tara.models.Item;
 
-public class BusinessDetailActivity extends AppCompatActivity implements BusinessDetailMenuAdapter.OnBusinessItemClickListener {
+public class BusinessDetailActivity extends AppCompatActivity implements BusinessDetailMenuAdapter.OnBusinessItemClickListener{
 
-    private ViewPager mViewPager;
     private static final String EXTRA_PREFIX = "com.trytara.tara.BusinessDetailActivity";
     private static final String EXTRA_BUSINESS_ID = EXTRA_PREFIX + "businessId";
+    private static final String EXTRA_BUSINESS_TITLE = EXTRA_PREFIX + "businessTitle";
+
     private static final int REQUEST_BACK = 563;
     private Business mBusiness;
     private TextView mBusinessDescription;
-
-    public Business getBusiness() {
-        return mBusiness;
-    }
+    private String mSelectedBusinessId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,61 +41,45 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mBusinessDescription = (TextView) findViewById(R.id.business_description);
-        String businessId = getIntent().getStringExtra(EXTRA_BUSINESS_ID);
-        ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.fromLocalDatastore();
-        query.getInBackground(businessId, new GetCallback<Business>() {
-            @Override
-            public void done(Business business, ParseException e) {
-                if (e == null) {
-                    Log.d("DEBUG", business.toString());
-                    mBusiness = business;
-                    mBusinessDescription.setText(mBusiness.getDescription());
-                    getSupportActionBar().setTitle(mBusiness.getName());
-                } else {
-                    Log.d("DEBUG", e.getLocalizedMessage());
-                }
-            }
-        });
 
+        mSelectedBusinessId = getIntent().getStringExtra(EXTRA_BUSINESS_ID);
 
+//        Business.getSelectedBusiness(mSelectedBusinessId, new Business.OnGetSelectedBusinessListener() {
+//            @Override
+//            public void onGetSelectedBusiness(Business business) {
+//                mBusiness = business;
+//                mBusinessDescription.setText(business.getDescription());
+//            }
+//        });
 
+        //mBusinessDescription.setText(mBusiness.getDescription());
 
-        mViewPager = (ViewPager) findViewById(R.id.business_viewpager);
-        setupViewPager(mViewPager);
+        getSupportActionBar().setTitle(getIntent().getStringExtra(EXTRA_BUSINESS_TITLE));
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.business_viewpager);
+        setupViewPager(viewPager);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.business_tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setupWithViewPager(viewPager);
+    }
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                mViewPager.setCurrentItem(tab.getPosition());
-                switch (tab.getPosition()) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                }
-            }
+    public Business getBusiness() {
+        return mBusiness;
+    }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
+    public void setBusiness(Business business) {
+        mBusiness = business;
+    }
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
-
+    public String getSelectedBusinessId() {
+        return mSelectedBusinessId;
     }
 
 
-    public static Intent newIntent(Context packageContext, String businessId) {
+    public static Intent newIntent(Context packageContext, String businessId, String businessName) {
         Intent intent = new Intent(packageContext, BusinessDetailActivity.class);
         intent.putExtra(EXTRA_BUSINESS_ID, businessId);
+        intent.putExtra(EXTRA_BUSINESS_TITLE, businessName);
         return intent;
     }
 
@@ -137,6 +115,8 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         Intent i = BusinessItemDetailActivity.newIntent(this, item);
         startActivityForResult(i, REQUEST_BACK);
     }
+
+
 
     /*@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

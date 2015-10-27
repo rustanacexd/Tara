@@ -1,7 +1,15 @@
 package com.trytara.tara.models;
 
+import android.util.Log;
+
+import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.List;
 
 @ParseClassName("Business")
 public class Business extends ParseObject {
@@ -34,11 +42,54 @@ public class Business extends ParseObject {
     }
 
     public void setAddress(String address) {
-        put(ADDRESS , address);
+        put(ADDRESS, address);
+    }
+
+    public static void getAllBusinesses(final OnBusinessListFetchListener callback) {
+
+        ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
+        query.findInBackground(new FindCallback<Business>() {
+            @Override
+            public void done(List<Business> list, ParseException e) {
+                if (e == null) {
+                    if (callback != null) {
+                        callback.onBusinessListFetch(list);
+                    }
+                } else {
+                    Log.d("DEBUG", e.getLocalizedMessage());
+                }
+            }
+        });
+    }
+
+    public static void getSelectedBusiness(String businessId, final OnGetSelectedBusinessListener callback) {
+        ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
+        query.fromLocalDatastore();
+        query.getInBackground(businessId, new GetCallback<Business>() {
+            @Override
+            public void done(Business business, ParseException e) {
+                if (e == null) {
+                    if (callback != null) {
+                        callback.onGetSelectedBusiness(business);
+                    }
+
+                } else {
+                    Log.d("DEBUG", e.getLocalizedMessage());
+                }
+            }
+        });
+    }
+
+    public interface OnBusinessListFetchListener {
+        void onBusinessListFetch(List<Business> businessList);
+    }
+
+    public interface OnGetSelectedBusinessListener {
+        void onGetSelectedBusiness(Business business);
     }
 
     @Override
     public String toString() {
-        return "Business{" + getName()  + "}";
+        return "Business{" + getName() + "}";
     }
 }

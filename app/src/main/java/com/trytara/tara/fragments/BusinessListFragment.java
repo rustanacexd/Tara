@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.trytara.tara.BusinessDetailActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.BusinessListAdapter;
-import com.trytara.tara.datasource.BusinessDataSource;
 import com.trytara.tara.models.Business;
 
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ public class BusinessListFragment extends Fragment implements BusinessListAdapte
         rvBusiness.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvBusiness.setHasFixedSize(true);
 
-        BusinessDataSource.getAllBusinesses(new BusinessDataSource.BusinessDataCallbacks() {
+        Business.getAllBusinesses(new Business.OnBusinessListFetchListener() {
             @Override
             public void onBusinessListFetch(List<Business> businessList) {
                 progress.setVisibility(View.GONE);
@@ -68,7 +67,8 @@ public class BusinessListFragment extends Fragment implements BusinessListAdapte
     @Override
     public void OnBusinessListItemClick(Business business) {
         business.pinInBackground();
-        Intent i = BusinessDetailActivity.newIntent(getActivity(), business.getObjectId());
+        Intent i = BusinessDetailActivity.newIntent(getActivity(),
+                business.getObjectId(), business.getName());
         startActivity(i);
     }
 

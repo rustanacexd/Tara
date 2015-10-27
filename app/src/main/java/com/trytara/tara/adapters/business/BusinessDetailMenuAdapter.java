@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.trytara.tara.R;
 import com.trytara.tara.models.Item;
 import com.trytara.tara.models.POJOItem;
@@ -60,9 +63,15 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
         }
 
         public void bindItem(Item item) {
-            mItem = item;
-            menuTitle.setText(item.getTitle());
-            menuPrice.setText(item.getPrice() + " PHP");
+            item.fetchIfNeededInBackground(new GetCallback<Item>() {
+                @Override
+                public void done(Item object, ParseException e) {
+                    mItem = object;
+                    menuTitle.setText(object.getTitle());
+                    menuPrice.setText(object.getPrice() + " PHP");
+                }
+            });
+
         }
 
         public ImageView getMenuImage() {
