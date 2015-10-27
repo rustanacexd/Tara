@@ -20,14 +20,6 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
     OnBusinessItemClickListener mListener;
 
     private List<Item> mDataSet;
-    int[] imgList = {R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,
-            R.drawable.pharmacy, R.drawable.hotels, R.drawable.coffee_shop, R.drawable.restaurant,
-            R.drawable.pharmacy, R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,
-            R.drawable.pharmacy, R.drawable.hotels, R.drawable.coffee_shop, R.drawable.restaurant,
-            R.drawable.pharmacy, R.drawable.hotels, R.drawable.restaurant, R.drawable.coffee_shop,
-            R.drawable.pharmacy, R.drawable.hotels, R.drawable.coffee_shop, R.drawable.restaurant,
-            R.drawable.pharmacy};
-
     private static Context mContext;
 
     public BusinessDetailMenuAdapter(Context context, List<Item> dataSet,
@@ -41,7 +33,6 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
         public void onBusinessItemClick(Item item);
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView menuImage;
@@ -50,7 +41,6 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
 
         public ViewHolder(View v) {
             super(v);
-            // Define click listener for the ViewHolder's View.
             v.setOnClickListener(this);
 
             menuImage = (ImageView) v.findViewById(R.id.menu_image);
@@ -93,7 +83,7 @@ public class BusinessDetailMenuAdapter extends RecyclerView.Adapter<BusinessDeta
         //Log.d(TAG, "Element " + position + " set.");
         Item currentItem = mDataSet.get(position);
         viewHolder.bindItem(currentItem);
-        viewHolder.getMenuImage().setImageResource(imgList[position]);
+
     }
 
     @Override

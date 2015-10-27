@@ -11,23 +11,23 @@ import android.widget.TextView;
 
 import com.trytara.tara.MapsActivity;
 import com.trytara.tara.R;
-import com.trytara.tara.models.Categories;
+import com.trytara.tara.models.Category;
 
 import java.util.List;
 
 public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ViewHolder> {
     private static final String TAG = "CategoryListAdapter";
 
-    private List<Categories.CategoryItem> mDataSet;
+    private List<Category.CategoryItem> mDataSet;
     private static Context mContext;
 
-    public CategoryListAdapter(Context context, List<Categories.CategoryItem> dataSet) {
+    public CategoryListAdapter(Context context, List<Category.CategoryItem> dataSet) {
         mContext = context;
         mDataSet = dataSet;
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView categoryImage;
         private final TextView categoryName;
@@ -58,7 +58,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
         @Override
         public void onClick(View v) {
-            Intent i = MapsActivity.newIntent(mContext, Categories.sCategoryItemsList.get(getLayoutPosition()).mName);
+            Intent i = MapsActivity.newIntent(mContext, mDataSet.get(getAdapterPosition()).toString());
             mContext.startActivity(i);
         }
     }
@@ -77,7 +77,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         //Log.d(TAG, "Element " + position + " set.");
-        Categories.CategoryItem cat = mDataSet.get(position);
+        Category.CategoryItem cat = mDataSet.get(position);
         viewHolder.getCategoryImage().setImageResource(cat.mDrawableResource);
         viewHolder.getCategoryName().setText(cat.mName);
         viewHolder.categoryDescription.setText(cat.mDescription);

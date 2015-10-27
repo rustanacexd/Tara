@@ -35,6 +35,10 @@ public class Item extends ParseObject {
         return getDouble(PRICE);
     }
 
+    public void setPrice(Double price) {
+        put(PRICE, price);
+    }
+
     public String getDescription() {
         return getString(DESCRIPTION);
     }
