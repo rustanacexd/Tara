@@ -2,6 +2,7 @@ package com.trytara.tara;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.trytara.tara.models.Business;
 import com.trytara.tara.models.Category;
@@ -10,6 +11,23 @@ import com.trytara.tara.models.Item;
 import java.util.List;
 
 public class Helper {
+
+    public static void deleteAllBusiness() {
+        ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
+        query.setLimit(1000);
+        query.findInBackground(new FindCallback<Business>() {
+            @Override
+            public void done(List<Business> list, ParseException e) {
+                try {
+                    ParseObject.deleteAll(list);
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
+                }
+
+            }
+        });
+    }
+
     public static void createDummyItems(int numItems) {
         for (int i = 0; i <= numItems; i++) {
             Item item = new Item();

@@ -117,7 +117,7 @@ public class Business extends ParseObject {
     public static void getBusinessListByCategory(String slug,
                                                  final OnGetBusinessListByCategoryCallback callback) {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
         query.whereEqualTo("category", slug);
         query.findInBackground(new FindCallback<Business>() {
             @Override
@@ -131,12 +131,11 @@ public class Business extends ParseObject {
                 }
             }
         });
-
     }
 
     public static void getBusiness(String businessId, final OnGetBusinessCallback callback) {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
         query.include(ITEMS);
         query.getInBackground(businessId, new GetCallback<Business>() {
             @Override
