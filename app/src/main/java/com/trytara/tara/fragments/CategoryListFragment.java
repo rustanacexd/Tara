@@ -12,6 +12,8 @@ import com.trytara.tara.R;
 import com.trytara.tara.adapters.CategoryListAdapter;
 import com.trytara.tara.models.Category;
 
+import java.util.List;
+
 
 public class CategoryListFragment extends Fragment {
 
@@ -29,7 +31,7 @@ public class CategoryListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_categories_list, container, false);
         RecyclerView rvCategories = (RecyclerView) view.findViewById(R.id.listview);
-        CategoryListAdapter adapter = new CategoryListAdapter(getActivity(), new Category().getCategoryItemsList());
+        CategoryListAdapter adapter = new CategoryListAdapter(getActivity(), new Category().mCategoryItemsList);
         rvCategories.setAdapter(adapter);
         rvCategories.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvCategories.setHasFixedSize(true);

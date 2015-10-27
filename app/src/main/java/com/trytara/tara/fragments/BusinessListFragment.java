@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.trytara.tara.BusinessDetailActivity;
+import com.trytara.tara.MapsActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.BusinessListAdapter;
 import com.trytara.tara.models.Business;
@@ -44,16 +45,16 @@ public class BusinessListFragment extends Fragment implements BusinessListAdapte
         rvBusiness.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvBusiness.setHasFixedSize(true);
 
-        Business.getAllBusiness(new Business.OnGetAllBusinessCallback() {
-            @Override
-            public void onGetAllBusiness(List<Business> businessList) {
-                progress.setVisibility(View.GONE);
-                rvBusiness.setVisibility(View.VISIBLE);
-                mBusinessList.addAll(businessList);
-                mAdapter.notifyDataSetChanged();
-            }
-
-        });
+        Business.getBusinessListByCategory(((MapsActivity) getActivity()).getCategorySlug(),
+                new Business.OnGetBusinessListByCategoryCallback() {
+                    @Override
+                    public void onGetBusinessListByCategory(List<Business> businessList) {
+                        progress.setVisibility(View.GONE);
+                        rvBusiness.setVisibility(View.VISIBLE);
+                        mBusinessList.addAll(businessList);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
 
 
         return view;

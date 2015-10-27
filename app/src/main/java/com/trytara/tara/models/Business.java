@@ -12,6 +12,10 @@ import com.trytara.tara.App;
 
 import java.util.List;
 
+import static com.trytara.tara.models.Category.categoryStringToType;
+import static com.trytara.tara.models.Category.categoryTypeToString;
+import static com.trytara.tara.models.Category.CategoryType;
+
 @ParseClassName("Business")
 public class Business extends ParseObject {
 
@@ -19,8 +23,21 @@ public class Business extends ParseObject {
     private static final String DESCRIPTION = "description";
     private static final String ADDRESS = "address";
     private static final String ITEMS = "items";
+    private static final String CATEGORY = "category";
+    private static final String PHONE_NUMBER = "phoneNumber";
+    private static final String MOBILE_PHONE_NUMBER = "mobilePhoneNumber";
+    private static final String EMAIL = "email";
+    private static final String ABOUT = "about";
 
     public Business() {
+    }
+
+    public String getEmail() {
+        return getString(EMAIL);
+    }
+
+    public void setEmail(String email) {
+        put(EMAIL, email);
     }
 
     public String getName() {
@@ -35,8 +52,16 @@ public class Business extends ParseObject {
         return getString(DESCRIPTION);
     }
 
-    public void setDescription(String description) {
-        put(DESCRIPTION, description);
+    public void setDescription(String about) {
+        put(DESCRIPTION, about);
+    }
+
+    public String getAbout() {
+        return getString(ABOUT);
+    }
+
+    public void setAbout(String about) {
+        put(ABOUT, about);
     }
 
     public String getAddress() {
@@ -45,6 +70,31 @@ public class Business extends ParseObject {
 
     public void setAddress(String address) {
         put(ADDRESS, address);
+    }
+
+    public CategoryType getCategory() {
+        return categoryStringToType(getString(CATEGORY));
+    }
+
+    public void setCategory(CategoryType categoryType) {
+        String category = categoryTypeToString(categoryType);
+        put(CATEGORY, category);
+    }
+
+    public String getPhoneNumber() {
+        return getString(PHONE_NUMBER);
+    }
+
+    public void setPhoneNumber(String number) {
+        put(PHONE_NUMBER, number);
+    }
+
+    public String getMobilePhoneNumber() {
+        return getString(MOBILE_PHONE_NUMBER);
+    }
+
+    public void setMobilePhoneNumber(String number) {
+        put(MOBILE_PHONE_NUMBER, number);
     }
 
     public static void getAllBusiness(final OnGetAllBusinessCallback callback) {
@@ -64,7 +114,27 @@ public class Business extends ParseObject {
         });
     }
 
-    public static void getBusiness(String businessId, final onGetBusinessCallback callback) {
+    public static void getBusinessListByCategory(String slug,
+                                                 final OnGetBusinessListByCategoryCallback callback) {
+        ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
+        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        query.whereEqualTo("category", slug);
+        query.findInBackground(new FindCallback<Business>() {
+            @Override
+            public void done(List<Business> list, ParseException e) {
+                if (e == null) {
+                    if (callback != null) {
+                        callback.onGetBusinessListByCategory(list);
+                    }
+                } else {
+                    Log.d(App.TAG, e.getLocalizedMessage());
+                }
+            }
+        });
+
+    }
+
+    public static void getBusiness(String businessId, final OnGetBusinessCallback callback) {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
         query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         query.include(ITEMS);
@@ -91,8 +161,12 @@ public class Business extends ParseObject {
         void onGetAllBusiness(List<Business> businessList);
     }
 
-    public interface onGetBusinessCallback {
+    public interface OnGetBusinessCallback {
         void onGetBusiness(Business business);
+    }
+
+    public interface OnGetBusinessListByCategoryCallback {
+        void onGetBusinessListByCategory(List<Business> businessList);
     }
 
     @Override

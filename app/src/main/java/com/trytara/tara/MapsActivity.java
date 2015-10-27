@@ -28,9 +28,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.trytara.tara.fragments.BusinessListFragment;
 
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener{
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
 
-    private static final String EXTRA_CATEGORY_NAME = "EXTRA_CATEGORY_NAME";
+    private static final String EXTRA_PREFIX = "com.trytara.tara.MapsActivity.";
+    private static final String EXTRA_CATEGORY_NAME = EXTRA_PREFIX + "EXTRA_CATEGORY_NAME";
+    private static final String EXTRA_CATEGORY_SLUG = EXTRA_PREFIX + "EXTRA_CATEGORY_SLUG";
 
     private GoogleMap mMap;
 
@@ -38,6 +40,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int CAMERA_ZOOM_LEVEL = 19;
     private SupportMapFragment mMapFragment;
 
+    private String mCategorySlug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
 
         String currentCategorySelected = getIntent().getStringExtra(EXTRA_CATEGORY_NAME);
+        mCategorySlug = getIntent().getStringExtra(EXTRA_CATEGORY_SLUG);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,15 +64,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mMapFragment = SupportMapFragment.newInstance(options);
         mMapFragment.getMapAsync(this);
+
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new BusinessListFragment(), "ListFragment")
                 .commit();
 
     }
 
-    public static Intent newIntent(Context packageContext, String selectedCategory) {
+    public String getCategorySlug() {
+        return mCategorySlug;
+    }
+
+    public static Intent newIntent(Context packageContext, String categoryName, String categorySlug) {
         Intent i = new Intent(packageContext, MapsActivity.class);
-        i.putExtra(EXTRA_CATEGORY_NAME, selectedCategory);
+        i.putExtra(EXTRA_CATEGORY_NAME, categoryName);
+        i.putExtra(EXTRA_CATEGORY_SLUG, categorySlug);
         return i;
     }
 
@@ -99,7 +110,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         Location location = locationManager.getLastKnownLocation(bestProvider);
         if (location != null) {
-           updateCurrentLocation(location);
+            updateCurrentLocation(location);
         }
 
         locationManager.requestLocationUpdates(bestProvider, 2000, 0, this);

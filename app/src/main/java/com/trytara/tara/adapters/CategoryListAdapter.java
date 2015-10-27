@@ -27,11 +27,12 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView categoryImage;
         private final TextView categoryName;
         private final TextView categoryDescription;
+        private Category.CategoryItem mCategoryItem;
 
         public ViewHolder(View v) {
             super(v);
@@ -41,24 +42,18 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             categoryImage = (ImageView) v.findViewById(R.id.category_image);
             categoryName = (TextView) v.findViewById(R.id.category_name);
             categoryDescription = (TextView) v.findViewById(R.id.category_descripton);
-
         }
 
-        public ImageView getCategoryImage() {
-            return categoryImage;
-        }
-
-        public TextView getCategoryName() {
-            return categoryName;
-        }
-
-        public TextView getCategoryDescription() {
-            return categoryDescription;
+        public void bindCategory(Category.CategoryItem categoryItem) {
+            mCategoryItem = categoryItem;
+            categoryImage.setImageResource(mCategoryItem.mDrawableResource);
+            categoryName.setText(mCategoryItem.mName);
+            categoryDescription.setText(mCategoryItem.mDescription);
         }
 
         @Override
         public void onClick(View v) {
-            Intent i = MapsActivity.newIntent(mContext, mDataSet.get(getAdapterPosition()).toString());
+            Intent i = MapsActivity.newIntent(mContext, mCategoryItem.mName, mCategoryItem.mSlug);
             mContext.startActivity(i);
         }
     }
@@ -77,11 +72,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         //Log.d(TAG, "Element " + position + " set.");
-        Category.CategoryItem cat = mDataSet.get(position);
-        viewHolder.getCategoryImage().setImageResource(cat.mDrawableResource);
-        viewHolder.getCategoryName().setText(cat.mName);
-        viewHolder.categoryDescription.setText(cat.mDescription);
-
+        viewHolder.bindCategory(mDataSet.get(position));
     }
 
     @Override

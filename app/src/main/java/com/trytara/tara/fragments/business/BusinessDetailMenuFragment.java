@@ -39,7 +39,7 @@ public class BusinessDetailMenuFragment extends Fragment {
         progress.setVisibility(View.VISIBLE);
         rvBusinessMenuList.setVisibility(View.GONE);
 
-        Business.getBusiness(activity.getBusinessId(), new Business.onGetBusinessCallback() {
+        Business.getBusiness(activity.getBusinessId(), new Business.OnGetBusinessCallback() {
             @Override
             public void onGetBusiness(Business business) {
                 progress.setVisibility(View.GONE);
