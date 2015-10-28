@@ -88,6 +88,8 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
             }
         });
 
+
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(viewPager);
 

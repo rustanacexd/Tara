@@ -1,6 +1,9 @@
 package com.trytara.tara;
 
+import android.util.Log;
+
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -9,6 +12,7 @@ import com.trytara.tara.models.Category;
 import com.trytara.tara.models.Item;
 import com.trytara.tara.models.Review;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -34,6 +38,30 @@ public class Helper {
             }
         });
     }
+
+//    public void getAllBusiness() {
+//        ParseQuery<Review> query = ParseQuery.getQuery(Review.class);
+//        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+//        query.findInBackground(new FindCallback<Review>() {
+//            @Override
+//            public void done(final List<Review> reviewList, ParseException e) {
+//                if (e == null) {
+//                    ParseQuery<Business> businessParseQuery = ParseQuery.getQuery(Business.class);
+//                    businessParseQuery.getFirstInBackground(new GetCallback<Business>() {
+//                        @Override
+//                        public void done(Business business, ParseException e) {
+//                            for(Review review : reviewList) {
+//                                review.put("business");
+//                            }
+//                        }
+//                    });
+//                } else {
+//                    Log.d(App.TAG, e.getLocalizedMessage());
+//                }
+//            }
+//        });
+//
+//    }
 
     public static void createDummyItems(int numItems) {
         for (int i = 0; i <= numItems; i++) {
