@@ -64,7 +64,6 @@ public class TrendingListFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFrag(new TrendingLatestFragment(), "Latest");
-        adapter.addFrag(new BusinessAboutFragment(), "Popular");
         viewPager.setAdapter(adapter);
     }
 }

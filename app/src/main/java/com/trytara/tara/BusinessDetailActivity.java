@@ -20,8 +20,6 @@ import com.trytara.tara.models.Item;
 
 public class BusinessDetailActivity extends AppCompatActivity implements BusinessDetailMenuAdapter.OnBusinessItemClickListener {
 
-    private static final int REQUEST_BACK = 563;
-
     private static final String EXTRA_PREFIX = "com.trytara.tara.BusinessDetailActivity.";
     private static final String EXTRA_BUSINESS_ID = EXTRA_PREFIX + "businessId";
     private static final String EXTRA_BUSINESS_TITLE = EXTRA_PREFIX + "businessTitle";
@@ -130,15 +128,9 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
-
-    @Override
     public void onBusinessItemClick(Item item) {
         Intent i = BusinessItemDetailActivity.newIntent(this, item.getObjectId());
-        startActivityForResult(i, REQUEST_BACK);
+        startActivity(i);
     }
 
 }
