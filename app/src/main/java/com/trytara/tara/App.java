@@ -67,7 +67,6 @@ public class App extends Application {
         //Helper.attachReviewsToBusiness();
 
 
-
     }
 
 }

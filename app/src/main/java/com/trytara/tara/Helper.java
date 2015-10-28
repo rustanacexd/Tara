@@ -140,13 +140,23 @@ public class Helper {
             @Override
             public void done(final List<Review> reviewList, ParseException e) {
                 ParseQuery<Business> businessParseQuery = ParseQuery.getQuery(Business.class);
-                businessParseQuery.setLimit(500);
-                businessParseQuery.findInBackground(new FindCallback<Business>() {
+                //businessParseQuery.setLimit(500);
+                /*businessParseQuery.findInBackground(new FindCallback<Business>() {
                     @Override
                     public void done(List<Business> list, ParseException e) {
                         for (Business business : list) {
                             business.put("reviews", reviewList);
                             business.saveInBackground();
+                        }
+                    }
+                });*/
+
+                businessParseQuery.getFirstInBackground(new GetCallback<Business>() {
+                    @Override
+                    public void done(Business business, ParseException e) {
+                        for (Review review : reviewList) {
+                            review.setReviewedTo(business);
+                            review.saveInBackground();
                         }
                     }
                 });

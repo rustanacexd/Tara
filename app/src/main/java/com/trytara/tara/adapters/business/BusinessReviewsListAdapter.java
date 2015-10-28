@@ -62,13 +62,14 @@ public class BusinessReviewsListAdapter extends RecyclerView.Adapter<RecyclerVie
 
         public void bindReview(Review review) {
 
-            review.getReviewer().fetchIfNeededInBackground(new GetCallback<ParseUser>() {
+            /*review.getReviewer().fetchIfNeededInBackground(new GetCallback<ParseUser>() {
                 @Override
                 public void done(ParseUser object, ParseException e) {
                     userName.setText(object.getUsername());
                 }
-            });
+            });*/
 
+            userName.setText(review.getReviewer().getUsername());
             dateReview.setText(review.getCreatedAt().toString());
             reviewContent.setText(review.getContent());
             userRating.setRating((float) review.getRating());

@@ -133,7 +133,7 @@ public class Business extends ParseObject {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
         query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         //query.setMaxCacheAge(MAX_CACHE_AGE);
-        query.whereEqualTo("category", slug);
+        query.whereEqualTo(CATEGORY, slug);
         query.findInBackground(new FindCallback<Business>() {
             @Override
             public void done(List<Business> list, ParseException e) {

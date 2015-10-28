@@ -3,7 +3,6 @@ package com.trytara.tara.models;
 import android.util.Log;
 
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -18,7 +17,8 @@ public class Review extends ParseObject {
 
     private static final String CONTENT = "content";
     private static final String RATING = "rating";
-    private static final String REVIEWER = "reviewer";
+    private static final String REVIEWED_BY = "reviewedBy";
+    private static final String REVIEWED_TO = "reviewedTo";
 
     public Review() {
     }
@@ -29,7 +29,7 @@ public class Review extends ParseObject {
 
     public void setContent(String content) {
         put(CONTENT, content);
-        put(REVIEWER, ParseUser.getCurrentUser());
+        put(REVIEWED_BY, ParseUser.getCurrentUser());
     }
 
     public double getRating() {
@@ -41,28 +41,36 @@ public class Review extends ParseObject {
     }
 
     public ParseUser getReviewer() {
-        return getParseUser(REVIEWER);
+        return getParseUser(REVIEWED_BY);
     }
 
-    public static void getReviewsByBusiness(String id, final OnGetReviewsByBusinessCallback callback) {
-        ParseQuery<Business> businessParseQuery = ParseQuery.getQuery(Business.class);
-        businessParseQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
-        businessParseQuery.include("reviews");
-        businessParseQuery.getInBackground(id, new GetCallback<Business>() {
+    public void setReviewedTo(ParseObject object) {
+        put(REVIEWED_TO, object);
+    }
+
+    public ParseObject getReviewedTo() {
+        return getParseObject(REVIEWED_TO);
+    }
+
+    public static void getReviewsByBusiness(Business business,
+                                            final OnGetReviewsByBusinessCallback callback) {
+        ParseQuery<Review> reviewParseQuery = ParseQuery.getQuery(Review.class);
+        reviewParseQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        reviewParseQuery.setLimit(15);
+        reviewParseQuery.whereEqualTo(REVIEWED_TO, business);
+        reviewParseQuery.include(REVIEWED_BY);
+        reviewParseQuery.findInBackground(new FindCallback<Review>() {
             @Override
-            public void done(Business business, ParseException e) {
+            public void done(List<Review> list, ParseException e) {
                 if (e == null) {
                     if (callback != null) {
-                        callback.onGetReviewsByBusiness(business.getReviews());
+                        callback.onGetReviewsByBusiness(list);
                     }
                 } else {
                     Log.d(App.TAG, e.getLocalizedMessage());
                 }
             }
         });
-
-
-
     }
 
 

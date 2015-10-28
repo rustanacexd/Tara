@@ -46,7 +46,7 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
     public Business mBusiness;
 
     private AppBarLayout mAppBarLayout;
-    private List<Item> mItems;
+    public List<Item> mItems;
 
     private BusinessDetailMenuFragment mBusinessDetailMenuFragment;
     private BusinessReviewFragment mBusinessReviewFragment;
