@@ -44,7 +44,7 @@ public class App extends Application {
         Helper.createDummyBusinesses(15, CategoryType.SCHOOL);*/
 
         //Helper.createDummyItems(15);
-        //Helper.AttachDummyItemsToBusinesses();
+        //Helper.attachDummyItemsToBusinesses();
 
         /*ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
         query.findInBackground(new FindCallback<Business>() {
@@ -62,6 +62,11 @@ public class App extends Application {
                 }
             }
         });*/
+
+        //Helper.createDummyReviews(50);
+        //Helper.attachReviewsToBusiness();
+
+
 
     }
 

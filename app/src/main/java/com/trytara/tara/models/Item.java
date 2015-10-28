@@ -19,7 +19,7 @@ public class Item extends ParseObject {
     private static final String PRICE = "price";
     private static final String DESCRIPTION = "description";
     private static final String CATEGORY = "category";
-    private static final String RATING = "rating";
+    private static final String AVERAGE_RATE = "averageRate";
 
     public Item() {
     }
@@ -56,12 +56,12 @@ public class Item extends ParseObject {
         put(CATEGORY, title);
     }
 
-    public Double getRating() {
-        return getDouble(RATING);
+    public Double getAverageRate() {
+        return getDouble(AVERAGE_RATE);
     }
 
-    public void setRating(Double rating) {
-        put(RATING, rating);
+    public void setAverageRate(Double rating) {
+        put(AVERAGE_RATE, rating);
     }
 
     public static void getAllItems(final OnGetAllItemsCallback callback) {

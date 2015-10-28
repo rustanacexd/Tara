@@ -2,12 +2,16 @@ package com.trytara.tara;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.trytara.tara.adapters.ViewPagerAdapter;
@@ -36,6 +40,8 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
     private String mMobileNumber;
     private String mEmail;
     private String mAddress;
+    private FloatingActionButton mFab;
+    private AppBarLayout mAppBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +65,22 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         mEmail = intent.getStringExtra(EXTRA_BUSINESS_EMAIL);
         mAddress = intent.getStringExtra(EXTRA_BUSINESS_ADDRESS);
 
+        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(viewPager);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.business_tabs);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    public AppBarLayout getAppBarLayout() {
+        return mAppBarLayout;
+    }
+
+    public FloatingActionButton getFab() {
+        return mFab;
     }
 
     public String getBusinessId() {
@@ -114,6 +131,7 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         adapter.addFrag(new BusinessContactFragment(), "Contact");
         viewPager.setAdapter(adapter);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

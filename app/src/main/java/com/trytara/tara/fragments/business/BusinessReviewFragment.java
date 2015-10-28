@@ -14,9 +14,13 @@ import com.trytara.tara.adapters.business.BusinessReviewsListAdapter;
 import com.trytara.tara.models.Review;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class BusinessReviewFragment extends Fragment {
+
+    private BusinessReviewsListAdapter mAdapter;
+    private List<Review> mReviewList;
 
     public BusinessReviewFragment() {
         // Required empty public constructor
@@ -28,15 +32,20 @@ public class BusinessReviewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_business_review, container, false);
 
         BusinessDetailActivity activity = (BusinessDetailActivity) getActivity();
-
+        mReviewList = new ArrayList<>();
         RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessReviewsList);
-        BusinessReviewsListAdapter adapter = new BusinessReviewsListAdapter(activity,
-                new ArrayList<Review>());
-
-        rvBusinessMenuList.setAdapter(adapter);
-
-        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        mAdapter = new BusinessReviewsListAdapter(activity, mReviewList);
+        rvBusinessMenuList.setAdapter(mAdapter);
+        LinearLayoutManager manager = new LinearLayoutManager(activity);
         rvBusinessMenuList.setLayoutManager(manager);
+
+        Review.getReviewsByBusiness(activity.getBusinessId(), new Review.OnGetReviewsByBusinessCallback() {
+            @Override
+            public void onGetReviewsByBusiness(List<Review> reviewsList) {
+                mReviewList.addAll(reviewsList);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
 
         return view;
     }

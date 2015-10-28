@@ -28,7 +28,8 @@ public class Business extends ParseObject {
     private static final String EMAIL = "email";
     private static final String ABOUT = "about";
     private static final int MAX_CACHE_AGE = 1000 * 60 * 60 * 48;
-    private static final String RATING = "averageRate";
+    private static final String AVERAGE_RATE = "averageRate";
+    private static final String REVIEWS = "reviews";
 
     public Business() {
     }
@@ -99,11 +100,15 @@ public class Business extends ParseObject {
     }
 
     public float averageRate() {
-        return (float) getDouble(RATING);
+        return (float) getDouble(AVERAGE_RATE);
     }
 
     public void setAverageRate(Double rating) {
-        put(RATING, rating);
+        put(AVERAGE_RATE, rating);
+    }
+
+    public List<Review> getReviews() {
+        return getList(REVIEWS);
     }
 
     public static void getAllBusiness(final OnGetAllBusinessCallback callback) {

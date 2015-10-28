@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 import com.trytara.tara.R;
 import com.trytara.tara.models.Review;
 
@@ -30,7 +34,7 @@ public class BusinessReviewsListAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
 
-    public static class VHItem extends RecyclerView.ViewHolder {
+    public class VHItem extends RecyclerView.ViewHolder {
         private final ImageView userThumbnail;
         private final TextView userName;
         private final TextView dateReview;
@@ -56,25 +60,19 @@ public class BusinessReviewsListAdapter extends RecyclerView.Adapter<RecyclerVie
 
         }
 
+        public void bindReview(Review review) {
 
-        public TextView getUserName() {
-            return userName;
-        }
+            review.getReviewer().fetchIfNeededInBackground(new GetCallback<ParseUser>() {
+                @Override
+                public void done(ParseUser object, ParseException e) {
+                    userName.setText(object.getUsername());
+                }
+            });
 
-        public ImageView getUserThumbnail() {
-            return userThumbnail;
-        }
-
-        public TextView getDateReview() {
-            return dateReview;
-        }
-
-        public TextView getReviewContent() {
-            return reviewContent;
-        }
-
-        public RatingBar getUserRating() {
-            return userRating;
+            dateReview.setText(review.getCreatedAt().toString());
+            reviewContent.setText(review.getContent());
+            userRating.setRating((float) review.getRating());
+            userThumbnail.setImageResource(R.drawable.restaurant);
         }
     }
 
@@ -110,15 +108,8 @@ public class BusinessReviewsListAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof VHItem) {
-            //String dataItem = getItemId(position);
-            //cast holder to VHItem and set data
             VHItem viewHolder = (VHItem) holder;
-            Review review = getItem(position);
-            viewHolder.getUserName().setText("TEST username");
-            viewHolder.getDateReview().setText("June 5 ,1989");
-            viewHolder.getUserRating().setRating(25);
-            viewHolder.getUserThumbnail().setImageResource(R.drawable.hotels);
-            viewHolder.getReviewContent().setText(review.getContent());
+            viewHolder.bindReview(getItem(position));
         } else if (holder instanceof VHHeader) {
             //cast holder to VHHeader and set data for header.
         }

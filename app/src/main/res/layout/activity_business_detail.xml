@@ -17,8 +17,8 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:minHeight="0dp"
             android:fitsSystemWindows="true"
+            android:minHeight="100dp"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="left"
             app:expandedTitleMarginBottom="50dp"
@@ -83,16 +83,18 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/bookmark_fab"
+        android:id="@+id/fab"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="15dp"
         android:clickable="true"
-        android:src="@drawable/common_ic_googleplayservices"
+        app:fabSize="mini"
+        android:src="@drawable/com_facebook_tooltip_blue_topnub"
         app:backgroundTint="?attr/colorPrimary"
-        app:fabSize="normal"
         app:layout_anchor="@+id/coord_layout"
+        app:layout_behavior="com.trytara.tara.ScrollAwareFABBehavior"
         app:layout_anchorGravity="bottom|right|end"
         tools:ignore="RtlHardcoded"
         />

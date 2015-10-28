@@ -39,6 +39,19 @@ public class BusinessDetailMenuFragment extends Fragment {
         progress.setVisibility(View.VISIBLE);
         rvBusinessMenuList.setVisibility(View.GONE);
 
+        rvBusinessMenuList.setAdapter(mAdapter);
+        final GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+        rvBusinessMenuList.setLayoutManager(layoutManager);
+
+        activity.getFab().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.getAppBarLayout().setExpanded(true);
+                layoutManager.scrollToPositionWithOffset(0, 200);
+            }
+        });
+
+
         Business.getBusiness(activity.getBusinessId(), new Business.OnGetBusinessCallback() {
             @Override
             public void onGetBusiness(Business business) {
@@ -50,8 +63,6 @@ public class BusinessDetailMenuFragment extends Fragment {
             }
         });
 
-        rvBusinessMenuList.setAdapter(mAdapter);
-        rvBusinessMenuList.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         return view;
     }

@@ -73,6 +73,10 @@ public class BusinessItemDetailActivity extends AppCompatActivity {
         IDLE
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+    }
 
     private void initViews() {
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
