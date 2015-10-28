@@ -16,7 +16,8 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="240dp"
+            android:minHeight="0dp"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="left"
@@ -24,7 +25,7 @@
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="@dimen/activity_horizontal_margin"
             app:expandedTitleTextAppearance="@style/ParallaxBusinessTitle"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap">
+            app:layout_scrollFlags="scroll|snap">
 
             <ImageView
                 android:id="@+id/header"
