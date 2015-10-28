@@ -1,7 +1,9 @@
 package com.trytara.tara.fragments.business;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ public class BusinessDetailMenuFragment extends Fragment {
 
     private ArrayList<Item> mItemsList;
     private BusinessDetailMenuAdapter mAdapter;
+    public GridLayoutManager mLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,17 +43,8 @@ public class BusinessDetailMenuFragment extends Fragment {
         rvBusinessMenuList.setVisibility(View.GONE);
 
         rvBusinessMenuList.setAdapter(mAdapter);
-        final GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-        rvBusinessMenuList.setLayoutManager(layoutManager);
-
-        activity.getFab().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.getAppBarLayout().setExpanded(true);
-                layoutManager.scrollToPositionWithOffset(0, 200);
-            }
-        });
-
+        mLayoutManager = new GridLayoutManager(getActivity(), 2);
+        rvBusinessMenuList.setLayoutManager(mLayoutManager);
 
         Business.getBusiness(activity.getBusinessId(), new Business.OnGetBusinessCallback() {
             @Override

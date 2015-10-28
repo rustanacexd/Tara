@@ -21,6 +21,7 @@ public class BusinessReviewFragment extends Fragment {
 
     private BusinessReviewsListAdapter mAdapter;
     private List<Review> mReviewList;
+    public LinearLayoutManager mLinearLayoutManager;
 
     public BusinessReviewFragment() {
         // Required empty public constructor
@@ -36,8 +37,8 @@ public class BusinessReviewFragment extends Fragment {
         RecyclerView rvBusinessMenuList = (RecyclerView) view.findViewById(R.id.rvBusinessReviewsList);
         mAdapter = new BusinessReviewsListAdapter(activity, mReviewList);
         rvBusinessMenuList.setAdapter(mAdapter);
-        LinearLayoutManager manager = new LinearLayoutManager(activity);
-        rvBusinessMenuList.setLayoutManager(manager);
+        mLinearLayoutManager = new LinearLayoutManager(activity);
+        rvBusinessMenuList.setLayoutManager(mLinearLayoutManager);
 
         Review.getReviewsByBusiness(activity.getBusinessId(), new Review.OnGetReviewsByBusinessCallback() {
             @Override

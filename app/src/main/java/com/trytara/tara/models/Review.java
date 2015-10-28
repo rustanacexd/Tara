@@ -47,7 +47,6 @@ public class Review extends ParseObject {
     public static void getReviewsByBusiness(String id, final OnGetReviewsByBusinessCallback callback) {
         ParseQuery<Business> businessParseQuery = ParseQuery.getQuery(Business.class);
         businessParseQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
-        businessParseQuery.setLimit(10);
         businessParseQuery.include("reviews");
         businessParseQuery.getInBackground(id, new GetCallback<Business>() {
             @Override

@@ -29,7 +29,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
     }
 
     public interface OnBusinessListItemClickListener {
-        public void OnBusinessListItemClick(Business business);
+        void OnBusinessListItemClick(Business business);
     }
 
 

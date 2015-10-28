@@ -40,15 +40,19 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
     private String mMobileNumber;
     private String mEmail;
     private String mAddress;
-    private FloatingActionButton mFab;
     private AppBarLayout mAppBarLayout;
+
+    private BusinessDetailMenuFragment mBusinessDetailMenuFragment;
+    private BusinessReviewFragment mBusinessReviewFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_detail);
+
+        mBusinessDetailMenuFragment = new BusinessDetailMenuFragment();
+        mBusinessReviewFragment = new BusinessReviewFragment();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.business_toolbar);
         setSupportActionBar(toolbar);
@@ -65,22 +69,31 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         mEmail = intent.getStringExtra(EXTRA_BUSINESS_EMAIL);
         mAddress = intent.getStringExtra(EXTRA_BUSINESS_ADDRESS);
 
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (mBusinessDetailMenuFragment.mLayoutManager != null) {
+                    mBusinessDetailMenuFragment.mLayoutManager.scrollToPositionWithOffset(0, 200);
+                }
+
+                if (mBusinessReviewFragment.mLinearLayoutManager != null) {
+                    mBusinessReviewFragment.mLinearLayoutManager.scrollToPositionWithOffset(0, 200);
+                }
+
+                mAppBarLayout.setExpanded(true);
+            }
+        });
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(viewPager);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.business_tabs);
         tabLayout.setupWithViewPager(viewPager);
-    }
 
-    public AppBarLayout getAppBarLayout() {
-        return mAppBarLayout;
-    }
-
-    public FloatingActionButton getFab() {
-        return mFab;
     }
 
     public String getBusinessId() {
@@ -125,9 +138,9 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new BusinessDetailMenuFragment(), "Menu");
+        adapter.addFrag(mBusinessDetailMenuFragment, "Menu");
         adapter.addFrag(new BusinessAboutFragment(), "About");
-        adapter.addFrag(new BusinessReviewFragment(), "Reviews");
+        adapter.addFrag(mBusinessReviewFragment, "Reviews");
         adapter.addFrag(new BusinessContactFragment(), "Contact");
         viewPager.setAdapter(adapter);
     }
@@ -150,5 +163,4 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         Intent i = BusinessItemDetailActivity.newIntent(this, item.getObjectId());
         startActivity(i);
     }
-
 }

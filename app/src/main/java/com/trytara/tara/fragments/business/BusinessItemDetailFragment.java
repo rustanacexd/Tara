@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.trytara.tara.BusinessDetailActivity;
 import com.trytara.tara.BusinessItemDetailActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.business.BusinessItemDetailReviewsAdapter;
@@ -17,6 +18,7 @@ import com.trytara.tara.models.Item;
 public class BusinessItemDetailFragment extends Fragment {
 
     private BusinessItemDetailReviewsAdapter mAdapter;
+    private Item mCurrentItem;
 
     public BusinessItemDetailFragment() {
     }
@@ -28,22 +30,27 @@ public class BusinessItemDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_business_item_detail, container, false);
 
         RecyclerView rvBusinessItemReviews = (RecyclerView) view.findViewById(R.id.rvBusinessItemMenuReviews);
+        BusinessItemDetailActivity activity = (BusinessItemDetailActivity) getActivity();
 
-        mAdapter = new BusinessItemDetailReviewsAdapter(((BusinessItemDetailActivity) getActivity()).getItem());
+        mCurrentItem = new Item();
+
+        //mAdapter = new BusinessItemDetailReviewsAdapter(((BusinessItemDetailActivity) getActivity()).getItem());
+        mAdapter = new BusinessItemDetailReviewsAdapter(mCurrentItem);
         rvBusinessItemReviews.setAdapter(mAdapter);
-        rvBusinessItemReviews.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ((BusinessItemDetailActivity) getActivity()).getProgress().setVisibility(View.GONE);
+        rvBusinessItemReviews.setLayoutManager(new LinearLayoutManager(activity));
+        activity.getProgress().setVisibility(View.GONE);
 
-        /*rvBusinessItemReviews.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+        Item.getItem(activity.getItemId(), new Item.OnGetItemCallback() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (recyclerView.getChildAt(0) != null) {
-                    View view = recyclerView.getChildAt(0);
-                    view.setTranslationY(-view.getTop() / 2);
-                }
+            public void onGetItem(Item item) {
+                mCurrentItem = item;
+                mAdapter.notifyDataSetChanged();
+
             }
-        });*/
+        });
+
+
         rvBusinessItemReviews.setHasFixedSize(true);
 
         return view;

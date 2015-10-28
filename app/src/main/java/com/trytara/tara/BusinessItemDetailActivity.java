@@ -24,9 +24,14 @@ public class BusinessItemDetailActivity extends AppCompatActivity {
     private View mProgress;
     private AppBarLayout mAppBarLayout;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
+    private String mItemId;
 
     public View getProgress() {
         return mProgress;
+    }
+
+    public String getItemId() {
+        return mItemId;
     }
 
     @Override
@@ -43,26 +48,21 @@ public class BusinessItemDetailActivity extends AppCompatActivity {
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
 
 
-        String itemId = getIntent().getStringExtra(EXTRA_ITEM_ID);
+        mItemId = getIntent().getStringExtra(EXTRA_ITEM_ID);
 
         mProgress = findViewById(R.id.progress);
         mProgress.setVisibility(View.VISIBLE);
+        
 
-        Item.getItem(itemId, new Item.OnGetItemCallback() {
-            @Override
-            public void onGetItem(Item item) {
-                mItem = item;
-                FragmentManager fm = getSupportFragmentManager();
-                Fragment fragment = fm.findFragmentById(R.id.item_fragment);
-                if (fragment == null) {
-                    fragment = new BusinessItemDetailFragment();
-                    fm.beginTransaction()
-                            .add(R.id.item_fragment, fragment)
-                            .commit();
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.item_fragment);
+        if (fragment == null) {
+            fragment = new BusinessItemDetailFragment();
+            fm.beginTransaction()
+                    .add(R.id.item_fragment, fragment)
+                    .commit();
 
-                }
-            }
-        });
+        }
 
         initViews();
     }
