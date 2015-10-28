@@ -19,6 +19,7 @@ public class Item extends ParseObject {
     private static final String PRICE = "price";
     private static final String DESCRIPTION = "description";
     private static final String CATEGORY = "category";
+    private static final String RATING = "rating";
 
     public Item() {
     }
@@ -55,6 +56,14 @@ public class Item extends ParseObject {
         put(CATEGORY, title);
     }
 
+    public Double getRating() {
+        return getDouble(RATING);
+    }
+
+    public void setRating(Double rating) {
+        put(RATING, rating);
+    }
+
     public static void getAllItems(final OnGetAllItemsCallback callback) {
         ParseQuery<Item> query = ParseQuery.getQuery(Item.class);
         query.findInBackground(new FindCallback<Item>() {
@@ -76,7 +85,7 @@ public class Item extends ParseObject {
 
     public static void getItem(String itemId, final OnGetItemCallback callback) {
         ParseQuery<Item> query = ParseQuery.getQuery(Item.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
         query.getInBackground(itemId, new GetCallback<Item>() {
             @Override
             public void done(Item item, ParseException e) {

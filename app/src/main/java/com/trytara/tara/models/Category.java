@@ -14,13 +14,13 @@ public class Category {
 
     private static final String SLUG_RESTAURANT = "restaurant";
     private static final String SLUG_HOTEL = "hotel";
-    private static final String SLUG_COFFEE_SHOP = "coffee-shop";
+    private static final String SLUG_COFFEE_SHOP = "coffeeshop";
     private static final String SLUG_PHARMACY = "pharmacy";
-    private static final String SLUG_COMPUTER_SHOP = "computer-shop";
+    private static final String SLUG_COMPUTER_SHOP = "computershop";
     private static final String SLUG_BAKERY = "bakery";
     private static final String SLUG_GYM = "gym";
     private static final String SLUG_SCHOOL = "school";
-    private static final String SLUG_HARDWARE_STORE = "hardware-store";
+    private static final String SLUG_HARDWARE_STORE = "hardwarestore";
 
     private static final String TITLE_RESTAURANT = "Restaurants";
     private static final String TITLE_HOTEL = "Hotels";
@@ -133,40 +133,5 @@ public class Category {
                 category = "";
         }
         return category;
-    }
-
-    public static CategoryType categoryStringToType(String category) {
-        CategoryType categoryType = null;
-        switch (category) {
-            case "coffeeshop":
-                categoryType = COFFEE_SHOP;
-                break;
-            case "restaurant":
-                categoryType = RESTAURANT;
-                break;
-            case "pharmacy":
-                categoryType = PHARMACY;
-                break;
-            case "hotel":
-                categoryType = HOTEL;
-                break;
-            case "computershop":
-                categoryType = COMPUTER_SHOP;
-                break;
-            case "hardwarestore":
-                categoryType = HARDWARE_STORE;
-                break;
-            case "bakery":
-                categoryType = BAKERY;
-                break;
-            case "gym":
-                categoryType = GYM;
-                break;
-            case "school":
-                categoryType = SCHOOL;
-                break;
-
-        }
-        return categoryType;
     }
 }

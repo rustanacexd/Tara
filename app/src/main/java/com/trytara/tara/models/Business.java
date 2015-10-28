@@ -12,7 +12,6 @@ import com.trytara.tara.App;
 
 import java.util.List;
 
-import static com.trytara.tara.models.Category.categoryStringToType;
 import static com.trytara.tara.models.Category.categoryTypeToString;
 import static com.trytara.tara.models.Category.CategoryType;
 
@@ -28,6 +27,8 @@ public class Business extends ParseObject {
     private static final String MOBILE_PHONE_NUMBER = "mobilePhoneNumber";
     private static final String EMAIL = "email";
     private static final String ABOUT = "about";
+    private static final int MAX_CACHE_AGE = 1000 * 60 * 60 * 48;
+    private static final String RATING = "averageRate";
 
     public Business() {
     }
@@ -57,7 +58,7 @@ public class Business extends ParseObject {
     }
 
     public String getAbout() {
-        return getString(ABOUT);
+        return getString(ABOUT) != null ? getString(ABOUT) : "";
     }
 
     public void setAbout(String about) {
@@ -72,8 +73,8 @@ public class Business extends ParseObject {
         put(ADDRESS, address);
     }
 
-    public CategoryType getCategory() {
-        return categoryStringToType(getString(CATEGORY));
+    public String getCategory() {
+        return getString(CATEGORY);
     }
 
     public void setCategory(CategoryType categoryType) {
@@ -82,7 +83,7 @@ public class Business extends ParseObject {
     }
 
     public String getPhoneNumber() {
-        return getString(PHONE_NUMBER);
+        return getString(PHONE_NUMBER) != null ? getString(PHONE_NUMBER) : "";
     }
 
     public void setPhoneNumber(String number) {
@@ -95,6 +96,14 @@ public class Business extends ParseObject {
 
     public void setMobilePhoneNumber(String number) {
         put(MOBILE_PHONE_NUMBER, number);
+    }
+
+    public float averageRate() {
+        return (float) getDouble(RATING);
+    }
+
+    public void setAverageRate(Double rating) {
+        put(RATING, rating);
     }
 
     public static void getAllBusiness(final OnGetAllBusinessCallback callback) {
@@ -117,7 +126,8 @@ public class Business extends ParseObject {
     public static void getBusinessListByCategory(String slug,
                                                  final OnGetBusinessListByCategoryCallback callback) {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        //query.setMaxCacheAge(MAX_CACHE_AGE);
         query.whereEqualTo("category", slug);
         query.findInBackground(new FindCallback<Business>() {
             @Override
@@ -135,7 +145,8 @@ public class Business extends ParseObject {
 
     public static void getBusiness(String businessId, final OnGetBusinessCallback callback) {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        //query.setMaxCacheAge(MAX_CACHE_AGE);
         query.include(ITEMS);
         query.getInBackground(businessId, new GetCallback<Business>() {
             @Override

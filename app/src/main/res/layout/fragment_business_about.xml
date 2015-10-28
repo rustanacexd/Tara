@@ -9,18 +9,18 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingTop="8dp"
             android:id="@+id/about_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="8dp"
             android:paddingLeft="@dimen/activity_vertical_margin"
             android:paddingRight="@dimen/activity_vertical_margin"
-            android:text="What we offer:"/>
+            android:text="About us:"/>
 
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_vertical_margin"
             android:paddingRight="@dimen/activity_vertical_margin"
-            android:text="Lorem ipsum dolor sit amet, consectetur ad
+            tools:text="Lorem ipsum dolor sit amet, consectetur ad
 ipisicing elit, sed do eiusmod tempor incididunt
 ut labore et dolore magna aliqua. Ut enim ad
 minim veniam, quis nostrud exercitation ullam

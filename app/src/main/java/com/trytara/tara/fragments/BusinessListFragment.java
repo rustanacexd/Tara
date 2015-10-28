@@ -14,6 +14,7 @@ import com.trytara.tara.BusinessDetailActivity;
 import com.trytara.tara.MapsActivity;
 import com.trytara.tara.R;
 import com.trytara.tara.adapters.BusinessListAdapter;
+import com.trytara.tara.adapters.DividerItemDecoration;
 import com.trytara.tara.models.Business;
 
 import java.util.ArrayList;
@@ -28,9 +29,6 @@ public class BusinessListFragment extends Fragment implements BusinessListAdapte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        Log.d("DEBUG", "onCreateView running");
-
         View view = inflater.inflate(R.layout.fragment_business_list, container, false);
 
         final View progress = view.findViewById(R.id.progress);
@@ -42,6 +40,8 @@ public class BusinessListFragment extends Fragment implements BusinessListAdapte
         mBusinessList = new ArrayList<>();
         mAdapter = new BusinessListAdapter(getActivity(), mBusinessList, this);
         rvBusiness.setAdapter(mAdapter);
+        rvBusiness.addItemDecoration(new DividerItemDecoration(getActivity(),
+                DividerItemDecoration.VERTICAL_LIST));
         rvBusiness.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvBusiness.setHasFixedSize(true);
 
@@ -67,8 +67,17 @@ public class BusinessListFragment extends Fragment implements BusinessListAdapte
 
     @Override
     public void OnBusinessListItemClick(Business business) {
-        Intent i = BusinessDetailActivity.newIntent(getActivity(),
-                business.getObjectId(), business.getName(), business.getDescription());
+        Intent i = BusinessDetailActivity.newIntent(
+                getActivity(),
+                business.getObjectId(),
+                business.getName(),
+                business.getDescription(),
+                business.getAbout(),
+                business.getPhoneNumber(),
+                business.getMobilePhoneNumber(),
+                business.getEmail(),
+                business.getAddress()
+        );
         startActivity(i);
     }
 

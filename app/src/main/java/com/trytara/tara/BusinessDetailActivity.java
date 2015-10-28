@@ -20,13 +20,24 @@ import com.trytara.tara.models.Item;
 
 public class BusinessDetailActivity extends AppCompatActivity implements BusinessDetailMenuAdapter.OnBusinessItemClickListener {
 
-    private static final String EXTRA_PREFIX = "com.trytara.tara.BusinessDetailActivity";
+    private static final int REQUEST_BACK = 563;
+
+    private static final String EXTRA_PREFIX = "com.trytara.tara.BusinessDetailActivity.";
     private static final String EXTRA_BUSINESS_ID = EXTRA_PREFIX + "businessId";
     private static final String EXTRA_BUSINESS_TITLE = EXTRA_PREFIX + "businessTitle";
     private static final String EXTRA_BUSINESS_DESCRIPTION = EXTRA_PREFIX + "businessDescription";
+    private static final String EXTRA_BUSINESS_ABOUT = EXTRA_PREFIX + "businessAbout";
+    private static final String EXTRA_BUSINESS_PHONE_NUMBER = EXTRA_PREFIX + "phoneNumber";
+    private static final String EXTRA_BUSINESS_MOBILE_NUMBER = EXTRA_PREFIX + "mobileNumber";
+    private static final String EXTRA_BUSINESS_EMAIL = EXTRA_PREFIX + "email";
+    private static final String EXTRA_BUSINESS_ADDRESS = EXTRA_PREFIX + "address";
 
-    private static final int REQUEST_BACK = 563;
     private String mBusinessId;
+    private String mBusinessAbout;
+    private String mPhoneNumber;
+    private String mMobileNumber;
+    private String mEmail;
+    private String mAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +51,15 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getIntent().getStringExtra(EXTRA_BUSINESS_TITLE));
         TextView businessDescriptionView = (TextView) findViewById(R.id.business_description);
-        mBusinessId = getIntent().getStringExtra(EXTRA_BUSINESS_ID);
         businessDescriptionView.setText(getIntent().getStringExtra(EXTRA_BUSINESS_DESCRIPTION));
+
+        Intent intent = getIntent();
+        mBusinessId = intent.getStringExtra(EXTRA_BUSINESS_ID);
+        mBusinessAbout = intent.getStringExtra(EXTRA_BUSINESS_ABOUT);
+        mPhoneNumber = intent.getStringExtra(EXTRA_BUSINESS_PHONE_NUMBER);
+        mMobileNumber = intent.getStringExtra(EXTRA_BUSINESS_MOBILE_NUMBER);
+        mEmail = intent.getStringExtra(EXTRA_BUSINESS_EMAIL);
+        mAddress = intent.getStringExtra(EXTRA_BUSINESS_ADDRESS);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(viewPager);
@@ -54,13 +72,39 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         return mBusinessId;
     }
 
+    public String getBusinessAbout() {
+        return mBusinessAbout;
+    }
 
-    public static Intent newIntent(Context packageContext, String businessId, String businessName,
-                                   String businessDescription) {
+    public String getPhoneNumber() {
+        return mPhoneNumber;
+    }
+
+    public String getMobileNumber() {
+        return mMobileNumber;
+    }
+
+    public String getEmail() {
+        return mEmail;
+    }
+
+    public String getAddress() {
+        return mAddress;
+    }
+
+    public static Intent newIntent(Context packageContext, String id, String name,
+                                   String description, String about, String phoneNumber,
+                                   String mobileNumber, String email, String address) {
+
         Intent intent = new Intent(packageContext, BusinessDetailActivity.class);
-        intent.putExtra(EXTRA_BUSINESS_ID, businessId);
-        intent.putExtra(EXTRA_BUSINESS_TITLE, businessName);
-        intent.putExtra(EXTRA_BUSINESS_DESCRIPTION, businessDescription);
+        intent.putExtra(EXTRA_BUSINESS_ID, id);
+        intent.putExtra(EXTRA_BUSINESS_TITLE, name);
+        intent.putExtra(EXTRA_BUSINESS_DESCRIPTION, description);
+        intent.putExtra(EXTRA_BUSINESS_ABOUT, about);
+        intent.putExtra(EXTRA_BUSINESS_PHONE_NUMBER, phoneNumber);
+        intent.putExtra(EXTRA_BUSINESS_MOBILE_NUMBER, mobileNumber);
+        intent.putExtra(EXTRA_BUSINESS_EMAIL, email);
+        intent.putExtra(EXTRA_BUSINESS_ADDRESS, address);
         return intent;
     }
 

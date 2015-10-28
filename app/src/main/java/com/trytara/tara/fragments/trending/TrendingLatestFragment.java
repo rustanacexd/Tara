@@ -36,7 +36,8 @@ public class TrendingLatestFragment extends Fragment {
         TrendingLatestListAdapter adapter = new TrendingLatestListAdapter(getActivity(),
                 new TrendingDataSource(getActivity()).getTrendingList());
 
-        rvTrendingLatest.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        rvTrendingLatest.addItemDecoration(new DividerItemDecoration(getActivity(),
+                DividerItemDecoration.VERTICAL_LIST));
         rvTrendingLatest.setAdapter(adapter);
         rvTrendingLatest.setLayoutManager(new LinearLayoutManager(getActivity()));
 

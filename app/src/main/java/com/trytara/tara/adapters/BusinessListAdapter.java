@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.trytara.tara.R;
@@ -34,10 +35,11 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView businessName;
-        private final TextView businessDescription;
+        private final TextView businessCategory;
         private final TextView businessDistance;
         private final ImageView businessThumbnail;
         private Business mBusiness;
+        private final RatingBar mBusinessRating;
 
         public ViewHolder(View v) {
             super(v);
@@ -45,16 +47,20 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
             v.setOnClickListener(this);
 
             businessName = (TextView) v.findViewById(R.id.business_name);
-            businessDescription = (TextView) v.findViewById(R.id.business_description);
+            businessCategory = (TextView) v.findViewById(R.id.business_category);
             businessThumbnail = (ImageView) v.findViewById(R.id.business_thumbnail);
             businessDistance = (TextView) v.findViewById(R.id.business_distance);
+            mBusinessRating = (RatingBar) v.findViewById(R.id.business_rating);
 
         }
 
         public void bindBusiness(Business business) {
             mBusiness = business;
             businessName.setText(mBusiness.getName());
-            businessDescription.setText(mBusiness.getDescription());
+            businessCategory.setText(String.format("%s%s", mBusiness.getCategory().substring(0, 1).toUpperCase(),
+                    mBusiness.getCategory().substring(1)));
+
+            mBusinessRating.setRating(mBusiness.averageRate());
             businessDistance.setText("82km");
         }
 

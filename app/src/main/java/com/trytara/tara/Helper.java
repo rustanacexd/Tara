@@ -38,12 +38,14 @@ public class Helper {
                     "consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
                     "cillum dolore eu fugiat nulla pariatur.");
             item.setPrice((double) (10 * i));
+            item.setRating((double) (1 * i));
             item.saveInBackground();
         }
     }
 
     public static void AttachDummyItemsToBusinesses() {
         ParseQuery<Item> itemParseQuery = ParseQuery.getQuery(Item.class);
+        itemParseQuery.setLimit(500);
         itemParseQuery.findInBackground(new FindCallback<Item>() {
             @Override
             public void done(final List<Item> itemList, ParseException e) {
@@ -71,6 +73,7 @@ public class Helper {
             business.setDescription("Dummy Business Description " + i);
             business.setPhoneNumber("062-2142-" + i + 2 * i + 3 * i);
             business.setMobilePhoneNumber("0915828" + i + 2 * i + 3 * i);
+            business.setAverageRate((double) (1 * i));
             business.setAbout("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
                     "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
                     "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +

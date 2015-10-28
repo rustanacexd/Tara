@@ -21,33 +21,11 @@
             android:text="You may contact us in the following details"/>
 
         <TextView
-            android:id="@+id/landline_caption"
+            android:id="@+id/phone_number_caption"
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Landline: "
-            />
-
-        <TextView
-            android:id="@+id/landline_number"
-            style="@style/TextAppearance.AppCompat.Body2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:singleLine="true"
-            android:text="2142406"
-            android:textSize="18sp"
-
-            />
-
-
-        <TextView
-            android:id="@+id/phone_caption"
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mobile Phone: "
+            android:text="Phone Number: "
             />
 
         <TextView
@@ -58,7 +36,29 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:singleLine="true"
-            android:text="09189361384"
+            tools:text="2142406"
+            android:textSize="18sp"
+
+            />
+
+
+        <TextView
+            android:id="@+id/mobile_phone_caption"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mobile Phone: "
+            />
+
+        <TextView
+            android:id="@+id/mobile_phone_number"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:singleLine="true"
+            tools:text="09189361384"
 
             android:textSize="18sp"
             />
@@ -80,8 +80,7 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:singleLine="true"
-            android:text="rustan@gmail.commmmmmm"
-
+            tools:text="rustan@gmail.commmmmmm"
             android:textSize="18sp"
             />
 
@@ -106,7 +105,7 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:scrollbars="vertical"
             android:singleLine="false"
-            android:text="Vicencio Sagun Street,\nPagadian City,\nZamboanga del Sur,\nPhilippines"
+            tools:text="Vicencio Sagun Street,\nPagadian City,\nZamboanga del Sur,\nPhilippines"
             android:textSize="18sp"
             />
 

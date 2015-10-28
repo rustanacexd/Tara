@@ -26,32 +26,52 @@
         android:paddingRight="@dimen/activity_horizontal_margin">
 
         <TextView
-            android:textSize="16sp"
             android:id="@+id/business_name"
             style="@android:style/TextAppearance.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:singleLine="true"
+            android:textSize="14sp"
             tools:text="Bob's Diner"/>
 
         <TextView
-            android:textSize="14sp"
-            android:id="@+id/business_description"
+            android:id="@+id/business_category"
             style="@android:style/TextAppearance.Small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/business_name"
             android:singleLine="true"
-            android:ellipsize="end"
-            tools:text="Lorem ipsum grabeh ka nonsense lol Lorem ipsum grabeh ka nonsense lol"/>
+            android:textSize="12sp"
+            tools:text="Restaurant"/>
+
+        <RatingBar
+            android:id="@+id/business_rating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/business_category"
+            android:stepSize="0.1"
+            tools:rating="3.8"/>
 
         <TextView
+            android:id="@+id/average_rating"
             style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/business_category"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@id/business_rating"
+            tools:text="(4.5)"/>
+
+        <TextView
             android:id="@+id/business_distance"
+            style="@style/Base.TextAppearance.AppCompat.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:paddingBottom="8dp"
             tools:text="0.8km"/>
 
     </RelativeLayout>
