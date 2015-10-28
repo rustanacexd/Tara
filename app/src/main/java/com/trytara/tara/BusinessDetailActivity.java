@@ -50,6 +50,8 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
 
     private BusinessDetailMenuFragment mBusinessDetailMenuFragment;
     private BusinessReviewFragment mBusinessReviewFragment;
+    private CollapsingToolbarLayout mCollapsingToolbarLayout;
+    private FloatingActionButton mFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +78,11 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         mAddress = intent.getStringExtra(EXTRA_BUSINESS_ADDRESS);
 
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        mCollapsingToolbarLayout = (CollapsingToolbarLayout)
+                findViewById(R.id.collapsing_toolbar);
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -91,7 +95,7 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
                 }
 
                 mAppBarLayout.setExpanded(true);
-                fab.hide();
+                mFab.hide();
             }
         });
 
@@ -105,6 +109,8 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
                 }
             });
         }
+
+        initViews();
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(viewPager);
@@ -145,6 +151,38 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         adapter.addFrag(mBusinessReviewFragment, "Reviews");
         adapter.addFrag(new BusinessContactFragment(), "Contact");
         viewPager.setAdapter(adapter);
+    }
+
+    private enum State {
+        EXPANDED,
+        COLLAPSED,
+        IDLE
+    }
+
+    private void initViews() {
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            private State state;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (verticalOffset == 0) {
+                    if (state != State.EXPANDED) {
+
+                    }
+                    state = State.EXPANDED;
+                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                    if (state != State.COLLAPSED) {
+                        mFab.hide();
+                    }
+                    state = State.COLLAPSED;
+                } else {
+                    if (state != State.IDLE) {
+
+                    }
+                    state = State.IDLE;
+                }
+            }
+        });
     }
 
 

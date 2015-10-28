@@ -131,7 +131,7 @@ public class Business extends ParseObject {
     public static void getBusinessListByCategory(String slug,
                                                  final OnGetBusinessListByCategoryCallback callback) {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         //query.setMaxCacheAge(MAX_CACHE_AGE);
         query.whereEqualTo("category", slug);
         query.findInBackground(new FindCallback<Business>() {
@@ -150,7 +150,7 @@ public class Business extends ParseObject {
 
     public static void getBusiness(String businessId, final OnGetBusinessCallback callback) {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         //query.setMaxCacheAge(MAX_CACHE_AGE);
         query.include(ITEMS);
         query.getInBackground(businessId, new GetCallback<Business>() {
