@@ -35,7 +35,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView businessName;
-        private final TextView businessCategory;
+        private final TextView businessAddress;
         private final TextView businessDistance;
         private final ImageView businessThumbnail;
         private Business mBusiness;
@@ -47,7 +47,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
             v.setOnClickListener(this);
 
             businessName = (TextView) v.findViewById(R.id.business_name);
-            businessCategory = (TextView) v.findViewById(R.id.business_category);
+            businessAddress = (TextView) v.findViewById(R.id.business_address);
             businessThumbnail = (ImageView) v.findViewById(R.id.business_thumbnail);
             businessDistance = (TextView) v.findViewById(R.id.business_distance);
             mBusinessRating = (RatingBar) v.findViewById(R.id.business_rating);
@@ -57,9 +57,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
         public void bindBusiness(Business business) {
             mBusiness = business;
             businessName.setText(mBusiness.getName());
-            businessCategory.setText(String.format("%s%s", mBusiness.getCategory().substring(0, 1).toUpperCase(),
-                    mBusiness.getCategory().substring(1)));
-
+            businessAddress.setText(mBusiness.getAddress());
             mBusinessRating.setRating(mBusiness.averageRate());
             businessDistance.setText("82km");
         }

@@ -40,7 +40,7 @@ public class BusinessReviewFragment extends Fragment {
         mLinearLayoutManager = new LinearLayoutManager(activity);
         rvBusinessMenuList.setLayoutManager(mLinearLayoutManager);
 
-        Review.getReviewsByBusiness(activity.getBusinessId(), new Review.OnGetReviewsByBusinessCallback() {
+        Review.getReviewsByBusiness(activity.mBusinessId, new Review.OnGetReviewsByBusinessCallback() {
             @Override
             public void onGetReviewsByBusiness(List<Review> reviewsList) {
                 mReviewList.addAll(reviewsList);

@@ -27,7 +27,7 @@ public class BusinessAboutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_business_about, container, false);
 
         TextView aboutContent = (TextView) view.findViewById(R.id.about_content);
-        aboutContent.setText(((BusinessDetailActivity) getActivity()).getBusinessAbout());
+        aboutContent.setText(((BusinessDetailActivity) getActivity()).mBusinessAbout);
 
         RecyclerView rvStaffList = (RecyclerView) view.findViewById(R.id.rvStaffList);
         BusinessStaffAdapter adapter = new BusinessStaffAdapter(getActivity());

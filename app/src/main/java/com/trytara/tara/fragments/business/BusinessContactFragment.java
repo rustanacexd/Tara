@@ -31,10 +31,10 @@ public class BusinessContactFragment extends Fragment {
         TextView emailAddress = (TextView) v.findViewById(R.id.email_address);
         TextView address = (TextView) v.findViewById(R.id.address);
 
-        phoneNumber.setText(activity.getPhoneNumber());
-        mobilePhoneNumber.setText(activity.getPhoneNumber());
-        emailAddress.setText(activity.getEmail());
-        address.setText(activity.getAddress());
+        phoneNumber.setText(activity.mPhoneNumber);
+        mobilePhoneNumber.setText(activity.mMobileNumber);
+        emailAddress.setText(activity.mEmail);
+        address.setText(activity.mAddress);
 
         return v;
     }

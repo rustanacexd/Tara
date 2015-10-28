@@ -20,7 +20,10 @@ import com.trytara.tara.fragments.business.BusinessAboutFragment;
 import com.trytara.tara.fragments.business.BusinessContactFragment;
 import com.trytara.tara.fragments.business.BusinessDetailMenuFragment;
 import com.trytara.tara.fragments.business.BusinessReviewFragment;
+import com.trytara.tara.models.Business;
 import com.trytara.tara.models.Item;
+
+import java.util.List;
 
 public class BusinessDetailActivity extends AppCompatActivity implements BusinessDetailMenuAdapter.OnBusinessItemClickListener {
 
@@ -34,13 +37,16 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
     private static final String EXTRA_BUSINESS_EMAIL = EXTRA_PREFIX + "email";
     private static final String EXTRA_BUSINESS_ADDRESS = EXTRA_PREFIX + "address";
 
-    private String mBusinessId;
-    private String mBusinessAbout;
-    private String mPhoneNumber;
-    private String mMobileNumber;
-    private String mEmail;
-    private String mAddress;
+    public String mBusinessId;
+    public String mBusinessAbout;
+    public String mPhoneNumber;
+    public String mMobileNumber;
+    public String mEmail;
+    public String mAddress;
+    public Business mBusiness;
+
     private AppBarLayout mAppBarLayout;
+    private List<Item> mItems;
 
     private BusinessDetailMenuFragment mBusinessDetailMenuFragment;
     private BusinessReviewFragment mBusinessReviewFragment;
@@ -71,7 +77,7 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
 
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,10 +91,20 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
                 }
 
                 mAppBarLayout.setExpanded(true);
+                fab.hide();
             }
         });
 
-
+        if (mBusiness == null) {
+            Business.getBusiness(mBusinessId, new Business.OnGetBusinessCallback() {
+                @Override
+                public void onGetBusiness(Business business) {
+                    mBusiness = business;
+                    mItems = business.getItems();
+                    onBusinessDetailMenuFragmentCreate();
+                }
+            });
+        }
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(viewPager);
@@ -98,29 +114,13 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
 
     }
 
-    public String getBusinessId() {
-        return mBusinessId;
+    public void onBusinessDetailMenuFragmentCreate() {
+        mBusinessDetailMenuFragment.mItemsList.addAll(mItems);
+        mBusinessDetailMenuFragment.mAdapter.notifyDataSetChanged();
+        mBusinessDetailMenuFragment.mProgress.setVisibility(View.GONE);
+        mBusinessDetailMenuFragment.mRvBusinessMenuList.setVisibility(View.VISIBLE);
     }
 
-    public String getBusinessAbout() {
-        return mBusinessAbout;
-    }
-
-    public String getPhoneNumber() {
-        return mPhoneNumber;
-    }
-
-    public String getMobileNumber() {
-        return mMobileNumber;
-    }
-
-    public String getEmail() {
-        return mEmail;
-    }
-
-    public String getAddress() {
-        return mAddress;
-    }
 
     public static Intent newIntent(Context packageContext, String id, String name,
                                    String description, String about, String phoneNumber,
