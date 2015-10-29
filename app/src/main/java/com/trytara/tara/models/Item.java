@@ -20,6 +20,7 @@ public class Item extends ParseObject {
     private static final String DESCRIPTION = "description";
     private static final String CATEGORY = "category";
     private static final String AVERAGE_RATE = "averageRate";
+    private static final String BUSINESS = "business";
 
     public Item() {
     }
@@ -64,6 +65,10 @@ public class Item extends ParseObject {
         put(AVERAGE_RATE, rating);
     }
 
+    public void setBusiness(ParseObject object) {
+        put(BUSINESS, object);
+    }
+
     public static void getAllItems(final OnGetAllItemsCallback callback) {
         ParseQuery<Item> query = ParseQuery.getQuery(Item.class);
         query.findInBackground(new FindCallback<Item>() {
@@ -101,6 +106,22 @@ public class Item extends ParseObject {
         });
     }
 
+    public static void getItemsByBusiness(Business business, final OnGetItemsByBusinessCallback callback) {
+        ParseQuery<Item> itemParseQuery = ParseQuery.getQuery(Item.class);
+        itemParseQuery.findInBackground(new FindCallback<Item>() {
+            @Override
+            public void done(List<Item> list, ParseException e) {
+                if (e == null) {
+                    if (callback != null) {
+                        callback.onGetItemsByBusiness(list);
+                    }
+                } else {
+                    Log.d(App.TAG, e.getLocalizedMessage());
+                }
+            }
+        });
+    }
+
     @Override
     public String toString() {
         return "Item{" + getTitle() + "}";
@@ -112,6 +133,10 @@ public class Item extends ParseObject {
 
     public interface OnGetItemCallback {
         void onGetItem(Item item);
+    }
+
+    public interface OnGetItemsByBusinessCallback {
+        void onGetItemsByBusiness(List<Item> itemList);
     }
 
 }

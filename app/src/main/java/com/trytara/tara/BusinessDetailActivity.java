@@ -26,7 +26,6 @@ import com.trytara.tara.models.Item;
 import java.util.List;
 
 public class BusinessDetailActivity extends AppCompatActivity implements BusinessDetailMenuAdapter.OnBusinessItemClickListener {
-
     private static final String EXTRA_PREFIX = "com.trytara.tara.BusinessDetailActivity.";
     private static final String EXTRA_BUSINESS_ID = EXTRA_PREFIX + "businessId";
     private static final String EXTRA_BUSINESS_TITLE = EXTRA_PREFIX + "businessTitle";
@@ -55,7 +54,6 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_detail);
 
@@ -85,15 +83,12 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (mBusinessDetailMenuFragment.mLayoutManager != null) {
                     mBusinessDetailMenuFragment.mLayoutManager.scrollToPositionWithOffset(0, 200);
                 }
-
                 if (mBusinessReviewFragment.mLinearLayoutManager != null) {
                     mBusinessReviewFragment.mLinearLayoutManager.scrollToPositionWithOffset(0, 200);
                 }
-
                 mAppBarLayout.setExpanded(true);
                 mFab.hide();
             }
@@ -104,14 +99,19 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
                 @Override
                 public void onGetBusiness(Business business) {
                     mBusiness = business;
-                    mItems = business.getItems();
-                    onBusinessDetailMenuFragmentCreate();
+                    Item.getItemsByBusiness(business, new Item.OnGetItemsByBusinessCallback() {
+                        @Override
+                        public void onGetItemsByBusiness(List<Item> itemList) {
+                            mItems = itemList;
+                            onBusinessDetailMenuFragmentCreate();
+                        }
+
+                    });
                 }
             });
         }
 
         initViews();
-
         ViewPager viewPager = (ViewPager) findViewById(R.id.business_viewpager);
         setupViewPager(viewPager);
 
@@ -126,7 +126,6 @@ public class BusinessDetailActivity extends AppCompatActivity implements Busines
         mBusinessDetailMenuFragment.mProgress.setVisibility(View.GONE);
         mBusinessDetailMenuFragment.mRvBusinessMenuList.setVisibility(View.VISIBLE);
     }
-
 
     public static Intent newIntent(Context packageContext, String id, String name,
                                    String description, String about, String phoneNumber,

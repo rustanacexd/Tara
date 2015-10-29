@@ -152,7 +152,6 @@ public class Business extends ParseObject {
         ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
         query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         //query.setMaxCacheAge(MAX_CACHE_AGE);
-        query.include(ITEMS);
         query.getInBackground(businessId, new GetCallback<Business>() {
             @Override
             public void done(Business business, ParseException e) {
@@ -167,6 +166,7 @@ public class Business extends ParseObject {
             }
         });
     }
+
 
     public List<Item> getItems() {
         return (List<Item>) this.get("items");
@@ -183,6 +183,7 @@ public class Business extends ParseObject {
     public interface OnGetBusinessListByCategoryCallback {
         void onGetBusinessListByCategory(List<Business> businessList);
     }
+
 
     @Override
     public String toString() {

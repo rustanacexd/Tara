@@ -33,38 +33,8 @@ public class App extends Application {
                 "AqlegT294eVrHhDaIkJWkTzNI4qsvZasFYNJrtCd");
         ParseFacebookUtils.initialize(this);
 
-        /*Helper.createDummyBusinesses(15, CategoryType.COFFEE_SHOP);
-        Helper.createDummyBusinesses(15, CategoryType.BAKERY);
-        Helper.createDummyBusinesses(15, CategoryType.RESTAURANT);
-        Helper.createDummyBusinesses(15, CategoryType.HARDWARE_STORE);
-        Helper.createDummyBusinesses(15, CategoryType.PHARMACY);
-        Helper.createDummyBusinesses(15, CategoryType.HOTEL);
-        Helper.createDummyBusinesses(15, CategoryType.COMPUTER_SHOP);
-        Helper.createDummyBusinesses(15, CategoryType.GYM);
-        Helper.createDummyBusinesses(15, CategoryType.SCHOOL);*/
 
-        //Helper.createDummyItems(15);
-        //Helper.attachDummyItemsToBusinesses();
-
-        /*ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.findInBackground(new FindCallback<Business>() {
-            @Override
-            public void done(List<Business> list, ParseException e) {
-                if (e == null) {
-                    for(int i = 0; i < list.size(); i++) {
-                        Business business = list.get(i);
-                        Random random = new Random();
-                        business.setAverageRate((double) (random.nextInt((5 - 1)) + 1));
-                        business.saveInBackground();
-                    }
-                } else {
-                    Log.d(App.TAG, e.getLocalizedMessage());
-                }
-            }
-        });*/
-
-        //Helper.createDummyReviews(50);
-        //Helper.attachReviewsToBusiness();
+        //Helper.createDummyBusinessData(15, 10, 10, CategoryType.RESTAURANT);
 
 
     }
