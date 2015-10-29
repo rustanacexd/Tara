@@ -108,6 +108,8 @@ public class Item extends ParseObject {
 
     public static void getItemsByBusiness(Business business, final OnGetItemsByBusinessCallback callback) {
         ParseQuery<Item> itemParseQuery = ParseQuery.getQuery(Item.class);
+        itemParseQuery.whereEqualTo(BUSINESS, business);
+        itemParseQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         itemParseQuery.findInBackground(new FindCallback<Item>() {
             @Override
             public void done(List<Item> list, ParseException e) {

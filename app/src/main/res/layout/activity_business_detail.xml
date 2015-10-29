@@ -89,7 +89,7 @@
         android:layout_marginBottom="15dp"
         android:layout_marginRight="15dp"
         android:clickable="true"
-        app:fabSize="mini"
+        app:fabSize="normal"
         android:src="@drawable/com_facebook_tooltip_blue_topnub"
         app:backgroundTint="?attr/colorPrimary"
         app:layout_anchor="@+id/coord_layout"

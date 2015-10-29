@@ -34,7 +34,12 @@ public class App extends Application {
         ParseFacebookUtils.initialize(this);
 
 
-        //Helper.createDummyBusinessData(15, 10, 10, CategoryType.RESTAURANT);
+//        Helper.createDummyBusinessData(15, 10, 10, CategoryType.COFFEE_SHOP);
+//        Helper.createDummyBusinessData(15, 10, 10, CategoryType.BAKERY);
+//        Helper.createDummyBusinessData(15, 10 ,10, CategoryType.HOTEL);
+//        Helper.createDummyBusinessData(15, 10 ,10, CategoryType.SCHOOL);
+//        Helper.createDummyBusinessData(15, 10 ,10, CategoryType.COMPUTER_SHOP);
+//        Helper.createDummyBusinessData(15, 10 ,10, CategoryType.HARDWARE_STORE);
 
 
     }
