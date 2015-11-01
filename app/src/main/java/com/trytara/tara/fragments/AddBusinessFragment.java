@@ -11,6 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.trytara.tara.R;
 import com.trytara.tara.models.Category;
 
@@ -73,21 +76,28 @@ public class AddBusinessFragment extends Fragment {
                 android.R.layout.simple_spinner_dropdown_item, new Category().mCategoryList);
 
         categorySpinner.setAdapter(adapter);
-        categorySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        break;
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                    case 1:
-                        break;
+            }
 
-                    default:
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                }
             }
         });
+
+        int PLACE_PICKER_REQUEST = 1;
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        try {
+            startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
 
         return v;
     }

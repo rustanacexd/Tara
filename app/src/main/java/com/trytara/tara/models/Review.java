@@ -75,7 +75,7 @@ public class Review extends ParseObject {
             }
         });
     }
-    
+
     public interface OnGetReviewsByBusinessCallback {
         void onGetReviewsByBusiness(List<Review> reviewsList);
     }
