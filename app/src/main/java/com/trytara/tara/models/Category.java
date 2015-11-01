@@ -33,7 +33,29 @@ public class Category {
     private static final String TITLE_SCHOOL = "Schools";
 
     public enum CategoryType {
-        RESTAURANT, COFFEE_SHOP, PHARMACY, HOTEL, COMPUTER_SHOP, HARDWARE_STORE, BAKERY, GYM, SCHOOL
+        RESTAURANT("restaurant"),
+        COFFEE_SHOP("coffeeshop"),
+        PHARMACY("pharmacy"),
+        HOTEL("hotel"),
+        COMPUTER_SHOP("computershop"),
+        HARDWARE_STORE("hardwarestore"),
+        BAKERY("bakery"),
+        GYM("gym"),
+        SCHOOL("school");
+
+        private final String mName;
+        private final String mTitle;
+
+        CategoryType(String name, String title) {
+            mName = name;
+            mTitle = title;
+        }
+
+
+        @Override
+        public String toString() {
+            return mName;
+        }
     }
 
     public List<CategoryItem> mCategoryItemsList = new ArrayList<>();

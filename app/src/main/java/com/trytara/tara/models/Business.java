@@ -30,6 +30,8 @@ public class Business extends ParseObject {
     private static final int MAX_CACHE_AGE = 1000 * 60 * 60 * 48;
     private static final String AVERAGE_RATE = "averageRate";
     private static final String REVIEWS = "reviews";
+    private static final String TAG_LINE = "tagline";
+
 
     public Business() {
     }
@@ -109,6 +111,14 @@ public class Business extends ParseObject {
 
     public List<Review> getReviews() {
         return getList(REVIEWS);
+    }
+
+    public String getTagLine() {
+        return getString(TAG_LINE);
+    }
+
+    public void setTagLine(String tagLine) {
+        put(TAG_LINE, tagLine);
     }
 
     public static void getAllBusiness(final OnGetAllBusinessCallback callback) {

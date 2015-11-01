@@ -24,6 +24,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.trytara.tara.fragments.AddBusinessFragment;
 import com.trytara.tara.fragments.CategoryListFragment;
 import com.trytara.tara.fragments.TrendingListFragment;
 import com.trytara.tara.models.Business;
@@ -160,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_reviews:
                 break;
             case R.id.nav_add_business:
+                fragment = new AddBusinessFragment();
                 break;
             case R.id.nav_my_business:
                 break;
