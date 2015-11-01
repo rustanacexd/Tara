@@ -18,10 +18,10 @@ import java.util.List;
 public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ViewHolder> {
     private static final String TAG = "CategoryListAdapter";
 
-    private List<Category.CategoryItem> mDataSet;
+    private List<Category.CategoryType> mDataSet;
     private static Context mContext;
 
-    public CategoryListAdapter(Context context, List<Category.CategoryItem> dataSet) {
+    public CategoryListAdapter(Context context, List<Category.CategoryType> dataSet) {
         mContext = context;
         mDataSet = dataSet;
     }
@@ -32,7 +32,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         private final ImageView categoryImage;
         private final TextView categoryName;
         private final TextView categoryDescription;
-        private Category.CategoryItem mCategoryItem;
+        private Category.CategoryType mCategoryItem;
 
         public ViewHolder(View v) {
             super(v);
@@ -44,16 +44,16 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             categoryDescription = (TextView) v.findViewById(R.id.category_descripton);
         }
 
-        public void bindCategory(Category.CategoryItem categoryItem) {
+        public void bindCategory(Category.CategoryType categoryItem) {
             mCategoryItem = categoryItem;
             categoryImage.setImageResource(mCategoryItem.mDrawableResource);
-            categoryName.setText(mCategoryItem.mName);
+            categoryName.setText(mCategoryItem.mTitle);
             categoryDescription.setText(mCategoryItem.mDescription);
         }
 
         @Override
         public void onClick(View v) {
-            Intent i = MapsActivity.newIntent(mContext, mCategoryItem.mName, mCategoryItem.mSlug);
+            Intent i = MapsActivity.newIntent(mContext, mCategoryItem.mTitle, mCategoryItem.mSlug);
             mContext.startActivity(i);
         }
     }

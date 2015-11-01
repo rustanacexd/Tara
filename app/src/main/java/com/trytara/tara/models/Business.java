@@ -12,7 +12,6 @@ import com.trytara.tara.App;
 
 import java.util.List;
 
-import static com.trytara.tara.models.Category.categoryTypeToString;
 import static com.trytara.tara.models.Category.CategoryType;
 
 @ParseClassName("Business")
@@ -81,8 +80,7 @@ public class Business extends ParseObject {
     }
 
     public void setCategory(CategoryType categoryType) {
-        String category = categoryTypeToString(categoryType);
-        put(CATEGORY, category);
+        put(CATEGORY, categoryType.toString());
     }
 
     public String getPhoneNumber() {
