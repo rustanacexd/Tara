@@ -69,9 +69,12 @@ public class Item extends ParseObject {
         put(BUSINESS, object);
     }
 
+    public static ParseQuery<Item> getQuery() {
+        return ParseQuery.getQuery(Item.class);
+    }
+
     public static void getAllItems(final OnGetAllItemsCallback callback) {
-        ParseQuery<Item> query = ParseQuery.getQuery(Item.class);
-        query.findInBackground(new FindCallback<Item>() {
+        getQuery().findInBackground(new FindCallback<Item>() {
             @Override
             public void done(List<Item> list, ParseException e) {
                 if (e == null) {
@@ -89,9 +92,8 @@ public class Item extends ParseObject {
     }
 
     public static void getItem(String itemId, final OnGetItemCallback callback) {
-        ParseQuery<Item> query = ParseQuery.getQuery(Item.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
-        query.getInBackground(itemId, new GetCallback<Item>() {
+        getQuery().setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        getQuery().getInBackground(itemId, new GetCallback<Item>() {
             @Override
             public void done(Item item, ParseException e) {
                 if (e == null) {
@@ -107,10 +109,9 @@ public class Item extends ParseObject {
     }
 
     public static void getItemsByBusiness(Business business, final OnGetItemsByBusinessCallback callback) {
-        ParseQuery<Item> itemParseQuery = ParseQuery.getQuery(Item.class);
-        itemParseQuery.whereEqualTo(BUSINESS, business);
-        itemParseQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
-        itemParseQuery.findInBackground(new FindCallback<Item>() {
+        getQuery().whereEqualTo(BUSINESS, business);
+        getQuery().setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        getQuery().findInBackground(new FindCallback<Item>() {
             @Override
             public void done(List<Item> list, ParseException e) {
                 if (e == null) {

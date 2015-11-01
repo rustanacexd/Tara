@@ -41,34 +41,22 @@
                         android:id="@+id/business_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Location"
                         android:gravity="top"
-                        android:singleLine="false"
+                        android:hint="Location"
                         android:inputType="textMultiLine"
+                        android:singleLine="false"
                         tools:ignore="RtlHardcoded"/>
 
                 </android.support.design.widget.TextInputLayout>
 
-
-                <android.support.design.widget.TextInputLayout
+                <Spinner
+                    android:paddingLeft="0dp"
+                    android:id="@+id/business_category_spinner"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"/>
 
-                    <EditText
-                        android:id="@+id/business_category"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="Category"
-                        android:inputType="textPersonName"
-                        tools:ignore="RtlHardcoded"/>
-
-                    <Spinner
-                        android:id="@+id/spinner1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:spinnerMode="dropdown" />
-
-                </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"

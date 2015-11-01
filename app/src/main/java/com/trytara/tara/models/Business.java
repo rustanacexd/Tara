@@ -119,10 +119,13 @@ public class Business extends ParseObject {
         put(TAG_LINE, tagLine);
     }
 
+    public static ParseQuery<Business> getQuery() {
+        return ParseQuery.getQuery(Business.class);
+    }
+
     public static void getAllBusiness(final OnGetAllBusinessCallback callback) {
-        ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
-        query.findInBackground(new FindCallback<Business>() {
+        getQuery().setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        getQuery().findInBackground(new FindCallback<Business>() {
             @Override
             public void done(List<Business> list, ParseException e) {
                 if (e == null) {
@@ -138,11 +141,11 @@ public class Business extends ParseObject {
 
     public static void getBusinessListByCategory(String slug,
                                                  final OnGetBusinessListByCategoryCallback callback) {
-        ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+
+        getQuery().setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         //query.setMaxCacheAge(MAX_CACHE_AGE);
-        query.whereEqualTo(CATEGORY, slug);
-        query.findInBackground(new FindCallback<Business>() {
+        getQuery().whereEqualTo(CATEGORY, slug);
+        getQuery().findInBackground(new FindCallback<Business>() {
             @Override
             public void done(List<Business> list, ParseException e) {
                 if (e == null) {
@@ -157,10 +160,9 @@ public class Business extends ParseObject {
     }
 
     public static void getBusiness(String businessId, final OnGetBusinessCallback callback) {
-        ParseQuery<Business> query = ParseQuery.getQuery(Business.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        getQuery().setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         //query.setMaxCacheAge(MAX_CACHE_AGE);
-        query.getInBackground(businessId, new GetCallback<Business>() {
+        getQuery().getInBackground(businessId, new GetCallback<Business>() {
             @Override
             public void done(Business business, ParseException e) {
                 if (e == null) {

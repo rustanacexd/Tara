@@ -3,11 +3,16 @@ package com.trytara.tara.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatSpinner;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.trytara.tara.R;
+import com.trytara.tara.models.Category;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +50,7 @@ public class AddBusinessFragment extends Fragment {
 
     public AddBusinessFragment() {
         // Required empty public constructor
+
     }
 
     @Override
@@ -60,7 +66,30 @@ public class AddBusinessFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_business, container, false);
+        View v = inflater.inflate(R.layout.fragment_add_business, container, false);
+
+        Spinner categorySpinner = (Spinner) v.findViewById(R.id.business_category_spinner);
+        ArrayAdapter<Category.CategoryType> adapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item, new Category().mCategoryList);
+
+        categorySpinner.setAdapter(adapter);
+        categorySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        break;
+
+                    case 1:
+                        break;
+
+                    default:
+
+                }
+            }
+        });
+
+        return v;
     }
 
 

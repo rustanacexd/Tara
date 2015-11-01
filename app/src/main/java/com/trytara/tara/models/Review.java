@@ -52,14 +52,17 @@ public class Review extends ParseObject {
         return getParseObject(REVIEWED_TO);
     }
 
+    public static ParseQuery<Review> getQuery() {
+        return ParseQuery.getQuery(Review.class);
+    }
+
     public static void getReviewsByBusiness(Business business,
                                             final OnGetReviewsByBusinessCallback callback) {
-        ParseQuery<Review> reviewParseQuery = ParseQuery.getQuery(Review.class);
-        reviewParseQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
-        reviewParseQuery.setLimit(15);
-        reviewParseQuery.whereEqualTo(REVIEWED_TO, business);
-        reviewParseQuery.include(REVIEWED_BY);
-        reviewParseQuery.findInBackground(new FindCallback<Review>() {
+        getQuery().setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+        getQuery().setLimit(15);
+        getQuery().whereEqualTo(REVIEWED_TO, business);
+        getQuery().include(REVIEWED_BY);
+        getQuery().findInBackground(new FindCallback<Review>() {
             @Override
             public void done(List<Review> list, ParseException e) {
                 if (e == null) {
@@ -72,8 +75,7 @@ public class Review extends ParseObject {
             }
         });
     }
-
-
+    
     public interface OnGetReviewsByBusinessCallback {
         void onGetReviewsByBusiness(List<Review> reviewsList);
     }

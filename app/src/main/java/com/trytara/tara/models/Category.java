@@ -2,8 +2,6 @@ package com.trytara.tara.models;
 
 
 import com.trytara.tara.R;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
